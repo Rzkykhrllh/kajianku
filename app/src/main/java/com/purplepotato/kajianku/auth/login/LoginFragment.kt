@@ -49,6 +49,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 val intent = Intent(activity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
+                activity?.finishAfterTransition()
             }
 
             R.id.btn_to_sign_up -> {
