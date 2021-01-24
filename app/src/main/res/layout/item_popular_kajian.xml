@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:layout_margin="16dp"
+    android:backgroundTint="@android:color/darker_gray"
+    app:cardCornerRadius="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/poster_image"
+            android:scaleType="center"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <View
+            android:id="@+id/bg_tag"
+            android:layout_width="80dp"
+            android:layout_height="32dp"
+            android:background="@drawable/tag_item_online_offline"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/bg_tag"
+            app:layout_constraintEnd_toEndOf="@id/bg_tag"
+            app:layout_constraintStart_toStartOf="@id/bg_tag"
+            app:layout_constraintTop_toTopOf="@id/bg_tag"
+            tools:text="Offline" />
+
+
+        <View
+            android:id="@+id/bg_txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:alpha="0.6"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/item_txt_title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/montserrat_medium"
+            android:maxLines="1"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/bg_txt_title"
+            app:layout_constraintEnd_toEndOf="@id/bg_txt_title"
+            app:layout_constraintStart_toStartOf="@id/bg_txt_title"
+            app:layout_constraintTop_toTopOf="@id/bg_txt_title"
+            tools:text="@tools:sample/lorem/random" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
