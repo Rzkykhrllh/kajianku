@@ -1,4 +1,4 @@
-package com.purplepotato.kajianku.home
+package com.purplepotato.kajianku.saved_kajian
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +10,12 @@ import com.purplepotato.kajianku.core.domain.Kajian
 import com.purplepotato.kajianku.core.util.DiffUtilItemCallback
 import com.purplepotato.kajianku.databinding.ItemSuggestedKajianBinding
 
-class SuggestedKajianRecyclerAdapter :
-    ListAdapter<Kajian, SuggestedKajianRecyclerAdapter.SuggestedKajianViewHolder>(
+class SavedKajianRecyclerAdapter :
+    ListAdapter<Kajian, SavedKajianRecyclerAdapter.SavedKajianViewHolder>(
         DiffUtilItemCallback.KAJIAN_DIFF_CALLBACK
     ) {
 
-    inner class SuggestedKajianViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class SavedKajianViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemSuggestedKajianBinding.bind(itemView)
         fun bind(item: Kajian) {
             with(binding) {
@@ -24,13 +24,16 @@ class SuggestedKajianRecyclerAdapter :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuggestedKajianViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavedKajianViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_suggested_kajian, parent, false)
-        return SuggestedKajianViewHolder(view)
+        return SavedKajianViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: SuggestedKajianViewHolder, position: Int) {
+    override fun onBindViewHolder(
+        holder: SavedKajianRecyclerAdapter.SavedKajianViewHolder,
+        position: Int
+    ) {
         holder.bind(getItem(position))
     }
 }

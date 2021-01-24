@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.purplepotato.kajianku.core.KajianRepository
+import com.purplepotato.kajianku.core.data.KajianRepository
 import kotlinx.coroutines.*
 
 class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {

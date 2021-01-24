@@ -1,4 +1,4 @@
-package com.purplepotato.kajianku.core.helper
+package com.purplepotato.kajianku.core.util
 
 import androidx.recyclerview.widget.DiffUtil
 import com.purplepotato.kajianku.core.domain.Kajian

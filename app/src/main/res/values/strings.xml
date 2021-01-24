@@ -15,4 +15,10 @@
     <string name="birth_date">Tanggal Lahir</string>
     <string name="gender">Jenis Kelamin</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="kajian_history">Riwayat kajian</string>
+    <string name="about_us">Tentang kami</string>
+    <string name="change_email">Ganti Email</string>
+    <string name="change_password">Ganti kata sandi</string>
+    <string name="log_out">Keluar</string>
+    <string name="poster_image">Gambar kajian</string>
 </resources>

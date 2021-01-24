@@ -1,4 +1,4 @@
-package com.purplepotato.kajianku.core.remote.firebase
+package com.purplepotato.kajianku.core.data.remote.firebase
 
 class FirebaseDatabase {
 

@@ -2,7 +2,6 @@ package com.purplepotato.kajianku.auth.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.purplepotato.kajianku.MainActivity
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
+import com.purplepotato.kajianku.core.util.isValidEmail
 import com.purplepotato.kajianku.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment(), View.OnClickListener {
@@ -24,8 +24,8 @@ class LoginFragment : Fragment(), View.OnClickListener {
         get() = _binding!!
 
 
-    lateinit var password : String
-    lateinit var email : String
+    private lateinit var password: String
+    private lateinit var email: String
 
     private val viewModel by lazy {
         ViewModelProvider(this, ViewModelFactory.getInstance())[LoginViewModel::class.java]
@@ -50,13 +50,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
         binding.btnToSignUp.setOnClickListener(this)
 
         viewModel.navigateToHome.observe(viewLifecycleOwner, Observer {
-            if (it){
-                Toast.makeText(context, "Move to homme", Toast.LENGTH_LONG).show()
+            if (it) {
+                Toast.makeText(context, "Move to home", Toast.LENGTH_LONG).show()
 
                 val intent = Intent(activity, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
-                    activity?.finishAfterTransition()
+                intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                activity?.finishAfterTransition()
             }
         })
     }
@@ -64,8 +64,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_login -> {
-
-                if (validate()){
+                if (validate()) {
                     viewModel.login(email, password)
                 }
 
@@ -78,38 +77,34 @@ class LoginFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun validate() : Boolean{
+    private fun validate(): Boolean {
 
         email = binding.etEmail.text.toString()
         password = binding.etPassword.text.toString()
 
         // Empty Check
 
-        if (email.isNullOrEmpty()){
-            binding.etEmail.setError("Mohon masukkan email anda")
+        if (email.isNullOrEmpty()) {
+            binding.etEmail.error = "Mohon masukkan email anda"
             return false
         }
 
-        if (password.isNullOrEmpty()){
-            binding.etPassword.setError("Mohon massukan passord anda")
+        if (password.isEmpty()) {
+            binding.etPassword.error = "Mohon masukkan passord anda"
             return false
         }
 
         // Format check
 
-        if (!email.isValidEmail()){
-            binding.etEmail.setError("Email yang anda masukkan tidak valid")
+        if (!email.isValidEmail()) {
+            binding.etEmail.error = "Email yang anda masukkan tidak valid"
             return false
         }
 
-        if (password.length < 8 ){
-            binding.etEmail.setError("Password yang anda masukkan kurang dari 8 karakter")
+        if (password.length < 8) {
+            binding.etEmail.error = "Password yang anda masukkan kurang dari 8 karakter"
             return false
         }
         return true
     }
-
-    fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
-
-
 }

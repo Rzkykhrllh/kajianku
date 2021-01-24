@@ -1,7 +1,7 @@
-package com.purplepotato.kajianku.core.remote
+package com.purplepotato.kajianku.core.data.remote
 
-import com.purplepotato.kajianku.core.remote.firebase.FirebaseAuth
-import com.purplepotato.kajianku.core.remote.firebase.FirebaseDatabase
+import com.purplepotato.kajianku.core.data.remote.firebase.FirebaseAuth
+import com.purplepotato.kajianku.core.data.remote.firebase.FirebaseDatabase
 
 class RemoteDataSource(
     private val firebaseAuth: FirebaseAuth,

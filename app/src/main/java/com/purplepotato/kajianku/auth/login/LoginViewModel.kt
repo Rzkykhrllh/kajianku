@@ -3,14 +3,13 @@ package com.purplepotato.kajianku.auth.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.purplepotato.kajianku.core.KajianRepository
+import com.purplepotato.kajianku.core.data.KajianRepository
+import com.purplepotato.kajianku.core.data.remote.firebase.FirebaseAuth
 import kotlinx.coroutines.*
 
 class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
 
-    lateinit var auth : FirebaseAuth
+    lateinit var auth: FirebaseAuth
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -19,10 +18,9 @@ class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
     var password = ""
 
     private val _navigateToHome = MutableLiveData<Boolean>()
-    val navigateToHome : LiveData<Boolean>
+    val navigateToHome: LiveData<Boolean>
         get() = _navigateToHome
-
-
+    
     init {
         auth = FirebaseAuth.getInstance()
     }
@@ -40,7 +38,7 @@ class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
     }
 
     private suspend fun loginFirebase() {
-        withContext(Dispatchers.IO){
+        withContext(Dispatchers.IO) {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener() { task ->
                     if (task.isSuccessful) {

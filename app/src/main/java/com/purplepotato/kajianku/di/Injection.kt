@@ -1,9 +1,9 @@
 package com.purplepotato.kajianku.di
 
-import com.purplepotato.kajianku.core.KajianRepository
-import com.purplepotato.kajianku.core.remote.RemoteDataSource
-import com.purplepotato.kajianku.core.remote.firebase.FirebaseAuth
-import com.purplepotato.kajianku.core.remote.firebase.FirebaseDatabase
+import com.purplepotato.kajianku.core.data.KajianRepository
+import com.purplepotato.kajianku.core.data.remote.RemoteDataSource
+import com.purplepotato.kajianku.core.data.remote.firebase.FirebaseAuth
+import com.purplepotato.kajianku.core.data.remote.firebase.FirebaseDatabase
 
 object Injection {
     fun provideRepository(): KajianRepository {

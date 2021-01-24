@@ -1,6 +1,6 @@
-package com.purplepotato.kajianku.core
+package com.purplepotato.kajianku.core.data
 
-import com.purplepotato.kajianku.core.remote.RemoteDataSource
+import com.purplepotato.kajianku.core.data.remote.RemoteDataSource
 
 class KajianRepository(
     private val remoteDataSource: RemoteDataSource
