@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.core.domain.Kajian
-import com.purplepotato.kajianku.core.helper.DiffUtilItemCallback
+import com.purplepotato.kajianku.core.util.DiffUtilItemCallback
 import com.purplepotato.kajianku.databinding.ItemSuggestedKajianBinding
 
 class SavedKajianRecyclerAdapter :

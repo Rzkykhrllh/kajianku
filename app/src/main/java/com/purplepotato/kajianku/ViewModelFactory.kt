@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.purplepotato.kajianku.auth.login.LoginViewModel
 import com.purplepotato.kajianku.auth.sign_up.SignUpViewModel
-import com.purplepotato.kajianku.core.KajianRepository
+import com.purplepotato.kajianku.core.data.KajianRepository
 import com.purplepotato.kajianku.detail.DetailViewModel
 import com.purplepotato.kajianku.di.Injection
 import com.purplepotato.kajianku.home.HomeViewModel
