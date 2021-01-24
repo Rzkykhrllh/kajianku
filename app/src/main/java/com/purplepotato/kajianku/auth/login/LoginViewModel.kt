@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.purplepotato.kajianku.core.data.KajianRepository
-
 import kotlinx.coroutines.*
 
 class LoginViewModel(private val repository: KajianRepository) : ViewModel() {

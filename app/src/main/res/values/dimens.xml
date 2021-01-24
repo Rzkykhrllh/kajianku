@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="line_top_gap">3dp</dimen>
+    <dimen name="margin_item_login">12dp</dimen>
+    <dimen name="et_tv">-10dp</dimen>
+</resources>
