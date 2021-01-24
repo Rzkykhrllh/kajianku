@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "770118225887",
+    "project_id": "kajianku-f26aa",
+    "storage_bucket": "kajianku-f26aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770118225887:android:b6c678db356c5552f5fe6a",
+        "android_client_info": {
+          "package_name": "com.purplepotato.kajianku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770118225887-t7dvi41r91nsl3t4s0cp7gmbf2rdmt7j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyPMbNTLmc54oXNNZcbXo-qgHafxJR8EY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770118225887-t7dvi41r91nsl3t4s0cp7gmbf2rdmt7j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
