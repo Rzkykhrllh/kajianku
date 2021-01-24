@@ -9,7 +9,7 @@
     tools:context=".auth.login.LoginFragment">
 
     <TextView
-        android:id="@+id/tv_login"
+        android:id="@+id/tv_sign_up"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/tv_login"
+        app:layout_constraintTop_toBottomOf="@id/tv_sign_up"
         android:layout_marginTop="56dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -44,6 +44,7 @@
 
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:hint="Muhammad"
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,9 +54,15 @@
             android:textSize="14sp"
             android:drawableLeft="@drawable/ic_baseline_person_24"
             android:drawablePadding="12dp"
-            android:backgroundTint="@color/primary"
-            android:layout_marginTop="-10"
+            android:backgroundTint="#ffffffff"
+            android:layout_marginTop="-10dp"
+            />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/primary"
+            android:layout_marginTop="@dimen/line_top_gap"
             />
 
     </LinearLayout>
@@ -83,6 +90,7 @@
 
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:hint="9 Rabiul Awal"
             android:id="@+id/et_birth_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,8 +100,16 @@
             android:textSize="14sp"
             android:drawableLeft="@drawable/ic_baseline_cake_24"
             android:drawablePadding="12dp"
-            android:backgroundTint="@color/primary"
-            android:layout_marginTop="-10dp" />
+            android:backgroundTint="#ffffffff"
+            android:layout_marginTop="-10dp"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/primary"
+            android:layout_marginTop="@dimen/line_top_gap"
+            />
 
     </LinearLayout>
 
@@ -126,6 +142,7 @@
 
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:hint="Ikhwan"
             android:id="@+id/et_gender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -135,8 +152,16 @@
             android:textSize="14sp"
             android:drawableLeft="@drawable/ic_baseline_cake_24"
             android:drawablePadding="12dp"
-            android:backgroundTint="@color/primary"
-            android:layout_marginTop="-10dp" />
+            android:backgroundTint="#ffffffff"
+            android:layout_marginTop="-10dp"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/primary"
+            android:layout_marginTop="@dimen/line_top_gap"
+            />
 
     </LinearLayout>
 
@@ -170,6 +195,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_email"
+            android:hint="@gmail.com"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/primary"
@@ -189,7 +215,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/input_gender"
+        app:layout_constraintTop_toBottomOf="@id/input_email"
         android:layout_marginTop="@dimen/margin_item_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -213,6 +239,7 @@
 
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:hint="********"
             android:id="@+id/et_password"
 
             android:layout_width="match_parent"
@@ -233,7 +260,7 @@
     <com.google.android.material.button.MaterialButton
         android:backgroundTint="@color/primary"
         android:layout_marginHorizontal="20dp"
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_sign_up"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
@@ -245,13 +272,13 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
-        android:id="@+id/btn_to_sign_up"
+        android:id="@+id/btn_to_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="@string/sign_up"
+        android:text="@string/login"
         android:textColor="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -267,7 +294,7 @@
         android:textColor="@color/accent_2"
         android:fontFamily="@font/montserrat_medium"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_to_sign_up"
+        app:layout_constraintEnd_toStartOf="@id/btn_to_login"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 

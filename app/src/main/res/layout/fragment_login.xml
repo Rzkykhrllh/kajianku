@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,131 +23,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/input_nama"
+        android:id="@+id/input_email"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/tv_login"
-        android:layout_marginTop="56dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="38dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:textSize="14sp"
-            android:text="Name"
-            android:textColor="@color/accent"
-            android:layout_marginLeft="40dp" />
-
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primary"
-            tools:text="Muhammad Rizky Khairullah"
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:drawableLeft="@drawable/ic_baseline_person_24"
-            android:drawablePadding="12dp"
-            android:backgroundTint="@color/primary"
-            android:layout_marginTop="-10"
-
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/input_birth"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/input_nama"
-        android:layout_marginTop="@dimen/margin_item_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="38dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:textSize="14sp"
-            android:text="Date of Birth"
-            android:textColor="@color/accent"
-            android:layout_marginLeft="40dp" />
-
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_birth_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primary"
-            tools:text="9 Juli 2000"
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:drawableLeft="@drawable/ic_baseline_cake_24"
-            android:drawablePadding="12dp"
-            android:backgroundTint="@color/primary"
-            android:layout_marginTop="-10dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/input_gender"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/input_birth"
-        android:layout_marginTop="@dimen/margin_item_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="38dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:textSize="14sp"
-            android:text="Gender"
-            android:textColor="@color/accent"
-            android:layout_marginLeft="40dp" />
-        <!--
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primary"
-                    />-->
-
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/et_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primary"
-            tools:text="Male"
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:drawableLeft="@drawable/ic_baseline_cake_24"
-            android:drawablePadding="12dp"
-            android:backgroundTint="@color/primary"
-            android:layout_marginTop="-10dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/input_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/input_gender"
-        android:layout_marginTop="@dimen/margin_item_login"
+        android:layout_marginTop="130dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="38dp"
@@ -170,6 +53,7 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_email"
+            android:hint="@gmail.com"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/primary"
@@ -189,7 +73,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/input_gender"
+        app:layout_constraintTop_toBottomOf="@id/input_email"
         android:layout_marginTop="@dimen/margin_item_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -213,6 +97,7 @@
 
 
         <androidx.appcompat.widget.AppCompatEditText
+            android:hint="********"
             android:id="@+id/et_password"
 
             android:layout_width="match_parent"
@@ -228,6 +113,22 @@
             android:layout_marginTop="-10dp" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_forget_passord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/input_pass"
+        android:paddingHorizontal="38dp"
+        android:text="Forget Password ?"
+        android:textSize="14sp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/montserrat_medium"
+        android:textColor="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
 
 
     <com.google.android.material.button.MaterialButton
