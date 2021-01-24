@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.purplepotato.kajianku.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.purplepotato.kajianku.ViewModelFactory
 import com.purplepotato.kajianku.databinding.FragmentHomeBinding
 
@@ -35,4 +34,21 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val suggestedRecyclerAdapter = SuggestedKajianRecyclerAdapter()
+        val popularRecyclerAdapter = PopularKajianRecyclerAdapter()
+
+        binding.recyclerViewPopularKajian.apply {
+            adapter = popularRecyclerAdapter
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+
+        binding.recyclerViewSuggestedKajian.apply {
+            adapter = suggestedRecyclerAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
 }
