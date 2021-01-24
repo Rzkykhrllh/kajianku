@@ -11,7 +11,7 @@ import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
 import com.purplepotato.kajianku.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment(), View.OnClickListener {
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -33,20 +33,6 @@ class HomeFragment : Fragment(), View.OnClickListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.btnHomeToDetail.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View) {
-        when(v.id){
-            R.id.btn_home_to_detail -> {
-                val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
-                findNavController().navigate(action)
-            }
-        }
     }
 
 }

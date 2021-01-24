@@ -21,9 +21,13 @@
     <string name="change_password">Ganti kata sandi</string>
     <string name="log_out">Keluar</string>
     <string name="poster_image">Gambar kajian</string>
-
+    <string name="saved_kajian">Kajian Tersimpan</string>
+    <string name="popular_kajian">Kajian Terpopuler</string>
+    <string name="suggested_kajian">Kajian Untukmu</string>
+    <string name="hint_search_kajian">Cari kajian...</string>
+  
     <string-array name="gender_list">
-        <item>Ikhwan</item>
-        <item>Akhwat</item>
-    </string-array>
+          <item>Ikhwan</item>
+          <item>Akhwat</item>
+      </string-array>
 </resources>
