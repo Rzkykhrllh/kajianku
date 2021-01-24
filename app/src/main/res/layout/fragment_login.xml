@@ -12,70 +12,237 @@
         android:id="@+id/tv_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="52dp"
         android:text="@string/login"
+        android:textColor="#7b7b7b"
+        android:textSize="20sp"
+        android:fontFamily="@font/montserrat_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tf_layout_email"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <LinearLayout
+        android:id="@+id/input_nama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:hint="@string/email"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/tv_login"
+        android:layout_marginTop="56dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_login">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="38dp"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="14sp"
+            android:text="Name"
+            android:textColor="@color/accent"
+            android:layout_marginLeft="40dp" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            tools:text="Muhammad Rizky Khairullah"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawablePadding="12dp"
+            android:backgroundTint="@color/primary"
+            android:layout_marginTop="-10"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/input_birth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/input_nama"
+        android:layout_marginTop="@dimen/margin_item_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="38dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="14sp"
+            android:text="Date of Birth"
+            android:textColor="@color/accent"
+            android:layout_marginLeft="40dp" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_birth_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            tools:text="9 Juli 2000"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_baseline_cake_24"
+            android:drawablePadding="12dp"
+            android:backgroundTint="@color/primary"
+            android:layout_marginTop="-10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/input_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/input_birth"
+        android:layout_marginTop="@dimen/margin_item_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="38dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="14sp"
+            android:text="Gender"
+            android:textColor="@color/accent"
+            android:layout_marginLeft="40dp" />
+        <!--
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary"
+                    />-->
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            tools:text="Male"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_baseline_cake_24"
+            android:drawablePadding="12dp"
+            android:backgroundTint="@color/primary"
+            android:layout_marginTop="-10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/input_gender"
+        android:layout_marginTop="@dimen/margin_item_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="38dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="14sp"
+            android:text="Email"
+            android:textColor="@color/accent"
+            android:layout_marginLeft="40dp" />
+        <!--
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary"
+                    />-->
+
+
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            tools:text="Rizkykirigaya@gmail.com"
+            android:inputType="textEmailAddress"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_baseline_mail_outline_24"
+            android:drawablePadding="12dp"
+            android:backgroundTint="@color/primary"
+            android:layout_marginTop="-10dp" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tf_layout_password"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <LinearLayout
+        android:id="@+id/input_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/password"
-        app:endIconMode="password_toggle"
-        app:layout_constraintEnd_toEndOf="@id/tf_layout_email"
-        app:layout_constraintStart_toStartOf="@id/tf_layout_email"
-        app:layout_constraintTop_toBottomOf="@id/tf_layout_email">
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/input_gender"
+        android:layout_marginTop="@dimen/margin_item_login"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="38dp"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="14sp"
+            android:text="Pasword"
+            android:textColor="@color/accent"
+            android:layout_marginLeft="40dp" />
+        <!--
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/primary"
+                    />-->
+
+
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_password"
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            tools:text="Rizkykirigaya@gmail.com"
+            android:inputType="textPassword"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
+            android:drawablePadding="12dp"
+            android:backgroundTint="@color/primary"
+            android:layout_marginTop="-10dp" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_forgot_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/forgot_password"
-        app:layout_constraintEnd_toEndOf="@id/tf_layout_password"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@id/tf_layout_password"
-        app:layout_constraintTop_toBottomOf="@id/tf_layout_password" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
+        android:backgroundTint="@color/primary"
+        android:layout_marginHorizontal="20dp"
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:text="@string/login"
-        app:cornerRadius="8dp"
+        app:cornerRadius="15dp"
+        android:layout_marginBottom="62dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_forgot_password" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/btn_to_sign_up"
@@ -83,8 +250,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
+        android:fontFamily="@font/montserrat_bold"
         android:text="@string/sign_up"
-        android:textColor="@color/black"
+        android:textColor="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -96,6 +264,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/don_t_have_an_account"
+        android:textColor="@color/accent_2"
+        android:fontFamily="@font/montserrat_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_to_sign_up"
         app:layout_constraintHorizontal_chainStyle="packed"
