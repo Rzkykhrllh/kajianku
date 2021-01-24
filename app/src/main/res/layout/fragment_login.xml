@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".auth.login.LoginFragment">
+    tools:context=".auth.login.LoginFragment"
+    android:background="@color/background">
 
     <TextView
         android:id="@+id/tv_login"
@@ -27,7 +28,6 @@
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/tv_login"
         android:layout_marginTop="130dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +72,6 @@
         android:id="@+id/input_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         app:layout_constraintTop_toBottomOf="@id/input_email"
         android:layout_marginTop="@dimen/margin_item_login"
         app:layout_constraintStart_toStartOf="parent"
@@ -116,17 +115,17 @@
 
     <TextView
         android:id="@+id/tv_forget_passord"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/input_pass"
-        android:paddingHorizontal="38dp"
         android:text="Forget Password ?"
+        android:clickable="true"
         android:textSize="14sp"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/montserrat_medium"
         android:textColor="@color/primary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="@id/input_pass"
+        />
 
 
 

@@ -25,9 +25,9 @@
     <string name="popular_kajian">Kajian Terpopuler</string>
     <string name="suggested_kajian">Kajian Untukmu</string>
     <string name="hint_search_kajian">Cari kajian...</string>
-  
+
     <string-array name="gender_list">
-          <item>Ikhwan</item>
-          <item>Akhwat</item>
-      </string-array>
+        <item>Ikhwan</item>
+        <item>Akhwat</item>
+    </string-array>
 </resources>

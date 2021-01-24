@@ -23,6 +23,10 @@ class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
     
     init {
         auth = FirebaseAuth.getInstance()
+
+        if (auth.currentUser != null){
+            _navigateToHome.value = true
+        }
     }
 
     fun login(
