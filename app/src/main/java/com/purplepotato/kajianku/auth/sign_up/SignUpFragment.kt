@@ -1,15 +1,20 @@
 package com.purplepotato.kajianku.auth.sign_up
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.purplepotato.kajianku.MainActivity
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
 import com.purplepotato.kajianku.databinding.FragmentSignUpBinding
-
 
 class SignUpFragment : Fragment() {
 
@@ -17,6 +22,12 @@ class SignUpFragment : Fragment() {
 
     private val binding
         get() = _binding!!
+
+    lateinit var name : String
+    lateinit var password : String
+    lateinit var email : String
+    lateinit var gender : String
+    lateinit var birth : String
 
     private val viewModel by lazy {
         ViewModelProvider(this,ViewModelFactory.getInstance())[SignUpViewModel::class.java]
@@ -30,9 +41,82 @@ class SignUpFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.btnSignUp.setOnClickListener {
+            if (validate()){
+                viewModel.signup(name, birth,gender, email, password)
+            }
+        }
+
+        viewModel.navigateToHome.observe(viewLifecycleOwner, Observer {
+            if (it){
+                Toast.makeText(context, "Move to homme", Toast.LENGTH_LONG).show()
+                val intent = Intent(activity, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+                activity?.finishAfterTransition()
+            }
+        })
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun validate() : Boolean{
+
+        // Log.i("validation", "im here")
+
+        name = binding.etName.text.toString()
+        email = binding.etEmail.text.toString()
+        birth = binding.etBirthDate.text.toString()
+        password = binding.etPassword.text.toString()
+        gender = binding.etGender.text.toString()
+        // Log.i("validation", "$name")
+
+        // Empty Check
+        if (name.isNullOrEmpty()){
+            binding.etName.setError("Mohon masukkan nama anda")
+            return false
+        }
+
+        if (birth.isNullOrEmpty()){
+            binding.etBirthDate.setError("Mohon masukkan tanggal lahir anda")
+            return false
+        }
+
+        if (gender.isNullOrEmpty()){
+            binding.etGender.setError("Mohon masukkan jenis kelamin anda")
+            return false
+        }
+
+        if (email.isNullOrEmpty()){
+            binding.etEmail.setError("Mohon masukkan email anda")
+            return false
+        }
+
+        if (password.isNullOrEmpty()){
+            binding.etPassword.setError("Mohon massukan passord anda")
+            return false
+        }
+
+        // Format check
+
+        if (!email.isValidEmail()){
+            binding.etEmail.setError("Email yang anda masukkan tidak valid")
+            return false
+        }
+
+        if (password.length < 8 ){
+            binding.etEmail.setError("Password yang anda masukkan kurang dari 8 karakter")
+            return false
+        }
+        return true
+    }
+
+    fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 }

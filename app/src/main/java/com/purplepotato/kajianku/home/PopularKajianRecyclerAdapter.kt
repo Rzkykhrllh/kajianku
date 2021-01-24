@@ -20,6 +20,7 @@ class PopularKajianRecyclerAdapter :
             with(binding) {
                 // tempat assign ke item recycler nya
             }
+
         }
     }
 
