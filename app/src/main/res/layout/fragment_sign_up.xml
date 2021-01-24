@@ -89,7 +89,8 @@
             android:layout_marginLeft="40dp" />
 
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <TextView
+            android:clickable="true"
             android:hint="9 Rabiul Awal"
             android:id="@+id/et_birth_date"
             android:layout_width="match_parent"
@@ -101,7 +102,7 @@
             android:drawableLeft="@drawable/ic_baseline_cake_24"
             android:drawablePadding="12dp"
             android:backgroundTint="#ffffffff"
-            android:layout_marginTop="-10dp"
+            android:layout_marginTop="3dp"
             />
 
         <ImageView
@@ -133,15 +134,32 @@
             android:text="Gender"
             android:textColor="@color/accent"
             android:layout_marginLeft="40dp" />
-        <!--
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primary"
-                    />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_baseline_cake_24"/>
+
+            <Spinner
+                android:layout_marginLeft="17dp"
+                android:id="@+id/spinner_gender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary"
+                android:entries="@string/gender"
+                android:textAlignment="center"
+                />
+
+        </LinearLayout>
 
 
-        <androidx.appcompat.widget.AppCompatEditText
+
+
+        <!--<androidx.appcompat.widget.AppCompatEditText
             android:hint="Ikhwan"
             android:id="@+id/et_gender"
             android:layout_width="match_parent"
@@ -154,7 +172,7 @@
             android:drawablePadding="12dp"
             android:backgroundTint="#ffffffff"
             android:layout_marginTop="-10dp"
-            />
+            />-->
 
         <ImageView
             android:layout_width="match_parent"
@@ -185,12 +203,6 @@
             android:text="Email"
             android:textColor="@color/accent"
             android:layout_marginLeft="40dp" />
-        <!--
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primary"
-                    />-->
 
 
         <androidx.appcompat.widget.AppCompatEditText

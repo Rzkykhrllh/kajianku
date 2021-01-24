@@ -21,4 +21,9 @@
     <string name="change_password">Ganti kata sandi</string>
     <string name="log_out">Keluar</string>
     <string name="poster_image">Gambar kajian</string>
+
+    <string-array name="gender_list">
+        <item>Ikhwan</item>
+        <item>Akhwat</item>
+    </string-array>
 </resources>
