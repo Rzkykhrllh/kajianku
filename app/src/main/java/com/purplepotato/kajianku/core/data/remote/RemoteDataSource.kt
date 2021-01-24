@@ -1,10 +1,10 @@
 package com.purplepotato.kajianku.core.data.remote
 
-import com.purplepotato.kajianku.core.data.remote.firebase.FirebaseAuth
+import com.purplepotato.kajianku.core.data.remote.firebase.FirebaseAuthentication
 import com.purplepotato.kajianku.core.data.remote.firebase.FirebaseDatabase
 
 class RemoteDataSource(
-    private val firebaseAuth: FirebaseAuth,
+    private val firebaseAuthentication: FirebaseAuthentication,
     private val firebaseDatabase: FirebaseDatabase
 ) {
 
@@ -13,10 +13,10 @@ class RemoteDataSource(
         private var instance: RemoteDataSource? = null
 
         fun getInstance(
-            firebaseAuth: FirebaseAuth,
+            firebaseAuthentication: FirebaseAuthentication,
             firebaseDatabase: FirebaseDatabase
         ): RemoteDataSource = instance ?: synchronized(this) {
-            instance ?: RemoteDataSource(firebaseAuth, firebaseDatabase)
+            instance ?: RemoteDataSource(firebaseAuthentication, firebaseDatabase)
         }
     }
 
