@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingHorizontal="16dp"
     tools:context=".profile.ProfileFragment">
 
     <TextView
@@ -12,89 +13,98 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/montserrat_semi_bold"
-        android:textColor="@color/black"
-        android:textSize="16sp"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/primary"
+
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Nama User" />
+        tools:text="Rizky Khairullah" />
 
     <TextView
         android:id="@+id/tv_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:textSize="12sp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/tv_history"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_username"
-        tools:text="Nama Email" />
+        tools:text="nananana@gmail.com" />
 
     <TextView
         android:id="@+id/tv_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:background="?attr/selectableItemBackground"
-        android:fontFamily="@font/montserrat_regular"
+        android:fontFamily="@font/montserrat_semi_bold"
         android:padding="16dp"
         android:text="@string/kajian_history"
+        android:textColor="@color/accent"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@id/tv_username"
         app:layout_constraintStart_toStartOf="@id/tv_username"
         app:layout_constraintTop_toBottomOf="@id/tv_email" />
 
-    <TextView
-        android:id="@+id/tv_about_us"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:fontFamily="@font/montserrat_regular"
-        android:padding="16dp"
-        android:text="@string/about_us"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/tv_history"
-        app:layout_constraintStart_toStartOf="@id/tv_history"
-        app:layout_constraintTop_toBottomOf="@id/tv_history" />
 
     <TextView
         android:id="@+id/tv_change_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:fontFamily="@font/montserrat_regular"
+        android:fontFamily="@font/montserrat_semi_bold"
         android:padding="16dp"
         android:text="@string/change_email"
+        android:textColor="@color/accent"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/tv_about_us"
-        app:layout_constraintStart_toStartOf="@id/tv_about_us"
-        app:layout_constraintTop_toBottomOf="@id/tv_about_us" />
+        app:layout_constraintEnd_toEndOf="@id/tv_history"
+        app:layout_constraintStart_toStartOf="@id/tv_history"
+        app:layout_constraintTop_toBottomOf="@id/tv_history" />
 
     <TextView
         android:id="@+id/tv_change_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:fontFamily="@font/montserrat_regular"
+        android:fontFamily="@font/montserrat_semi_bold"
         android:padding="16dp"
         android:text="@string/change_password"
+        android:textColor="@color/accent"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@id/tv_change_email"
         app:layout_constraintStart_toStartOf="@id/tv_change_email"
         app:layout_constraintTop_toBottomOf="@id/tv_change_email" />
+
+
+    <TextView
+        android:id="@+id/tv_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:padding="16dp"
+        android:text="@string/about_us"
+        android:textColor="@color/accent"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/tv_change_password"
+        app:layout_constraintStart_toStartOf="@id/tv_change_password"
+        app:layout_constraintTop_toBottomOf="@id/tv_change_password" />
 
     <TextView
         android:id="@+id/tv_log_out"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
-        android:fontFamily="@font/montserrat_regular"
+        android:fontFamily="@font/montserrat_semi_bold"
         android:padding="16dp"
         android:text="@string/log_out"
+        android:textColor="@color/accent"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@id/tv_change_password"
-        app:layout_constraintStart_toStartOf="@id/tv_change_password"
-        app:layout_constraintTop_toBottomOf="@id/tv_change_password" />
+        app:layout_constraintEnd_toEndOf="@id/tv_about_us"
+        app:layout_constraintStart_toStartOf="@id/tv_about_us"
+        app:layout_constraintTop_toBottomOf="@id/tv_about_us" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -242,13 +242,6 @@
             android:text="Pasword"
             android:textColor="@color/accent"
             android:layout_marginLeft="40dp" />
-        <!--
-                <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/primary"
-                    />-->
-
 
         <androidx.appcompat.widget.AppCompatEditText
             android:hint="********"

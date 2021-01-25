@@ -2,6 +2,7 @@ package com.purplepotato.kajianku.auth.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.purplepotato.kajianku.MainActivity
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
@@ -59,6 +61,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 activity?.finishAfterTransition()
             }
         })
+
+        binding.tvForgetPassord.setOnClickListener {
+            Toast.makeText(context, "gelud yokkk", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgotPassword())
+        }
     }
 
     override fun onClick(v: View) {
@@ -68,6 +75,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
                     viewModel.login(email, password)
                 }
 
+            }
+
+            R.id.tv_forget_passord -> {
+                Toast.makeText(context, "gelud yokkk", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgotPassword())
             }
 
             R.id.btn_to_sign_up -> {
