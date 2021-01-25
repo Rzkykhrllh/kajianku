@@ -9,7 +9,7 @@
         android:id="@+id/savedKajianFragment"
         android:name="com.purplepotato.kajianku.saved_kajian.SavedKajianFragment"
         android:label="fragment_saved_kajian"
-        tools:layout="@layout/fragment_saved_kajian" >
+        tools:layout="@layout/fragment_saved_kajian">
         <action
             android:id="@+id/action_savedKajianFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -25,7 +25,7 @@
         android:id="@+id/homeFragment"
         android:name="com.purplepotato.kajianku.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
@@ -34,5 +34,11 @@
         android:id="@+id/detailFragment"
         android:name="com.purplepotato.kajianku.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="kajian"
+            android:defaultValue="@null"
+            app:argType="com.purplepotato.kajianku.core.domain.Kajian"
+            app:nullable="true" />
+    </fragment>
 </navigation>

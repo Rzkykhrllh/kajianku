@@ -25,7 +25,12 @@
     <string name="popular_kajian">Kajian Terpopuler</string>
     <string name="suggested_kajian">Kajian Untukmu</string>
     <string name="hint_search_kajian">Cari kajian...</string>
-  
+    <string name="content_desc_back">Kembali ke halaman sebelumnya</string>
+    <string name="content_desc_share">Bagikan</string>
+    <string name="description">Deskripsi</string>
+    <string name="registration">Pendaftaran</string>
+    <string name="content_desc_find_location">Cari lokasi</string>
+
     <string-array name="gender_list">
           <item>Ikhwan</item>
           <item>Akhwat</item>
