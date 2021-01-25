@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.purplepotato.kajianku.MainActivity
+import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
 import com.purplepotato.kajianku.auth.AuthenticationActivity
 import com.purplepotato.kajianku.databinding.FragmentProfileBinding
@@ -43,6 +44,21 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.tvChangePassword
+            .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_chevron_right_24, 0);
+
+        binding.tvLogOut
+            .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_chevron_right_24, 0);
+
+        binding.tvHistory
+            .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_chevron_right_24, 0);
+
+        binding.tvAboutUs
+            .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_chevron_right_24, 0);
+
+        binding.tvChangeEmail
+            .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_chevron_right_24, 0);
 
         binding.tvLogOut.setOnClickListener {
             viewModel.logout()
