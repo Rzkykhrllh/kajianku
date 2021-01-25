@@ -3,7 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_home">Beranda</string>
-    <string name="menu_saved_kajian">Kajian Tersimpan</string>
+    <string name="menu_saved_kajian">Kajianku</string>
     <string name="menu_profile">Profil</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -24,7 +24,12 @@
     <string name="saved_kajian">Kajian Tersimpan</string>
     <string name="popular_kajian">Kajian Terpopuler</string>
     <string name="suggested_kajian">Kajian Untukmu</string>
-    <string name="hint_search_kajian">Cari kajian...</string>
+    <string name="hint_search_kajian">Cari kajian…</string>
+    <string name="content_desc_back">Kembali ke halaman sebelumnya</string>
+    <string name="content_desc_share">Bagikan</string>
+    <string name="description">Deskripsi</string>
+    <string name="registration">Pendaftaran</string>
+    <string name="content_desc_find_location">Cari lokasi</string>
 
     <string-array name="gender_list">
         <item>Ikhwan</item>

@@ -2,16 +2,12 @@ package com.purplepotato.kajianku.auth.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import com.purplepotato.kajianku.MainActivity
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
@@ -25,12 +21,20 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private val binding
         get() = _binding!!
 
-
     private lateinit var password: String
     private lateinit var email: String
 
     private val viewModel by lazy {
         ViewModelProvider(this, ViewModelFactory.getInstance())[LoginViewModel::class.java]
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.navigateToHome.observe(viewLifecycleOwner, {
+            if (it) {
+                moveToHome()
+            }
+        })
     }
 
     override fun onCreateView(
@@ -50,22 +54,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         binding.btnLogin.setOnClickListener(this)
         binding.btnToSignUp.setOnClickListener(this)
+    }
 
-        viewModel.navigateToHome.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                Toast.makeText(context, "Move to home", Toast.LENGTH_LONG).show()
-
-                val intent = Intent(activity, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-                startActivity(intent)
-                activity?.finishAfterTransition()
-            }
-        })
-
-        binding.tvForgetPassord.setOnClickListener {
-            Toast.makeText(context, "gelud yokkk", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgotPassword())
-        }
+    private fun moveToHome() {
+        val intent = Intent(activity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        activity?.finishAfterTransition()
     }
 
     override fun onClick(v: View) {
@@ -74,12 +69,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 if (validate()) {
                     viewModel.login(email, password)
                 }
-
-            }
-
-            R.id.tv_forget_passord -> {
-                Toast.makeText(context, "gelud yokkk", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgotPassword())
             }
 
             R.id.btn_to_sign_up -> {
@@ -95,8 +84,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         password = binding.etPassword.text.toString()
 
         // Empty Check
-
-        if (email.isNullOrEmpty()) {
+        if (email.isEmpty()) {
             binding.etEmail.error = "Mohon masukkan email anda"
             return false
         }
@@ -107,14 +95,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
         }
 
         // Format check
-
         if (!email.isValidEmail()) {
             binding.etEmail.error = "Email yang anda masukkan tidak valid"
             return false
         }
 
         if (password.length < 8) {
-            binding.etEmail.error = "Password yang anda masukkan kurang dari 8 karakter"
+            binding.etPassword.error = "Password yang anda masukkan kurang dari 8 karakter"
             return false
         }
         return true

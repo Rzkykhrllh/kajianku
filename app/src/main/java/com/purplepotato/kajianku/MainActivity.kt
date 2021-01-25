@@ -1,7 +1,6 @@
 package com.purplepotato.kajianku
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
@@ -17,27 +16,22 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.chipNavBar.setItemSelected(R.id.homeFragment)
+
         val navController = Navigation.findNavController(this, R.id.fragment_container)
         NavigationUI.setupWithNavController(binding.bottomNavBar, navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.detailFragment -> hideBottomNav()
-                R.id.profileFragment -> showBottomNav()
-                R.id.homeFragment -> showBottomNav()
-                R.id.savedKajianFragment -> showBottomNav()
+                R.id.detailFragment -> binding.chipNavBar.collapse()
+                R.id.profileFragment -> binding.chipNavBar.expand()
+                R.id.homeFragment -> binding.chipNavBar.expand()
+                R.id.savedKajianFragment -> binding.chipNavBar.expand()
             }
         }
+
+        binding.chipNavBar.setOnItemSelectedListener { itemId ->
+            binding.bottomNavBar.selectedItemId = itemId
+        }
     }
-
-
-    private fun showBottomNav() {
-        binding.bottomNavBar.visibility = View.VISIBLE
-    }
-
-    private fun hideBottomNav() {
-        binding.bottomNavBar.visibility = View.GONE
-    }
-
-
 }

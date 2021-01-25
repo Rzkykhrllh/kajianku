@@ -65,7 +65,6 @@ class ChangePasswordViewModel : ViewModel() {
                         } else{
                             _navigateToProfile.value = false
                         }
-
                 }
             }
 
