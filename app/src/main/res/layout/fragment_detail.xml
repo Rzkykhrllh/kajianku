@@ -1,13 +1,313 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".detail.DetailFragment">
 
-    <TextView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Detail Fragment" />
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#F3F2F2">
+
+            <ImageView
+                android:id="@+id/img_poster"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/poster_image"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <View
+                android:id="@+id/bg_tag"
+                android:layout_width="80dp"
+                android:layout_height="32dp"
+                android:background="@drawable/tag_online_offline"
+                app:layout_constraintBottom_toBottomOf="@id/img_poster"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@id/bg_tag"
+                app:layout_constraintEnd_toEndOf="@id/bg_tag"
+                app:layout_constraintStart_toStartOf="@id/bg_tag"
+                app:layout_constraintTop_toTopOf="@id/bg_tag"
+                tools:text="Offline" />
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_round_img_button"
+                android:backgroundTint="#88000000"
+                android:contentDescription="@string/content_desc_back"
+                android:src="@drawable/ic_arrow_back"
+                android:tint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/btn_share"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/bg_round_img_button"
+                android:backgroundTint="#88000000"
+                android:contentDescription="@string/content_desc_share"
+                android:src="@drawable/ic_share"
+                android:tint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/bg_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="@id/img_poster"
+                app:layout_constraintStart_toStartOf="@id/img_poster"
+                app:layout_constraintTop_toBottomOf="@id/img_poster">
+
+                <TextView
+                    android:id="@+id/txt_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="#4AC9B4"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="@id/bg_title"
+                    app:layout_constraintStart_toStartOf="@id/bg_title"
+                    app:layout_constraintTop_toTopOf="@id/bg_title"
+                    tools:text="@tools:sample/lorem" />
+
+                <TextView
+                    android:id="@+id/txt_speaker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="#4AC9B4"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="@id/bg_title"
+                    app:layout_constraintStart_toStartOf="@id/bg_title"
+                    app:layout_constraintTop_toBottomOf="@id/txt_title"
+                    tools:text="@tools:sample/lorem" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_tag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bg_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingVertical="8dp"
+                app:layout_constraintEnd_toEndOf="@id/bg_title"
+                app:layout_constraintStart_toStartOf="@id/bg_title"
+                app:layout_constraintTop_toBottomOf="@id/bg_title">
+
+                <TextView
+                    android:id="@+id/txt_place"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:textColor="#4AC9B4"
+                    android:textSize="14sp"
+                    app:drawableStartCompat="@drawable/ic_place"
+                    app:drawableTint="#4AC9B4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="@tools:sample/lorem" />
+
+                <View
+                    android:id="@+id/divider_time_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#DAD9D9"
+                    app:layout_constraintBottom_toTopOf="@id/txt_date"
+                    app:layout_constraintTop_toBottomOf="@id/txt_place" />
+
+                <TextView
+                    android:id="@+id/txt_date"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:textColor="#4AC9B4"
+                    android:textSize="14sp"
+                    app:drawableStartCompat="@drawable/ic_date"
+                    app:drawableTint="#4AC9B4"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider_time_top"
+                    tools:text="@tools:sample/lorem" />
+
+                <View
+                    android:id="@+id/divider_time_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#DAD9D9"
+                    app:layout_constraintBottom_toTopOf="@id/txt_time"
+                    app:layout_constraintTop_toBottomOf="@id/txt_date" />
+
+                <TextView
+                    android:id="@+id/txt_time"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawablePadding="8dp"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:gravity="center_vertical"
+                    android:padding="16dp"
+                    android:textColor="#4AC9B4"
+                    android:textSize="14sp"
+                    app:drawableStartCompat="@drawable/ic_time"
+                    app:drawableTint="#4AC9B4"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider_time_bottom"
+                    tools:text="@tools:sample/lorem" />
+
+                <ImageButton
+                    android:id="@+id/btn_find_location"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_round_img_button"
+                    android:backgroundTint="#4AC9B4"
+                    android:contentDescription="@string/content_desc_find_location"
+                    android:src="@drawable/ic_map"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@id/txt_place"
+                    app:layout_constraintEnd_toEndOf="@id/txt_place"
+                    app:layout_constraintTop_toTopOf="@id/txt_place" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/bg_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="@id/bg_time"
+                app:layout_constraintStart_toStartOf="@id/bg_time"
+                app:layout_constraintTop_toBottomOf="@id/bg_time">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:text="@string/description"
+                    android:textColor="#4AC9B4"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="12sp"
+                    tools:maxLines="5"
+                    tools:text="@tools:sample/lorem/random" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bg_registration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="100dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="@id/bg_desc"
+                app:layout_constraintStart_toStartOf="@id/bg_desc"
+                app:layout_constraintTop_toBottomOf="@id/bg_desc">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semi_bold"
+                    android:text="@string/registration"
+                    android:textColor="#4AC9B4"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="12sp"
+                    tools:maxLines="5"
+                    tools:text="@tools:sample/lorem/random" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Simpan kajian"
+        android:textSize="14sp"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/bg_button"
+        app:layout_constraintEnd_toEndOf="@id/bg_button"
+        app:layout_constraintStart_toStartOf="@id/bg_button"
+        app:layout_constraintTop_toTopOf="@id/bg_button" />
+
+    <View
+        android:id="@+id/bg_button"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

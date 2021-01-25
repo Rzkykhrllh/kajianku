@@ -3,6 +3,7 @@ package com.purplepotato.kajianku.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.purplepotato.kajianku.R
@@ -20,6 +21,12 @@ class SuggestedKajianRecyclerAdapter :
         fun bind(item: Kajian) {
             with(binding) {
                 //assign value to item recycler view
+
+                root.setOnClickListener {
+                    val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
+                    action.kajian = item
+                    root.findNavController().navigate(action)
+                }
             }
         }
     }

@@ -11,5 +11,13 @@
     <color name="primary">#4AC9B4</color>
     <color name="accent">#7b7b7b</color>
     <color name="accent_2">#a2a2a2</color>
+
+    <color name="green">#00B06F</color>
+    <color name="darkGreen">#00774B</color>
+    <color name="lightGreen">#4AC9B4</color>
+    <color name="lightCyan">#DFFDF2</color>
+    <color name="lightGray">#F1F3F6</color>
+
+    <color name="placeholder">#dddddd</color>
     <color name="background">#F9FBFB</color>
 </resources>
