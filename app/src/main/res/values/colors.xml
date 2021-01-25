@@ -19,4 +19,5 @@
     <color name="lightGray">#F1F3F6</color>
 
     <color name="placeholder">#dddddd</color>
+    <color name="background">#F9FBFB</color>
 </resources>
