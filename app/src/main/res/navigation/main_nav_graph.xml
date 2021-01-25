@@ -23,6 +23,15 @@
         <action
             android:id="@+id/action_profileFragment_to_changePassword"
             app:destination="@id/changePassword" />
+        <action
+            android:id="@+id/action_profileFragment_to_chaneUsernameFragment"
+            app:destination="@id/chaneUsernameFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_tentangKamiFragment"
+            app:destination="@id/tentangKamiFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_riwayatKajianFragment"
+            app:destination="@id/riwayatKajianFragment" />
     </fragment>
 
     <fragment
@@ -46,6 +55,39 @@
         tools:layout="@layout/change_password_fragment" >
         <action
             android:id="@+id/action_changePassword_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/chaneUsernameFragment"
+        android:name="com.purplepotato.kajianku.profile.changeusername.ChaneUsernameFragment"
+        android:label="fragment_chane_username"
+        tools:layout="@layout/fragment_chane_username" >
+        <action
+            android:id="@+id/action_chaneUsernameFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/tentangKamiFragment"
+        android:name="com.purplepotato.kajianku.profile.tentangkami.TentangKamiFragment"
+        android:label="fragment_tentang_kami"
+        tools:layout="@layout/fragment_tentang_kami" >
+        <action
+            android:id="@+id/action_tentangKamiFragment_to_profileFragment"
+            app:destination="@id/profileFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/riwayatKajianFragment"
+        android:name="com.purplepotato.kajianku.profile.history.RiwayatKajianFragment"
+        android:label="fragment_riwayat_kajian"
+        tools:layout="@layout/fragment_riwayat_kajian" >
+        <action
+            android:id="@+id/action_riwayatKajianFragment_to_profileFragment"
             app:destination="@id/profileFragment"
             app:popUpTo="@id/profileFragment"
             app:popUpToInclusive="true" />

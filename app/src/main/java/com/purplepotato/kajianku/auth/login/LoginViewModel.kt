@@ -1,5 +1,6 @@
 package com.purplepotato.kajianku.auth.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,14 +43,21 @@ class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
     }
 
     private suspend fun loginFirebase() {
+        Log.i("logincess", "im here")
+
         withContext(Dispatchers.IO) {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener() { task ->
+
+                    Log.i("logincess", "dah selesai")
+
                     if (task.isSuccessful) {
                         val user = auth.currentUser
                         _navigateToHome.value = true
+                        Log.i("logincess", "berhasil $user")
                     } else {
                         _navigateToHome.value = false
+                        Log.i("logincess", "berhasil gagal")
                     }
                 }
         }
