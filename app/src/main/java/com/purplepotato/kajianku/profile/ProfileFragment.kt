@@ -2,12 +2,15 @@ package com.purplepotato.kajianku.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.ProxyFileDescriptorCallback
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.purplepotato.kajianku.MainActivity
 import com.purplepotato.kajianku.ViewModelFactory
 import com.purplepotato.kajianku.auth.AuthenticationActivity
@@ -43,6 +46,12 @@ class ProfileFragment : Fragment() {
 
         binding.tvLogOut.setOnClickListener {
             viewModel.logout()
+        }
+
+        binding.tvChangePassword.setOnClickListener {
+            Toast.makeText(context, "pindah ke change pass", Toast.LENGTH_LONG).show()
+
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToChangePassword())
         }
 
         // Log out
