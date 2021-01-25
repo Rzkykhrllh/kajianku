@@ -66,7 +66,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_login -> {
-                if (validate()) {
+                var test = validate()
+                Log.i("logincess", "hasil validasi ${validate()}")
+
+                if (test) {
                     viewModel.login(email, password)
                 }
             }

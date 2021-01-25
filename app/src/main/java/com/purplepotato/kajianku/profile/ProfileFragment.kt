@@ -45,6 +45,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // give icon to textView
+
         binding.tvChangePassword
             .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_chevron_right_24, 0);
 
@@ -64,10 +66,25 @@ class ProfileFragment : Fragment() {
             viewModel.logout()
         }
 
+
+        // Navigation
+
         binding.tvChangePassword.setOnClickListener {
             Toast.makeText(context, "pindah ke change pass", Toast.LENGTH_LONG).show()
 
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToChangePassword())
+        }
+
+        binding.tvAboutUs.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToTentangKamiFragment())
+        }
+
+        binding.tvHistory.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToRiwayatKajianFragment())
+        }
+
+        binding.tvChangeEmail.setOnClickListener {
+            findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToChaneUsernameFragment())
         }
 
         // Log out

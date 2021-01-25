@@ -1,5 +1,6 @@
 package com.purplepotato.kajianku.auth.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -37,6 +38,7 @@ class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
     init {
         isAlreadyLoggedIn()
     }
+
 
     override fun onCleared() {
         super.onCleared()
