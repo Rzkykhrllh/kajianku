@@ -13,7 +13,7 @@ import kotlinx.coroutines.*
 class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
 
     private lateinit var auth: FirebaseAuth
-    lateinit var user : FirebaseUser
+    lateinit var user: FirebaseUser
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
@@ -23,14 +23,14 @@ class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
 
     }
 
-    var name : String = ""
-    var birth : String = ""
-    var gender : String = ""
-    var email : String = ""
-    var password : String = ""
+    var name: String = ""
+    var birth: String = ""
+    var gender: String = ""
+    var email: String = ""
+    var password: String = ""
 
     private val _navigateToHome = MutableLiveData<Boolean>()
-    val navigateToHome : LiveData<Boolean>
+    val navigateToHome: LiveData<Boolean>
         get() = _navigateToHome
 
 
@@ -76,11 +76,13 @@ class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
             .build()
 
         /** run update request */
-        user.updateProfile(profileUpdates).addOnCompleteListener{
+        user.updateProfile(profileUpdates).addOnCompleteListener {
             Log.i("inputdesu profile", "berhasil di update")
         }
     }
 
-
-
+    override fun onCleared() {
+        super.onCleared()
+        uiScope.cancel()
+    }
 }

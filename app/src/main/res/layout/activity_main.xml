@@ -22,10 +22,22 @@
         android:id="@+id/bottom_nav_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:labelVisibilityMode="selected"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/main_menu" />
 
+    <com.ismaeldivita.chipnavigation.ChipNavigationBar
+        android:id="@+id/chip_nav_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="4dp"
+        android:background="@color/white"
+        app:cnb_menuResource="@menu/main_menu"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
