@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.purplepotato.kajianku.ViewModelFactory
+import com.purplepotato.kajianku.core.Resource
 import com.purplepotato.kajianku.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -50,5 +51,20 @@ class HomeFragment : Fragment() {
             adapter = suggestedRecyclerAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
+
+        viewModel.listSuggestedKajian.observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is Resource.Success -> {
+                    binding.progressIndicator.visibility = View.GONE
+                    suggestedRecyclerAdapter.submitList(result.data)
+                }
+                is Resource.Loading -> {
+                    binding.progressIndicator.visibility = View.VISIBLE
+                }
+                is Resource.Error -> {
+                    binding.progressIndicator.visibility = View.GONE
+                }
+            }
+        })
     }
 }

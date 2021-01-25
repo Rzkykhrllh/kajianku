@@ -10,17 +10,12 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcher
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.purplepotato.kajianku.MainActivity
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
-import com.purplepotato.kajianku.auth.login.LoginFragmentDirections
 import com.purplepotato.kajianku.core.util.isValidEmail
 import com.purplepotato.kajianku.databinding.FragmentSignUpBinding
 import java.text.SimpleDateFormat
@@ -41,7 +36,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     lateinit var birth: String
 
 
-    var cal = Calendar.getInstance()
+    private var cal: Calendar = Calendar.getInstance()
 
     private val viewModel by lazy {
         ViewModelProvider(this, ViewModelFactory.getInstance())[SignUpViewModel::class.java]
@@ -71,7 +66,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         }
 
         // Pindah ke halaman Home
-        viewModel.navigateToHome.observe(viewLifecycleOwner, Observer {
+        viewModel.navigateToHome.observe(viewLifecycleOwner, {
             if (it) {
                 Toast.makeText(context, "Move to home", Toast.LENGTH_LONG).show()
                 val intent = Intent(activity, MainActivity::class.java)
@@ -130,7 +125,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     private fun updateLabel() {
         val myFormat = "MM/dd/yyyy" //In which you need put here
         val sdf = SimpleDateFormat(myFormat, Locale.US)
-        binding.etBirthDate.setText(sdf.format(cal.getTime()))
+        binding.etBirthDate.text = sdf.format(cal.time)
     }
 
     override fun onDestroyView() {
@@ -149,12 +144,12 @@ class SignUpFragment : Fragment(), View.OnClickListener {
 //        gender = binding.etGender.text.toString()
 
         // Empty Check
-        if (name.isNullOrEmpty()) {
+        if (name.isEmpty()) {
             binding.etName.error = "Mohon masukkan nama anda"
             return false
         }
 
-        if (birth.isNullOrEmpty()) {
+        if (birth.isEmpty()) {
             binding.etBirthDate.error = "Mohon masukkan tanggal lahir anda"
             return false
         }
@@ -164,12 +159,12 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             return false
         }*/
 
-        if (email.isNullOrEmpty()) {
+        if (email.isEmpty()) {
             binding.etEmail.error = "Mohon masukkan email anda"
             return false
         }
 
-        if (password.isNullOrEmpty()) {
+        if (password.isEmpty()) {
             binding.etPassword.error = "Mohon massukan passord anda"
             return false
         }

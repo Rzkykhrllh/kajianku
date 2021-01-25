@@ -55,7 +55,7 @@ class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
     private suspend fun signUpFirebase() {
         withContext(Dispatchers.IO) {
             auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener() { task ->
+                .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Log.i("inputdesu", "berhasil membuat user")
                         user = auth.currentUser!!

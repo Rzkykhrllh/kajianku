@@ -1,11 +1,14 @@
 package com.purplepotato.kajianku.core.data.remote
 
+import com.purplepotato.kajianku.core.Resource
+import com.purplepotato.kajianku.core.data.remote.firebase.FireStore
 import com.purplepotato.kajianku.core.data.remote.firebase.FirebaseAuthentication
-import com.purplepotato.kajianku.core.data.remote.firebase.FirebaseDatabase
+import com.purplepotato.kajianku.core.domain.Kajian
+import kotlinx.coroutines.flow.Flow
 
 class RemoteDataSource(
     private val firebaseAuthentication: FirebaseAuthentication,
-    private val firebaseDatabase: FirebaseDatabase
+    private val fireStore: FireStore
 ) {
 
     companion object {
@@ -14,10 +17,14 @@ class RemoteDataSource(
 
         fun getInstance(
             firebaseAuthentication: FirebaseAuthentication,
-            firebaseDatabase: FirebaseDatabase
+            fireStore: FireStore
         ): RemoteDataSource = instance ?: synchronized(this) {
-            instance ?: RemoteDataSource(firebaseAuthentication, firebaseDatabase)
+            instance ?: RemoteDataSource(firebaseAuthentication, fireStore)
         }
     }
+
+    suspend fun queryAllKajian(): Flow<Resource<List<Kajian>>> = fireStore.queryAllKajian()
+
+    suspend fun queryAllSavedKajian(): Flow<Resource<List<Kajian>>> = fireStore.queryAllSavedKajian()
 
 }
