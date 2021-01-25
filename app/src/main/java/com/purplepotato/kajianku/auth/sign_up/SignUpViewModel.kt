@@ -12,16 +12,11 @@ import kotlinx.coroutines.*
 
 class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
 
-    private lateinit var auth: FirebaseAuth
-    lateinit var user: FirebaseUser
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var user: FirebaseUser
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-
-    init {
-        auth = FirebaseAuth.getInstance() // Buat objek auth
-
-    }
 
     var name: String = ""
     var birth: String = ""
@@ -34,38 +29,24 @@ class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
         get() = _navigateToHome
 
 
-    fun signup(
-        name: String,
-        birth: String,
-        gender: String,
-        email: String,
-        password: String
+    fun signUp(
+        name: String, birth: String, gender: String, email: String, password: String
     ) {
-        this.name = name
-        this.birth = birth
-        this.gender = gender
-        this.email = email
-        this.password = password
 
         uiScope.launch {
-            signUpFirebase()
-        }
-    }
-
-    private suspend fun signUpFirebase() {
-        withContext(Dispatchers.IO) {
-            auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        Log.i("inputdesu", "berhasil membuat user")
-                        user = auth.currentUser!!
-                        updateProfile()
-                        _navigateToHome.value = true
-                    } else {
-                        _navigateToHome.value = false
+            withContext(Dispatchers.IO) {
+                auth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.i("inputdesu", "berhasil membuat user")
+                            user = auth.currentUser!!
+                            updateProfile()
+                            _navigateToHome.value = true
+                        } else {
+                            _navigateToHome.value = false
+                        }
                     }
-
-                }
+            }
         }
     }
 

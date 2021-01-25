@@ -13,10 +13,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
+        android:fontFamily="@font/montserrat_bold"
         android:text="@string/sign_up"
         android:textColor="#7b7b7b"
         android:textSize="20sp"
-        android:fontFamily="@font/montserrat_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,45 +25,43 @@
         android:id="@+id/input_nama"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/tv_sign_up"
-        android:layout_marginTop="56dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="38dp"
-        android:orientation="vertical">
+        android:layout_marginTop="56dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_sign_up">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:textSize="14sp"
             android:text="Name"
             android:textColor="@color/accent"
-            android:layout_marginLeft="40dp" />
+            android:textSize="14sp" />
 
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:hint="Muhammad"
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/primary"
-            tools:text="Muhammad Rizky Khairullah"
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:drawableLeft="@drawable/ic_baseline_person_24"
-            android:drawablePadding="12dp"
-            android:backgroundTint="#ffffffff"
             android:layout_marginTop="-10dp"
-            />
+            android:backgroundTint="#ffffffff"
+            android:drawableStart="@drawable/ic_baseline_person_24"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:hint="Muhammad"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            tools:text="Muhammad Rizky Khairullah" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/primary"
             android:layout_marginTop="@dimen/line_top_gap"
-            />
+            android:background="@color/primary" />
 
     </LinearLayout>
 
@@ -71,46 +69,44 @@
         android:id="@+id/input_birth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/input_nama"
-        android:layout_marginTop="@dimen/margin_item_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="38dp"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/margin_item_login"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_nama">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:textSize="14sp"
             android:text="Date of Birth"
             android:textColor="@color/accent"
-            android:layout_marginLeft="40dp" />
+            android:textSize="14sp" />
 
 
         <TextView
-            android:clickable="true"
-            android:hint="9 Rabiul Awal"
             android:id="@+id/et_birth_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/primary"
-            tools:text="9 Juli 2000"
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:drawableLeft="@drawable/ic_baseline_cake_24"
-            android:drawablePadding="12dp"
-            android:backgroundTint="#ffffffff"
             android:layout_marginTop="3dp"
-            />
+            android:backgroundTint="#ffffffff"
+            android:clickable="true"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:hint="9 Rabiul Awal"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            app:drawableStartCompat="@drawable/ic_baseline_cake_24"
+            tools:text="9 Juli 2000" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/primary"
             android:layout_marginTop="@dimen/line_top_gap"
-            />
+            android:background="@color/primary" />
 
     </LinearLayout>
 
@@ -118,22 +114,22 @@
         android:id="@+id/input_gender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/input_birth"
-        android:layout_marginTop="@dimen/margin_item_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="38dp"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/margin_item_login"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_birth">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:textSize="14sp"
             android:text="Gender"
             android:textColor="@color/accent"
-            android:layout_marginLeft="40dp" />
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -142,44 +138,22 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_baseline_cake_24"/>
+                android:background="@drawable/ic_baseline_cake_24" />
 
             <Spinner
-                android:layout_marginLeft="17dp"
                 android:id="@+id/spinner_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:backgroundTint="@color/primary"
-                android:entries="@string/gender"
-                android:textAlignment="center"
-                />
-
+                android:textAlignment="center" />
         </LinearLayout>
-
-
-
-
-        <!--<androidx.appcompat.widget.AppCompatEditText
-            android:hint="Ikhwan"
-            android:id="@+id/et_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/primary"
-            tools:text="Male"
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:drawableLeft="@drawable/ic_baseline_cake_24"
-            android:drawablePadding="12dp"
-            android:backgroundTint="#ffffffff"
-            android:layout_marginTop="-10dp"
-            />-->
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/primary"
             android:layout_marginTop="@dimen/line_top_gap"
-            />
+            android:background="@color/primary" />
 
     </LinearLayout>
 
@@ -187,94 +161,91 @@
         android:id="@+id/input_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/input_gender"
-        android:layout_marginTop="@dimen/margin_item_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="38dp"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/margin_item_login"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_gender">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:textSize="14sp"
             android:text="Email"
             android:textColor="@color/accent"
-            android:layout_marginLeft="40dp" />
-
+            android:textSize="14sp" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/et_email"
-            android:hint="@gmail.com"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/primary"
-            tools:text="Rizkykirigaya@gmail.com"
-            android:inputType="textEmailAddress"
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:drawableLeft="@drawable/ic_baseline_mail_outline_24"
-            android:drawablePadding="12dp"
+            android:layout_marginTop="-10dp"
             android:backgroundTint="@color/primary"
-            android:layout_marginTop="-10dp" />
-
+            android:drawableStart="@drawable/ic_baseline_mail_outline_24"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:hint="asd"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            tools:text="Rizkykirigaya@gmail.com" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/input_pass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/input_email"
-        android:layout_marginTop="@dimen/margin_item_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="38dp"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/margin_item_login"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_email">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:fontFamily="@font/montserrat_semi_bold"
-            android:textSize="14sp"
-            android:text="Pasword"
+            android:text="Password"
             android:textColor="@color/accent"
-            android:layout_marginLeft="40dp" />
+            android:textSize="14sp" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:hint="********"
             android:id="@+id/et_password"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/primary"
-            tools:text="Rizkykirigaya@gmail.com"
-            android:inputType="textPassword"
-            android:fontFamily="@font/montserrat_bold"
-            android:textSize="14sp"
-            android:drawableLeft="@drawable/ic_baseline_lock_24"
-            android:drawablePadding="12dp"
+            android:layout_marginTop="-10dp"
             android:backgroundTint="@color/primary"
-            android:layout_marginTop="-10dp" />
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:hint="********"
+            android:inputType="textPassword"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            tools:text="Rizkykirigaya@gmail.com" />
 
     </LinearLayout>
 
 
     <com.google.android.material.button.MaterialButton
-        android:backgroundTint="@color/primary"
-        android:layout_marginHorizontal="20dp"
         android:id="@+id/btn_sign_up"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginTop="16dp"
-        android:text="@string/login"
-        app:cornerRadius="15dp"
         android:layout_marginBottom="62dp"
+        android:backgroundTint="@color/primary"
+        android:text="@string/sign_up"
+        app:cornerRadius="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/btn_to_login"
@@ -295,9 +266,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:fontFamily="@font/montserrat_medium"
         android:text="@string/already_have_an_account"
         android:textColor="@color/accent_2"
-        android:fontFamily="@font/montserrat_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_to_login"
         app:layout_constraintHorizontal_chainStyle="packed"

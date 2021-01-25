@@ -21,7 +21,6 @@ import com.purplepotato.kajianku.databinding.FragmentSignUpBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-
 class SignUpFragment : Fragment(), View.OnClickListener {
 
     private var _binding: FragmentSignUpBinding? = null
@@ -34,7 +33,6 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     lateinit var email: String
     lateinit var gender: String
     lateinit var birth: String
-
 
     private var cal: Calendar = Calendar.getInstance()
 
@@ -50,20 +48,16 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnToLogin.setOnClickListener(this)
-
-        binding.btnSignUp.setOnClickListener {
-            if (validate()) {
-                viewModel.signup(name, birth, gender, email, password)
-            }
-        }
-
-        binding.btnToLogin.setOnClickListener {
-            findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-        }
+        binding.btnSignUp.setOnClickListener(this)
 
         // Pindah ke halaman Home
         viewModel.navigateToHome.observe(viewLifecycleOwner, {
@@ -76,11 +70,9 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             }
         })
 
-
-
         // Buat objek date
         val date =
-            OnDateSetListener { view, year, monthOfYear, dayOfMonth -> // TODO Auto-generated method stub
+            OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -95,31 +87,27 @@ class SignUpFragment : Fragment(), View.OnClickListener {
 
         }
 
-
         // Fungsi buat spinner
         val genderList = resources.getStringArray(R.array.gender_list)
         val spinnerAdapter = ArrayAdapter(requireContext(), R.layout.spinner_item, genderList)
         binding.spinnerGender.adapter = spinnerAdapter
 
         binding.spinnerGender.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener{
+            AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
                 position: Int,
                 id: Long
             ) {
-//                Toast.makeText(context, genderList[position], Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, genderList[position], Toast.LENGTH_SHORT).show()
                 gender = genderList[position]
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-//                TODO("Not yet implemented")
             }
-
         }
     }
-
 
     // Fungsi untuk mengubah tampilan pada view
     private fun updateLabel() {
@@ -128,20 +116,12 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         binding.etBirthDate.text = sdf.format(cal.time)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-
-
     private fun validate(): Boolean {
 
         name = binding.etName.text.toString()
         email = binding.etEmail.text.toString()
         birth = binding.etBirthDate.text.toString()
         password = binding.etPassword.text.toString()
-//        gender = binding.etGender.text.toString()
 
         // Empty Check
         if (name.isEmpty()) {
@@ -153,11 +133,6 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             binding.etBirthDate.error = "Mohon masukkan tanggal lahir anda"
             return false
         }
-
-        /*if (gender.isNullOrEmpty()) {
-            binding.etGender.error = "Mohon masukkan jenis kelamin anda"
-            return false
-        }*/
 
         if (email.isEmpty()) {
             binding.etEmail.error = "Mohon masukkan email anda"
@@ -181,11 +156,20 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             return false
         }
 
-        Toast.makeText(context, "nama : $name \ndate : $birth \ngender : $gender", Toast.LENGTH_LONG).show()
         return true
     }
 
-    override fun onClick(v: View?) {
-//        TODO("Not yet implemented")
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btn_sign_up -> {
+                if (validate()) {
+                    viewModel.signUp(name, birth, gender, email, password)
+                }
+            }
+
+            R.id.btn_to_login -> {
+                findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+            }
+        }
     }
 }
