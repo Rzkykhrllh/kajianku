@@ -22,7 +22,7 @@ class SavedKajianViewModel(private val repository: KajianRepository) : ViewModel
     }
 
     private fun queryAllSavedKajian() = viewModelScope.launch {
-        repository.queryAllSavedKajianFromFireStore().collect {
+        repository.queryAllSavedKajian().collect {
             _listSavedKajian.postValue(it)
         }
     }

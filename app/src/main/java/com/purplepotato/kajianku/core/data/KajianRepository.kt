@@ -19,9 +19,12 @@ class KajianRepository(
             }
     }
 
-    suspend fun queryAllKajianFromFireStore(): Flow<Resource<List<Kajian>>> =
-        remoteDataSource.queryAllKajian()
+    suspend fun queryAllSuggestedKajian(): Flow<Resource<List<Kajian>>> =
+        remoteDataSource.queryAllSuggestedKajianFromFireStore()
 
-    suspend fun queryAllSavedKajianFromFireStore(): Flow<Resource<List<Kajian>>> =
-        remoteDataSource.queryAllSavedKajian()
+    suspend fun queryAllSavedKajian(): Flow<Resource<List<Kajian>>> =
+        remoteDataSource.queryAllSavedKajianFromFireStore()
+
+    suspend fun queryAllPopularKajian(): Flow<Resource<List<Kajian>>> =
+        remoteDataSource.queryAllPopularKajianFromFireStore()
 }

@@ -7,15 +7,25 @@ import java.util.*
 
 object Helpers {
     @SuppressLint("SimpleDateFormat")
-    fun changeDateFormat(text: String): String? {
+    fun convertTimeStampToDateFormat(timeInMillis: Long): String {
         return try {
-            val parser = SimpleDateFormat("yyyy-MM-dd")
-            val formatter = SimpleDateFormat("MMMM dd, yyyy")
-            val date = parser.parse(text)
-            formatter.format(date as Date)
+            val parser = SimpleDateFormat("EEEE, dd MMMM YYYY", Locale.getDefault())
+            parser.format(timeInMillis)
         } catch (e: Exception) {
             e.printStackTrace()
-            null
+            ""
+        }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun convertTimeStampToTimeFormat(timeInMillis: Long): String {
+        return try {
+            val sdf = SimpleDateFormat("HH.mm")
+            val dateTime = Date(timeInMillis)
+            sdf.format(dateTime)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ""
         }
     }
 }

@@ -30,6 +30,9 @@
     <string name="description">Deskripsi</string>
     <string name="registration">Pendaftaran</string>
     <string name="content_desc_find_location">Cari lokasi</string>
+    <string name="time_format">%s - selesai</string>
+    <string name="share_kajian_title">Bagikan kajian ini sekarang</string>
+    <string name="kajian_invitation">Yuk ikutan kajian %s</string>
 
     <string-array name="gender_list">
         <item>Ikhwan</item>
