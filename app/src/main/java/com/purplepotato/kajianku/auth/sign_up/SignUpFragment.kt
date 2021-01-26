@@ -152,7 +152,7 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         }
 
         if (password.length < 8) {
-            binding.etEmail.error = "Password yang anda masukkan kurang dari 8 karakter"
+            binding.etPassword.error = "Password yang anda masukkan kurang dari 8 karakter"
             return false
         }
 
