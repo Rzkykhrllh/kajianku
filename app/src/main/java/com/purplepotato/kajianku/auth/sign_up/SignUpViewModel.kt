@@ -18,6 +18,10 @@ class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
     var name: String = ""
     var birth: String = ""
     var gender: String = ""
@@ -35,12 +39,14 @@ class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
 
         uiScope.launch {
             withContext(Dispatchers.IO) {
+                _isLoading.value = true
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Log.i("inputdesu", "berhasil membuat user")
                             user = auth.currentUser!!
                             updateProfile()
+                            _isLoading.value = false
                             _navigateToHome.value = true
                         } else {
                             _navigateToHome.value = false

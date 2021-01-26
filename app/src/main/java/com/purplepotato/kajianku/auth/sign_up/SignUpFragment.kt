@@ -59,6 +59,10 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         binding.btnToLogin.setOnClickListener(this)
         binding.btnSignUp.setOnClickListener(this)
 
+        viewModel.isLoading.observe(viewLifecycleOwner, { state ->
+            showLoading(state)
+        })
+
         // Pindah ke halaman Home
         viewModel.navigateToHome.observe(viewLifecycleOwner, {
             if (it) {
@@ -170,6 +174,16 @@ class SignUpFragment : Fragment(), View.OnClickListener {
             R.id.btn_to_login -> {
                 findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
             }
+        }
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.loadingFrame.visibility = View.VISIBLE
+            binding.loginProgressBar.visibility = View.VISIBLE
+        } else {
+            binding.loadingFrame.visibility = View.GONE
+            binding.loginProgressBar.visibility = View.GONE
         }
     }
 }
