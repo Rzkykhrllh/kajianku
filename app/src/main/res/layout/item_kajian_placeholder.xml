@@ -15,25 +15,15 @@
         android:padding="8dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/img"
+            android:id="@+id/item_img_poster"
             android:layout_width="84dp"
             android:layout_height="96dp"
+            android:backgroundTint="#C1BFBF"
             app:cardCornerRadius="8dp"
             app:cardElevation="0dp"
             app:cardMaxElevation="0dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/item_img_poster"
-                android:layout_width="84dp"
-                android:layout_height="96dp"
-                android:adjustViewBounds="true"
-                android:background="#C1BFBF"
-                android:contentDescription="@string/poster_image"
-                android:scaleType="fitXY" />
-
-        </androidx.cardview.widget.CardView>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/item_txt_title"
@@ -49,8 +39,8 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/item_txt_speaker"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img"
-            app:layout_constraintTop_toTopOf="@id/img" />
+            app:layout_constraintStart_toEndOf="@id/item_img_poster"
+            app:layout_constraintTop_toTopOf="@id/item_img_poster" />
 
         <TextView
             android:id="@+id/item_txt_speaker"
@@ -63,7 +53,7 @@
             android:maxLines="1"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img"
+            app:layout_constraintStart_toEndOf="@id/item_img_poster"
             app:layout_constraintTop_toBottomOf="@id/item_txt_title" />
 
         <TextView
@@ -77,7 +67,7 @@
             android:maxLines="3"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img"
+            app:layout_constraintStart_toEndOf="@id/item_img_poster"
             app:layout_constraintTop_toBottomOf="@id/item_txt_speaker" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

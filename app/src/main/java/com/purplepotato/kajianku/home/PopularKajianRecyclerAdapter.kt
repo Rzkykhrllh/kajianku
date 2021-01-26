@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.RoundedCornersTransformation
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.core.domain.Kajian
 import com.purplepotato.kajianku.core.util.DiffUtilItemCallback
@@ -19,12 +21,18 @@ class PopularKajianRecyclerAdapter :
         private val binding = ItemPopularKajianBinding.bind(itemView)
         fun bind(item: Kajian) {
             with(binding) {
-                // tempat assign ke item recycler nya
-             root.setOnClickListener {
-                 val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
-                 action.kajian = item
-                 root.findNavController().navigate(action)
-             }
+                itemImgPoster.load(item.imageUrl) {
+                    crossfade(true)
+                    placeholder(R.drawable.image_placeholder)
+                    error(R.drawable.ic_broken_image)
+                    transformations(RoundedCornersTransformation(16f))
+                }
+                itemTxtTitle.text = item.title
+                root.setOnClickListener {
+                    val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
+                    action.kajian = item
+                    root.findNavController().navigate(action)
+                }
             }
         }
     }

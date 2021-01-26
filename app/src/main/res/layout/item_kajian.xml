@@ -7,20 +7,24 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="8dp"
     android:background="?attr/selectableItemBackground"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    android:elevation="4dp"
+    app:cardCornerRadius="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_item_suggested_kajian"
         android:padding="8dp">
 
-        <include
-            android:id="@+id/img"
-            layout="@layout/item_recycler_image"
+        <ImageView
+            android:id="@+id/item_img_poster"
+            android:layout_width="84dp"
+            android:layout_height="96dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/poster_image"
+            android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/item_txt_title"
@@ -30,12 +34,11 @@
             android:ellipsize="end"
             android:fontFamily="@font/montserrat_bold"
             android:maxLines="1"
-            android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@id/item_txt_speaker"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img"
-            app:layout_constraintTop_toTopOf="@id/img"
+            app:layout_constraintStart_toEndOf="@id/item_img_poster"
+            app:layout_constraintTop_toTopOf="@id/item_img_poster"
             tools:text="@tools:sample/lorem" />
 
         <TextView
@@ -46,23 +49,21 @@
             android:ellipsize="end"
             android:fontFamily="@font/montserrat_medium"
             android:maxLines="1"
-            android:textColor="@color/white"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img"
+            app:layout_constraintStart_toEndOf="@id/item_img_poster"
             app:layout_constraintTop_toBottomOf="@id/item_txt_title"
             tools:text="@tools:sample/lorem" />
 
         <TextView
-            android:id="@+id/item_txt_time"
+            android:id="@+id/item_txt_date_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/montserrat_medium"
-            android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@id/item_txt_place"
-            app:layout_constraintStart_toEndOf="@id/img"
+            app:layout_constraintStart_toEndOf="@id/item_img_poster"
             tools:text="@tools:sample/date/ddmmyy" />
 
         <TextView
@@ -73,11 +74,10 @@
             android:ellipsize="end"
             android:fontFamily="@font/montserrat_medium"
             android:maxLines="1"
-            android:textColor="@color/white"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@id/img"
+            app:layout_constraintBottom_toBottomOf="@id/item_img_poster"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/img"
+            app:layout_constraintStart_toEndOf="@id/item_img_poster"
             tools:text="@tools:sample/cities" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
