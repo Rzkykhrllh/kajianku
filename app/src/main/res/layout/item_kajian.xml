@@ -32,14 +32,14 @@
             android:maxLines="1"
             android:textColor="@color/white"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@id/item_txt_date"
+            app:layout_constraintBottom_toTopOf="@id/item_txt_speaker"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/img"
             app:layout_constraintTop_toTopOf="@id/img"
             tools:text="@tools:sample/lorem" />
 
         <TextView
-            android:id="@+id/item_txt_date"
+            android:id="@+id/item_txt_speaker"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -67,13 +67,16 @@
 
         <TextView
             android:id="@+id/item_txt_place"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:ellipsize="end"
             android:fontFamily="@font/montserrat_medium"
+            android:maxLines="1"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/img"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/img"
             tools:text="@tools:sample/cities" />
 

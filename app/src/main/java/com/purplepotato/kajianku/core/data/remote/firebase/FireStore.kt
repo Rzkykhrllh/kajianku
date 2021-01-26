@@ -24,12 +24,17 @@ class FireStore {
         private val currentUser = FirebaseAuth.getInstance().currentUser
     }
 
-    suspend fun queryAllKajian(): Flow<Resource<List<Kajian>>> = flow<Resource<List<Kajian>>> {
+    suspend fun queryAllSuggestedKajian(): Flow<Resource<List<Kajian>>> = flow<Resource<List<Kajian>>> {
         emit(Resource.Loading())
         emit(Resource.Success(emptyList()))
     }.flowOn(Dispatchers.IO).take(2)
 
     suspend fun queryAllSavedKajian(): Flow<Resource<List<Kajian>>> = flow<Resource<List<Kajian>>> {
+        emit(Resource.Loading())
+        emit(Resource.Success(emptyList()))
+    }.flowOn(Dispatchers.IO).take(2)
+
+    suspend fun queryAllPopularKajian(): Flow<Resource<List<Kajian>>> = flow<Resource<List<Kajian>>>{
         emit(Resource.Loading())
         emit(Resource.Success(emptyList()))
     }.flowOn(Dispatchers.IO).take(2)

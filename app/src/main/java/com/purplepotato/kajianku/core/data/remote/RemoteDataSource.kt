@@ -23,8 +23,12 @@ class RemoteDataSource(
         }
     }
 
-    suspend fun queryAllKajian(): Flow<Resource<List<Kajian>>> = fireStore.queryAllKajian()
+    suspend fun queryAllSuggestedKajianFromFireStore(): Flow<Resource<List<Kajian>>> =
+        fireStore.queryAllSuggestedKajian()
 
-    suspend fun queryAllSavedKajian(): Flow<Resource<List<Kajian>>> = fireStore.queryAllSavedKajian()
+    suspend fun queryAllSavedKajianFromFireStore(): Flow<Resource<List<Kajian>>> =
+        fireStore.queryAllSavedKajian()
 
+    suspend fun queryAllPopularKajianFromFireStore(): Flow<Resource<List<Kajian>>> =
+        fireStore.queryAllPopularKajian()
 }

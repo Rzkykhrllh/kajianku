@@ -66,5 +66,17 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+
+        viewModel.listPopularKajian.observe(viewLifecycleOwner,{result->
+            when(result){
+                is Resource.Success -> {
+                    popularRecyclerAdapter.submitList(result.data)
+                }
+                is Resource.Loading -> {
+                }
+                is Resource.Error -> {
+                }
+            }
+        })
     }
 }
