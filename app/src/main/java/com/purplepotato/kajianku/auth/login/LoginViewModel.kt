@@ -14,14 +14,20 @@ class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
     private val _navigateToHome = MutableLiveData<Boolean>()
     val navigateToHome: LiveData<Boolean>
         get() = _navigateToHome
 
     fun login(email: String, password: String) = uiScope.launch {
+        _isLoading.value = true
         withContext(Dispatchers.IO) {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
+                    _isLoading.value = false
                     _navigateToHome.value = true
                 }.addOnFailureListener {
                     _navigateToHome.value = false
