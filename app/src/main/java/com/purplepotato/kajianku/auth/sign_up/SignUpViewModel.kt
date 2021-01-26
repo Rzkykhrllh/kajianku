@@ -1,5 +1,7 @@
 package com.purplepotato.kajianku.auth.sign_up
 
+import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

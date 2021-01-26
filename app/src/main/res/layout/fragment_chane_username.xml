@@ -1,14 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile.changeusername.ChaneUsernameFragment">
+    android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tv_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Change Profile"
+        android:textColor="#7b7b7b"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/input_username"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_reset"
+        android:layout_marginTop="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="38dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textSize="14sp"
+            android:text="Username"
+            android:textColor="@color/accent"
+            android:layout_marginLeft="40dp" />
+
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_username"
+            android:hint="Airu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/primary"
+            tools:text="Rizkykirigaya@gmail.com"
+            android:inputType="textEmailAddress"
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="14sp"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawablePadding="12dp"
+            android:backgroundTint="@color/primary"
+            android:layout_marginTop="-10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/input_birth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="38dp"
+        android:layout_marginTop="@dimen/margin_item_login"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_username">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Birth Date"
+            android:textColor="@color/accent"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_birth_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:backgroundTint="@color/primary"
+            android:drawableStart="@drawable/ic_baseline_cake_24"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:hint="12 Febuari 2020"
+            android:clickable="false"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            tools:text="Rizkykirigaya@gmail.com" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/input_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="38dp"
+        android:layout_marginTop="@dimen/margin_item_login"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_birth">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Gender"
+            android:textColor="@color/accent"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:backgroundTint="@color/primary"
+            android:drawableStart="@drawable/ic_baseline_mail_outline_24"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:hint="Ikhwan"
+            android:clickable="false"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            tools:text="Rizkykirigaya@gmail.com" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/input_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="38dp"
+        android:layout_marginTop="@dimen/margin_item_login"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/input_gender">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Email"
+            android:textColor="@color/accent"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-10dp"
+            android:backgroundTint="@color/primary"
+            android:drawableStart="@drawable/ic_baseline_mail_outline_24"
+            android:drawablePadding="12dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:hint="12 Febuari 2020"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:clickable="false"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            tools:text="Rizkykirigaya@gmail.com" />
+
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:backgroundTint="@color/primary"
+
+        android:id="@+id/btn_change_pass"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:text="Save"
+        app:cornerRadius="15dp"
+        android:layout_marginBottom="62dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,8 +1,10 @@
 package com.purplepotato.kajianku.profile
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.ProxyFileDescriptorCallback
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,6 +89,8 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToChaneUsernameFragment())
         }
 
+
+
         // Log out
         viewModel.navigateToLogin.observe(viewLifecycleOwner, Observer {
             val intent = Intent(activity, AuthenticationActivity::class.java)
@@ -96,7 +100,15 @@ class ProfileFragment : Fragment() {
         })
 
         // Set Username
-        viewModel.username.observe(viewLifecycleOwner, Observer {
+
+        val sharedPref = this.requireActivity().getSharedPreferences("mypref", Context.MODE_PRIVATE)
+
+        Log.i("sharedprefence", "${sharedPref.getString("email","ampasss cok")}")
+
+        binding.tvEmail.setText(sharedPref.getString("email",""))
+        binding.tvUsername.setText(sharedPref.getString("nama",""))
+
+        /*viewModel.username.observe(viewLifecycleOwner, Observer {
             if (viewModel.username != null){
                 binding.tvUsername.setText(viewModel.username.value)
             }
@@ -107,7 +119,7 @@ class ProfileFragment : Fragment() {
             if (viewModel.email != null){
                 binding.tvEmail.setText(viewModel.email.value)
             }
-        })
+        })*/
     }
 
 }
