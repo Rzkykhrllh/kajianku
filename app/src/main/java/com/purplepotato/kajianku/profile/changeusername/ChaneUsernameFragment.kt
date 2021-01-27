@@ -35,7 +35,7 @@ class ChaneUsernameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.etGender.setOnKeyListener(null)
-        Preferences(requireContext())
+        preferences = Preferences(requireContext())
         setData()
 
         binding.btnUpdateData.setOnClickListener {

@@ -102,7 +102,7 @@
     </fragment>
     <fragment
         android:id="@+id/allKajian"
-        android:name="com.purplepotato.kajianku.home.allkajian.AllKajian"
+        android:name="com.purplepotato.kajianku.home.allkajian.AllKajianFragment"
         android:label="fragment_all_kajian"
         tools:layout="@layout/fragment_all_kajian" />
 </navigation>

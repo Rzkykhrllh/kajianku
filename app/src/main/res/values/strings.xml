@@ -37,6 +37,7 @@
     <string name="notification_title_reminder">Reminder Kajian</string>
     <string name="save_kajian">Simpan kajian</string>
     <string name="cancel_kajian">Batal Mengikuti Kajian</string>
+    <string name="find_kajian">Cari kajian</string>
 
     <string-array name="gender_list">
         <item>Ikhwan</item>
