@@ -32,10 +32,10 @@ class ProfileViewModel(private val repository: KajianRepository) : ViewModel() {
         auth = FirebaseAuth.getInstance()
         var user = auth.currentUser
 
-        user?.let {
+        /*user?.let {
             _username.value = user.displayName
             _email.value = user.email
-        }
+        }*/
     }
 
     fun clearLocalDB() = uiScope.launch {
