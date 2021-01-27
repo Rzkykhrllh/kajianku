@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.purplepotato.kajianku.ViewModelFactory
 import com.purplepotato.kajianku.core.Resource
@@ -50,6 +51,10 @@ class HomeFragment : Fragment() {
         binding.recyclerViewSuggestedKajian.apply {
             adapter = suggestedRecyclerAdapter
             layoutManager = LinearLayoutManager(requireContext())
+        }
+
+        binding.btnSeeMore.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAllKajian())
         }
 
         viewModel.listSuggestedKajian.observe(viewLifecycleOwner, { result ->
