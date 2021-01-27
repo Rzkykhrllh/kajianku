@@ -57,7 +57,7 @@
         android:background="?attr/selectableItemBackground"
         android:fontFamily="@font/montserrat_semi_bold"
         android:padding="16dp"
-        android:text="@string/change_email"
+        android:text="@string/update_profile"
         android:textColor="@color/accent"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@id/tv_history"

@@ -7,10 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class ChangePasswordViewModel : ViewModel() {
 
@@ -26,6 +23,10 @@ class ChangePasswordViewModel : ViewModel() {
     val navigateToProfile: LiveData<Boolean>
         get() = _navigateToProfile
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
     lateinit var oldPass : String
     lateinit var newPass : String
     lateinit var email : String
@@ -40,38 +41,36 @@ class ChangePasswordViewModel : ViewModel() {
         this.newPass = newPass
 
         uiScope.launch {
-            changePassFirebase()
-        }
-    }
 
-    private fun changePassFirebase() {
-        user = auth.currentUser!!
+            _isLoading.value = true
+            withContext(Dispatchers.IO){
+                user = auth.currentUser!!
 
-        Log.i("changepass", "woyyyy $user")
+                Log.i("changepass", "woyyyy $user")
 
-        val credential = EmailAuthProvider
-            .getCredential(user.email!!, oldPass)
+                val credential = EmailAuthProvider
+                    .getCredential(user.email!!, oldPass)
 
-// Prompt the user to re-provide their sign-in credentials
-        user.reauthenticate(credential)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Log.i("changepass", "auth success")
+                // Prompt the user to re-provide their sign-in credentials
+                user.reauthenticate(credential)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            Log.i("changepass", "auth success")
 
-                    user.updatePassword(newPass).addOnCompleteListener { task->
-                        if (task.isSuccessful){
-                            Log.i("changepass","Password berhasil di ganti")
-                            _navigateToProfile.value = true
-                        } else{
-                            _navigateToProfile.value = false
+                            user.updatePassword(newPass).addOnCompleteListener { task->
+                                _isLoading.postValue(false)
+                                if (task.isSuccessful){
+                                    Log.i("changepass","Password berhasil di ganti")
+                                    _navigateToProfile.value = true
+                                } else{
+                                    _navigateToProfile.value = false
+                                }
+                            }
                         }
-                }
+
+                    }
             }
-
-
         }
-
-
     }
 
 }

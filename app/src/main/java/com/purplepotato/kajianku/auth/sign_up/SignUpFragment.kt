@@ -2,8 +2,10 @@ package com.purplepotato.kajianku.auth.sign_up
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,6 +68,28 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         // Pindah ke halaman Home
         viewModel.navigateToHome.observe(viewLifecycleOwner, {
             if (it) {
+
+                val sharedPref = this.requireActivity().getSharedPreferences("mypref", Context.MODE_PRIVATE)
+                val editor = sharedPref.edit()
+
+                editor.apply{
+                    putString("nama", name).
+                    putString("birth", birth)
+
+                    Log.i("inputdesu","Sharedpredence Executed")
+
+                }
+
+                editor.putString("email", email).commit()
+                editor.putString("gender", gender).apply()
+
+
+                Log.i("inputdesu nama","${sharedPref.getString("nama","odading mang oleh")}")
+                Log.i("inputdesu email","${sharedPref.getString("email","odading mang oleh")}")
+                Log.i("inputdesu gender","${sharedPref.getString("gender","odading mang oleh")}")
+
+
+
                 Toast.makeText(context, "Move to home", Toast.LENGTH_LONG).show()
                 val intent = Intent(activity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
