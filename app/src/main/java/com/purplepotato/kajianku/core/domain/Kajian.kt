@@ -15,5 +15,6 @@ data class Kajian(
     val registerUrl: String,
     val location: String,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val totalSaved: Long
 ) : Parcelable

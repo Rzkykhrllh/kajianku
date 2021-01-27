@@ -55,6 +55,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         binding.btnLogin.setOnClickListener(this)
         binding.btnToSignUp.setOnClickListener(this)
+
+        viewModel.isLoading.observe(viewLifecycleOwner, { state ->
+            showLoading(state)
+        })
     }
 
     private fun moveToHome() {
@@ -109,5 +113,15 @@ class LoginFragment : Fragment(), View.OnClickListener {
             return false
         }
         return true
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.loadingFrame.visibility = View.VISIBLE
+            binding.loginProgressBar.visibility = View.VISIBLE
+        } else {
+            binding.loadingFrame.visibility = View.GONE
+            binding.loginProgressBar.visibility = View.GONE
+        }
     }
 }
