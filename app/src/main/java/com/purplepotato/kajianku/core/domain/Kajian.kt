@@ -8,6 +8,7 @@ data class Kajian(
     val title: String,
     val imageUrl: String,
     val description: String,
+    val organizer: String,
     val tagId: List<String>,
     val status: String,
     val startedAt: Long,

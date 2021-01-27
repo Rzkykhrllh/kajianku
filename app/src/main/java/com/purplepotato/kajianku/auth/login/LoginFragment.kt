@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.purplepotato.kajianku.MainActivity
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
-import com.purplepotato.kajianku.auth.forgot.ForgotPasswordDirections
+import com.purplepotato.kajianku.core.session.Preferences
 import com.purplepotato.kajianku.core.util.isValidEmail
 import com.purplepotato.kajianku.databinding.FragmentLoginBinding
 
@@ -27,7 +27,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private lateinit var email: String
 
     private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory.getInstance(requireContext().applicationContext))[LoginViewModel::class.java]
+        ViewModelProvider(
+            this,
+            ViewModelFactory.getInstance(requireContext().applicationContext)
+        )[LoginViewModel::class.java]
     }
 
     override fun onStart() {
@@ -35,6 +38,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         viewModel.navigateToHome.observe(viewLifecycleOwner, {
             if (it) {
                 moveToHome()
+                saveUserDataToPreferences()
             }
         })
     }
@@ -70,10 +74,18 @@ class LoginFragment : Fragment(), View.OnClickListener {
         activity?.finishAfterTransition()
     }
 
+    private fun saveUserDataToPreferences() {
+        val pref = Preferences(requireContext())
+        pref.setGender(viewModel.gender as String)
+        pref.setEmail(viewModel.email1 as String)
+        pref.setBirth(viewModel.birth as String)
+        pref.setName(viewModel.name as String)
+    }
+
     override fun onClick(v: View) {
         when (v.id) {
             R.id.btn_login -> {
-                var test = validate()
+                val test = validate()
                 Log.i("logincess", "hasil validasi ${validate()}")
 
                 if (test) {

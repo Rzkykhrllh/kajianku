@@ -27,7 +27,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
     fun setOneTimeAlarm(
         context: Context,
-        requestCode: Int,
+        requestCode: Long,
         id: Long,
         message: String,
         triggerAtMillis: Long
@@ -37,15 +37,15 @@ class AlarmReceiver : BroadcastReceiver() {
         intent.putExtra(EXTRA_ID, id)
         intent.putExtra(EXTRA_MESSAGE, message)
 
-        val pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
+        val pendingIntent = PendingIntent.getBroadcast(context, requestCode.toInt(), intent, 0)
         alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
     }
 
-    fun cancelAlarm(context: Context, requestCode: Int) {
+    fun cancelAlarm(context: Context, requestCode: Long) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
 
-        val pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
+        val pendingIntent = PendingIntent.getBroadcast(context, requestCode.toInt(), intent, 0)
         pendingIntent.cancel()
 
         alarmManager.cancel(pendingIntent)

@@ -1,22 +1,18 @@
 package com.purplepotato.kajianku.profile
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.os.ProxyFileDescriptorCallback
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.purplepotato.kajianku.MainActivity
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
 import com.purplepotato.kajianku.auth.AuthenticationActivity
+import com.purplepotato.kajianku.core.session.Preferences
 import com.purplepotato.kajianku.databinding.FragmentProfileBinding
 
 
@@ -28,7 +24,10 @@ class ProfileFragment : Fragment() {
         get() = _binding!!
 
     private val viewModel by lazy {
-        ViewModelProvider(this,ViewModelFactory.getInstance())[ProfileViewModel::class.java]
+        ViewModelProvider(
+            this,
+            ViewModelFactory.getInstance(requireContext().applicationContext)
+        )[ProfileViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -46,23 +45,48 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val pref = Preferences(requireContext())
         // give icon to textView
 
         binding.tvChangePassword
-            .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_chevron_right_24, 0);
+            .setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_baseline_chevron_right_24,
+                0
+            );
 
         binding.tvLogOut
-            .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_chevron_right_24, 0);
+            .setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_baseline_chevron_right_24,
+                0
+            );
 
         binding.tvHistory
-            .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_chevron_right_24, 0);
+            .setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_baseline_chevron_right_24,
+                0
+            );
 
         binding.tvAboutUs
-            .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_chevron_right_24, 0);
+            .setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_baseline_chevron_right_24,
+                0
+            );
 
         binding.tvChangeEmail
-            .setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_baseline_chevron_right_24, 0);
+            .setCompoundDrawablesWithIntrinsicBounds(
+                0,
+                0,
+                R.drawable.ic_baseline_chevron_right_24,
+                0
+            );
 
         binding.tvLogOut.setOnClickListener {
             viewModel.logout()
@@ -90,9 +114,9 @@ class ProfileFragment : Fragment() {
         }
 
 
-
         // Log out
-        viewModel.navigateToLogin.observe(viewLifecycleOwner, Observer {
+        viewModel.navigateToLogin.observe(viewLifecycleOwner, {
+            pref.logout()
             val intent = Intent(activity, AuthenticationActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
@@ -100,14 +124,9 @@ class ProfileFragment : Fragment() {
         })
 
         // Set Username
-
-        val sharedPref = this.requireActivity().getSharedPreferences("mypref", Context.MODE_PRIVATE)
-
-        Log.i("sharedprefence", "${sharedPref.getString("email","ampasss cok")}")
-
-        binding.tvEmail.setText(sharedPref.getString("email",""))
-        binding.tvUsername.setText(sharedPref.getString("nama",""))
-
+//        Log.i("sharedprefence", "${sharedPref.getString("email", "ampasss cok")}")
+        binding.tvEmail.text = pref.email
+        binding.tvUsername.text = pref.name
     }
 
 }

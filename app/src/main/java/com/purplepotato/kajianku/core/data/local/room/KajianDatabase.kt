@@ -16,7 +16,7 @@ abstract class KajianDatabase : RoomDatabase() {
     companion object {
         private var instance: KajianDatabase? = null
 
-        fun getInstance(context: Context): KajianDatabase? = instance ?: synchronized(this) {
+        fun getInstance(context: Context): KajianDatabase = instance ?: synchronized(this) {
             instance ?: Room.databaseBuilder(
                 context,
                 KajianDatabase::class.java,

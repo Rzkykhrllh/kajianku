@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import coil.load
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
+import com.purplepotato.kajianku.core.session.Preferences
 import com.purplepotato.kajianku.core.util.AlarmReceiver
 import com.purplepotato.kajianku.core.util.Helpers
 import com.purplepotato.kajianku.databinding.FragmentDetailBinding
@@ -53,9 +54,18 @@ class DetailFragment : Fragment(), View.OnClickListener {
         arguments?.let {
             val kajian = DetailFragmentArgs.fromBundle(it).kajian
             kajian?.let { item -> viewModel.setKajian(item) }
+
+            populateData()
         }
 
-        populateData()
+        viewModel.isKajianAlreadySaved.observe(viewLifecycleOwner, {
+            if (it == true) {
+                showCancelKajianButton(true)
+            } else {
+                showCancelKajianButton(false)
+            }
+        })
+
         binding.btnFindLocation.setOnClickListener(this)
         binding.btnShare.setOnClickListener(this)
         binding.btnBack.setOnClickListener(this)
@@ -129,25 +139,39 @@ class DetailFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.btn_save_kajian -> {
+                val pref = Preferences(requireContext())
                 val item = viewModel.getKajian()
                 item?.let {
                     alarmReceiver.setOneTimeAlarm(
-                        requireContext().applicationContext,
-                        1,
-                        1,
-                        it.title,
+                        requireContext(),
+                        pref.reminderId,
+                        pref.reminderId,
+                        getString(R.string.kajian_invitation, it.title),
                         it.startedAt
                     )
                 }
+                pref.incrementReminderId()
+                viewModel.insertSavedKajian()
             }
 
             R.id.btn_cancel_kajian -> {
                 val item = viewModel.getKajian()
                 alarmReceiver.cancelAlarm(
-                    requireContext().applicationContext,
-                    item?.reminderId!!.toInt()
+                    requireContext(),
+                    item?.reminderId!!
                 )
+                viewModel.deleteSavedKajian()
             }
+        }
+    }
+
+    private fun showCancelKajianButton(state: Boolean) {
+        if (state) {
+            binding.btnSaveKajian.visibility = View.GONE
+            binding.btnCancelKajian.visibility = View.VISIBLE
+        } else {
+            binding.btnSaveKajian.visibility = View.VISIBLE
+            binding.btnCancelKajian.visibility = View.GONE
         }
     }
 }

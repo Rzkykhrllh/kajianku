@@ -21,4 +21,7 @@ interface KajianDao {
     @Query("SELECT * FROM saved_kajian ORDER BY started_at ASC")
     fun queryAllSavedKajian(): Flow<List<SavedKajianEntity>>
 
+    @Query("SELECT * FROM saved_kajian WHERE title=:title AND organizer=:organizer")
+    suspend fun getSavedKajian(title: String, organizer: String): SavedKajianEntity
+
 }

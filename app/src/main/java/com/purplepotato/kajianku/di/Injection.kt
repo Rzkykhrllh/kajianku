@@ -16,7 +16,7 @@ object Injection {
         val database = KajianDatabase.getInstance(context)
 
         val remoteDataSource = RemoteDataSource.getInstance(firebaseAuth, firebaseDatabase)
-        val localDataSource = LocalDataSource.getInstance(database!!.kajianDao())
+        val localDataSource = LocalDataSource.getInstance(database.kajianDao())
 
         return KajianRepository.getInstance(remoteDataSource, localDataSource)
     }

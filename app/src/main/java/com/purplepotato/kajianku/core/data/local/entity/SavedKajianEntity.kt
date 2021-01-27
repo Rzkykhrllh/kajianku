@@ -44,5 +44,8 @@ data class SavedKajianEntity(
     val longitude: Double,
 
     @ColumnInfo(name = "total_saved")
-    val totalSaved: Long
+    val totalSaved: Long,
+
+    @ColumnInfo(name = "organizer")
+    val organizer: String
 )

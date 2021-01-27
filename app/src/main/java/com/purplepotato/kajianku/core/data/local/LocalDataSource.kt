@@ -28,4 +28,7 @@ class LocalDataSource(private val kajianDao: KajianDao) {
 
     fun queryAllSavedKajian(): Flow<List<SavedKajianEntity>> = kajianDao.queryAllSavedKajian()
 
+    suspend fun getSavedKajian(title: String, organizer: String): SavedKajianEntity =
+        kajianDao.getSavedKajian(title, organizer)
+
 }

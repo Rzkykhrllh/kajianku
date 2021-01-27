@@ -63,4 +63,7 @@ class KajianRepository(
 
     suspend fun insertSavedKajian(kajian: Kajian) =
         localDataSource.insertSavedKajian(DataMapper.mapDomainToEntity(kajian))
+
+    suspend fun getSavedKajian(title: String, organizer: String): Kajian =
+        DataMapper.mapEntityToDomain(localDataSource.getSavedKajian(title, organizer))
 }

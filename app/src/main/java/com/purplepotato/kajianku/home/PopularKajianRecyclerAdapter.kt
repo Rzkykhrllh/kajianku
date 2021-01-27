@@ -12,6 +12,7 @@ import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.core.domain.Kajian
 import com.purplepotato.kajianku.core.util.DiffUtilItemCallback
 import com.purplepotato.kajianku.databinding.ItemPopularKajianBinding
+import com.purplepotato.kajianku.detail.DetailFragment
 
 class PopularKajianRecyclerAdapter :
     ListAdapter<Kajian, PopularKajianRecyclerAdapter.PopularKajianViewHolder>(
