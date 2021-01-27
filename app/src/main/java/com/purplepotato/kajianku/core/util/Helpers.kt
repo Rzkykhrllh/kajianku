@@ -17,6 +17,16 @@ object Helpers {
         }
     }
 
+    fun convertTimeStampToDateTimeFormat(timeInMillis: Long): String {
+        return try {
+            val parser = SimpleDateFormat("dd MMMM YYYY - HH.mm", Locale.getDefault())
+            parser.format(timeInMillis)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            ""
+        }
+    }
+
     @SuppressLint("SimpleDateFormat")
     fun convertTimeStampToTimeFormat(timeInMillis: Long): String {
         return try {

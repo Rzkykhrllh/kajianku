@@ -19,6 +19,10 @@ class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
     var name: String = ""
     var birth: String = ""
     var gender: String = ""
@@ -42,8 +46,7 @@ class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
 
         uiScope.launch {
             withContext(Dispatchers.IO) {
-                Log.i(tag, "di dalam coroutine")
-
+                _isLoading.value = true
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnFailureListener{
                         Log.i(tag, "di dalam onFailure $it")
@@ -54,8 +57,7 @@ class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
                             Log.i("inputdesu", "berhasil membuat user")
                             user = auth.currentUser!!
                             updateProfile()
-                            addDataToFirestore(user.uid)
-
+                            _isLoading.value = false
                             _navigateToHome.value = true
                         } else {
                             _navigateToHome.value = false

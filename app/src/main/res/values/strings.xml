@@ -33,6 +33,7 @@
     <string name="time_format">%s - selesai</string>
     <string name="share_kajian_title">Bagikan kajian ini sekarang</string>
     <string name="kajian_invitation">Yuk ikutan kajian %s</string>
+    <string name="date_time_format">%s WIB</string>
 
     <string-array name="gender_list">
         <item>Ikhwan</item>

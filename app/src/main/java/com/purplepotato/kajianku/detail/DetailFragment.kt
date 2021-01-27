@@ -65,6 +65,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
                     error(R.drawable.ic_broken_image)
                 }
 
+                txtStatus.text = it.status
                 val recyclerAdapter = TagKajianRecyclerAdapter()
                 binding.recyclerViewTag.apply {
                     adapter = recyclerAdapter

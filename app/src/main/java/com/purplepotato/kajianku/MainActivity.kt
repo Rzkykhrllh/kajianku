@@ -23,10 +23,10 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.detailFragment -> binding.chipNavBar.collapse()
-                R.id.profileFragment -> binding.chipNavBar.expand()
-                R.id.homeFragment -> binding.chipNavBar.expand()
-                R.id.savedKajianFragment -> binding.chipNavBar.expand()
+                R.id.detailFragment -> binding.chipNavBar.visibility = View.GONE
+                R.id.profileFragment -> binding.chipNavBar.visibility = View.VISIBLE
+                R.id.homeFragment -> binding.chipNavBar.visibility = View.VISIBLE
+                R.id.savedKajianFragment -> binding.chipNavBar.visibility = View.VISIBLE
             }
         }
 

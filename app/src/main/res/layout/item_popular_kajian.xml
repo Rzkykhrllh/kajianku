@@ -13,11 +13,12 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/item_img_poster"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:contentDescription="@string/poster_image"
-            android:scaleType="center"
+            android:scaleType="fitXY"
             tools:src="@tools:sample/backgrounds/scenic" />
 
         <View
