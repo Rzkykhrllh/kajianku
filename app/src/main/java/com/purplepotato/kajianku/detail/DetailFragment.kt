@@ -142,6 +142,8 @@ class DetailFragment : Fragment(), View.OnClickListener {
                 val pref = Preferences(requireContext())
                 val item = viewModel.getKajian()
                 item?.let {
+                    it.reminderId = pref.reminderId
+                    viewModel.setKajian(it)
                     alarmReceiver.setOneTimeAlarm(
                         requireContext(),
                         pref.reminderId,
