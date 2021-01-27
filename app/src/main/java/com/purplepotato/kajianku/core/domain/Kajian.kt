@@ -18,5 +18,5 @@ data class Kajian(
     val latitude: Double,
     val longitude: Double,
     val totalSaved: Long,
-    val reminderId: Long? = -1
+    var reminderId: Long? = -1
 ) : Parcelable
