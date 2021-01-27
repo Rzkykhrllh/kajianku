@@ -18,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.purplepotato.kajianku.MainActivity
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
+import com.purplepotato.kajianku.core.session.Preferences
 import com.purplepotato.kajianku.core.util.isValidEmail
 import com.purplepotato.kajianku.databinding.FragmentSignUpBinding
 import java.text.SimpleDateFormat
@@ -39,7 +40,10 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     private var cal: Calendar = Calendar.getInstance()
 
     private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory.getInstance())[SignUpViewModel::class.java]
+        ViewModelProvider(
+            this,
+            ViewModelFactory.getInstance(requireContext().applicationContext)
+        )[SignUpViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -68,29 +72,18 @@ class SignUpFragment : Fragment(), View.OnClickListener {
         // Pindah ke halaman Home
         viewModel.navigateToHome.observe(viewLifecycleOwner, {
             if (it) {
+                val pref = Preferences(requireContext())
 
-                val sharedPref = this.requireActivity().getSharedPreferences("mypref", Context.MODE_PRIVATE)
-                val editor = sharedPref.edit()
+                pref.setName(name)
+                pref.setBirth(birth)
+                pref.setEmail(email)
+                pref.setGender(gender)
 
-                editor.apply{
-                    putString("nama", name).
-                    putString("birth", birth)
+//                Log.i("inputdesu nama","${sharedPref.getString("nama","odading mang oleh")}")
+//                Log.i("inputdesu email","${sharedPref.getString("email","odading mang oleh")}")
+//                Log.i("inputdesu gender","${sharedPref.getString("gender","odading mang oleh")}")
+//                Toast.makeText(context, "Move to home", Toast.LENGTH_LONG).show()
 
-                    Log.i("inputdesu","Sharedpredence Executed")
-
-                }
-
-                editor.putString("email", email).commit()
-                editor.putString("gender", gender).apply()
-
-
-                Log.i("inputdesu nama","${sharedPref.getString("nama","odading mang oleh")}")
-                Log.i("inputdesu email","${sharedPref.getString("email","odading mang oleh")}")
-                Log.i("inputdesu gender","${sharedPref.getString("gender","odading mang oleh")}")
-
-
-
-                Toast.makeText(context, "Move to home", Toast.LENGTH_LONG).show()
                 val intent = Intent(activity, MainActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)

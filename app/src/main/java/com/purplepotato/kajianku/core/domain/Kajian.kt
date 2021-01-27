@@ -8,6 +8,7 @@ data class Kajian(
     val title: String,
     val imageUrl: String,
     val description: String,
+    val organizer: String,
     val tagId: List<String>,
     val status: String,
     val startedAt: Long,
@@ -16,5 +17,6 @@ data class Kajian(
     val location: String,
     val latitude: Double,
     val longitude: Double,
-    val totalSaved: Long
+    val totalSaved: Long,
+    val reminderId: Long? = -1
 ) : Parcelable

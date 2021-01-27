@@ -50,7 +50,7 @@ class ChangePassword : Fragment() {
             }
         })
 
-        viewModel.isLoading.observe(viewLifecycleOwner, Observer {  state ->
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer { state ->
             if (state) {
                 binding.loadingFrame.visibility = View.VISIBLE
                 binding.loginProgressBar.visibility = View.VISIBLE
@@ -83,7 +83,7 @@ class ChangePassword : Fragment() {
         }
 
         if (newPassword != retypePassword) {
-            binding.etRetypePassword.setError("Mohon cek kemabli password yang anda masukkan")
+            binding.etRetypePassword.setError("Mohon cek kembali password yang anda masukkan")
             return false
         }
 

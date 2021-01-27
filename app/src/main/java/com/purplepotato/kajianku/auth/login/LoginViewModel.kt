@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.purplepotato.kajianku.core.data.KajianRepository
 import kotlinx.coroutines.*
 
@@ -22,16 +23,40 @@ class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
     val navigateToHome: LiveData<Boolean>
         get() = _navigateToHome
 
+    var name: String? = null
+    var gender: String? = null
+    var birth: String? = null
+    var email1: String? = null
+
     fun login(email: String, password: String) = uiScope.launch {
         _isLoading.value = true
+        email1 = email
         withContext(Dispatchers.IO) {
             auth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
-                    _isLoading.value = false
-                    _navigateToHome.value = true
+                    getUserData()
                 }.addOnFailureListener {
                     _navigateToHome.value = false
                 }
+        }
+    }
+
+    private fun getUserData() {
+        uiScope.launch {
+            withContext(Dispatchers.IO) {
+                val db = FirebaseFirestore.getInstance()
+                db.collection("users")
+                    .document(auth.currentUser!!.uid)
+                    .get()
+                    .addOnSuccessListener { data ->
+                        name = data.getString("name") ?: ""
+                        birth = data.getString("birth_date") ?: ""
+                        gender = data.getString("gender") ?: ""
+                        _isLoading.value = false
+                        _navigateToHome.value = true
+                    }.addOnFailureListener {
+                    }
+            }
         }
     }
 

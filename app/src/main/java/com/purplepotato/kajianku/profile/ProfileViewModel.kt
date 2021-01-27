@@ -6,30 +6,26 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.purplepotato.kajianku.core.data.KajianRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 
 class ProfileViewModel(private val repository: KajianRepository) : ViewModel() {
 
     lateinit var auth: FirebaseAuth
-    lateinit var user : FirebaseUser
-
-
+    lateinit var user: FirebaseUser
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private val _navigateToLogin = MutableLiveData<Boolean>()
-    val navigateToLogin : LiveData<Boolean>
+    val navigateToLogin: LiveData<Boolean>
         get() = _navigateToLogin
 
     private val _username = MutableLiveData<String?>()
-    val username : LiveData<String?>
+    val username: LiveData<String?>
         get() = _username
 
     private val _email = MutableLiveData<String?>()
-    val email : LiveData<String?>
+    val email: LiveData<String?>
         get() = _email
 
     init {
@@ -42,10 +38,18 @@ class ProfileViewModel(private val repository: KajianRepository) : ViewModel() {
         }*/
     }
 
+    fun clearLocalDB() = uiScope.launch {
+        repository.deleteAllSavedKajian()
+    }
 
-    fun logout(){
-
+    fun logout() {
+        clearLocalDB()
         auth.signOut()
         _navigateToLogin.value = true
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        uiScope.cancel()
     }
 }

@@ -20,7 +20,10 @@ class HomeFragment : Fragment() {
         get() = _binding!!
 
     private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory.getInstance())[HomeViewModel::class.java]
+        ViewModelProvider(
+            this,
+            ViewModelFactory.getInstance(requireContext().applicationContext)
+        )[HomeViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -72,8 +75,8 @@ class HomeFragment : Fragment() {
             }
         })
 
-        viewModel.listPopularKajian.observe(viewLifecycleOwner,{result->
-            when(result){
+        viewModel.listPopularKajian.observe(viewLifecycleOwner, { result ->
+            when (result) {
                 is Resource.Success -> {
                     popularRecyclerAdapter.submitList(result.data)
                 }

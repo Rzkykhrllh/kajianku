@@ -19,7 +19,10 @@ class SavedKajianFragment : Fragment() {
         get() = _binding!!
 
     private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory.getInstance())[SavedKajianViewModel::class.java]
+        ViewModelProvider(
+            this,
+            ViewModelFactory.getInstance(requireContext().applicationContext)
+        )[SavedKajianViewModel::class.java]
     }
 
     override fun onCreateView(

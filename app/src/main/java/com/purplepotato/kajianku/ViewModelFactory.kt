@@ -1,5 +1,6 @@
 package com.purplepotato.kajianku
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.purplepotato.kajianku.auth.login.LoginViewModel
@@ -8,6 +9,7 @@ import com.purplepotato.kajianku.core.data.KajianRepository
 import com.purplepotato.kajianku.detail.DetailViewModel
 import com.purplepotato.kajianku.di.Injection
 import com.purplepotato.kajianku.home.HomeViewModel
+import com.purplepotato.kajianku.home.allkajian.AllKajianViewModel
 import com.purplepotato.kajianku.profile.ProfileViewModel
 import com.purplepotato.kajianku.saved_kajian.SavedKajianViewModel
 
@@ -17,9 +19,9 @@ class ViewModelFactory(private val repository: KajianRepository) : ViewModelProv
         @Volatile
         private var instance: ViewModelFactory? = null
 
-        fun getInstance(): ViewModelFactory = instance
+        fun getInstance(context: Context): ViewModelFactory = instance
             ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideRepository())
+                instance ?: ViewModelFactory(Injection.provideRepository(context))
             }
     }
 
@@ -47,6 +49,10 @@ class ViewModelFactory(private val repository: KajianRepository) : ViewModelProv
 
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(AllKajianViewModel::class.java) -> {
+                AllKajianViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown View model class : $modelClass")
