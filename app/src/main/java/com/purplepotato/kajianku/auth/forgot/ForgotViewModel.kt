@@ -22,6 +22,10 @@ class ForgotViewModel : ViewModel() {
     val navigateToLoginFragment : LiveData<String>
         get() = _navigateToLogin
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading  : LiveData<Boolean>
+        get() = _isLoading
+
     init {
         auth = FirebaseAuth.getInstance()
     }
@@ -30,22 +34,24 @@ class ForgotViewModel : ViewModel() {
         email: String,
     ) {
         this.email = email
+
         uiScope.launch {
-            resetFirebase()
+            _isLoading.value = true
+
+            withContext(Dispatchers.IO) {
+                auth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener(OnCompleteListener { task ->
+                        _isLoading.postValue(false)
+
+                        if (task.isSuccessful) {
+                            _navigateToLogin.value = "true"
+
+                        } else {
+                            _navigateToLogin.value = "fail"
+                        }
+                    })
+            }
         }
     }
 
-    private suspend fun resetFirebase() {
-        withContext(Dispatchers.IO) {
-            auth.sendPasswordResetEmail(email)
-                .addOnCompleteListener(OnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        _navigateToLogin.value = "true"
-
-                    } else {
-                        _navigateToLogin.value = "fail"
-                    }
-                })
-        }
-    }
 }

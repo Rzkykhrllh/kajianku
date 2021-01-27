@@ -49,6 +49,16 @@ class ChangePassword : Fragment() {
                 findNavController().navigate(ChangePasswordDirections.actionChangePasswordToProfileFragment())
             }
         })
+
+        viewModel.isLoading.observe(viewLifecycleOwner, Observer {  state ->
+            if (state) {
+                binding.loadingFrame.visibility = View.VISIBLE
+                binding.loginProgressBar.visibility = View.VISIBLE
+            } else {
+                binding.loadingFrame.visibility = View.GONE
+                binding.loginProgressBar.visibility = View.GONE
+            }
+        })
     }
 
     private fun validate(): Boolean {

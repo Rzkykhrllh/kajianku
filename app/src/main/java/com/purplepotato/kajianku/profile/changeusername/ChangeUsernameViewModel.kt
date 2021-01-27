@@ -24,10 +24,16 @@ class ChangeUsernameViewModel  : ViewModel() {
     val  navigateToProfile : LiveData<Boolean>
         get() = _navigateToProfile
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val  isLoading : LiveData<Boolean>
+        get() = _isLoading
+
 
     fun updateFirebase(name : String){
         uiScope.launch {
+            _isLoading.value = true
             withContext(Dispatchers.IO) {
+
                 user = auth.currentUser!!
 
                 // update auth
@@ -55,7 +61,7 @@ class ChangeUsernameViewModel  : ViewModel() {
                         Log.i(TAG, "update di firestore sukses")
                     }
 
-
+                _isLoading.postValue(false)
             }
         }
     }
