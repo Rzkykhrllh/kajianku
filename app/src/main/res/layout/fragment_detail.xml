@@ -290,19 +290,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="Simpan kajian"
-        android:textSize="14sp"
-        app:cornerRadius="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/bg_button"
-        app:layout_constraintEnd_toEndOf="@id/bg_button"
-        app:layout_constraintStart_toStartOf="@id/bg_button"
-        app:layout_constraintTop_toTopOf="@id/bg_button" />
-
     <View
         android:id="@+id/bg_button"
         android:layout_width="match_parent"
@@ -311,5 +298,39 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_save_kajian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/save_kajian"
+        android:textSize="14sp"
+        android:visibility="visible"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/bg_button"
+        app:layout_constraintEnd_toEndOf="@id/bg_button"
+        app:layout_constraintStart_toStartOf="@id/bg_button"
+        app:layout_constraintTop_toTopOf="@id/bg_button" />
+
+    <Button
+        android:id="@+id/btn_cancel_kajian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:backgroundTint="@color/white"
+        android:elevation="4dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/cancel_kajian"
+        android:textColor="@color/green"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/bg_button"
+        app:layout_constraintEnd_toEndOf="@id/bg_button"
+        app:layout_constraintStart_toStartOf="@id/bg_button"
+        app:layout_constraintTop_toTopOf="@id/bg_button" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

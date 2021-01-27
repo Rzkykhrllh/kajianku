@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.purplepotato.kajianku.MainActivity
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.ViewModelFactory
+import com.purplepotato.kajianku.auth.forgot.ForgotPasswordDirections
 import com.purplepotato.kajianku.core.util.isValidEmail
 import com.purplepotato.kajianku.databinding.FragmentLoginBinding
 
@@ -26,7 +27,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private lateinit var email: String
 
     private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory.getInstance())[LoginViewModel::class.java]
+        ViewModelProvider(this, ViewModelFactory.getInstance(requireContext().applicationContext))[LoginViewModel::class.java]
     }
 
     override fun onStart() {
@@ -55,6 +56,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         binding.btnLogin.setOnClickListener(this)
         binding.btnToSignUp.setOnClickListener(this)
+        binding.tvForgetPassword.setOnClickListener(this)
 
         viewModel.isLoading.observe(viewLifecycleOwner, { state ->
             showLoading(state)
@@ -81,6 +83,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
             R.id.btn_to_sign_up -> {
                 val action = LoginFragmentDirections.actionLoginFragmentToSignUpFragment()
+                findNavController().navigate(action)
+            }
+
+            R.id.tv_forget_password -> {
+                val action = LoginFragmentDirections.actionLoginFragmentToForgotPassword()
                 findNavController().navigate(action)
             }
         }

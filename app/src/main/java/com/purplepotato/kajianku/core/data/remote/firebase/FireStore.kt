@@ -3,6 +3,7 @@ package com.purplepotato.kajianku.core.data.remote.firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.purplepotato.kajianku.core.Resource
+import com.purplepotato.kajianku.core.data.remote.ApiResponse
 import com.purplepotato.kajianku.core.domain.Kajian
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -24,19 +25,27 @@ class FireStore {
         private val currentUser = FirebaseAuth.getInstance().currentUser
     }
 
-    suspend fun queryAllSuggestedKajian(): Flow<Resource<List<Kajian>>> = flow<Resource<List<Kajian>>> {
-        emit(Resource.Loading())
-        emit(Resource.Success(emptyList()))
-    }.flowOn(Dispatchers.IO).take(2)
+    suspend fun queryAllSuggestedKajian(): Flow<Resource<List<Kajian>>> =
+        flow<Resource<List<Kajian>>> {
 
-    suspend fun queryAllSavedKajian(): Flow<Resource<List<Kajian>>> = flow<Resource<List<Kajian>>> {
-        emit(Resource.Loading())
-        emit(Resource.Success(emptyList()))
-    }.flowOn(Dispatchers.IO).take(2)
+            emit(Resource.Loading())
+            emit(Resource.Success(emptyList()))
 
-    suspend fun queryAllPopularKajian(): Flow<Resource<List<Kajian>>> = flow<Resource<List<Kajian>>>{
-        emit(Resource.Loading())
-        emit(Resource.Success(emptyList()))
-    }.flowOn(Dispatchers.IO).take(2)
+        }.flowOn(Dispatchers.IO).take(2)
+
+    suspend fun queryAllSavedKajian(): Flow<ApiResponse<List<Kajian>>> =
+        flow<ApiResponse<List<Kajian>>> {
+
+            emit(ApiResponse.Success(emptyList()))
+
+        }.flowOn(Dispatchers.IO)
+
+    suspend fun queryAllPopularKajian(): Flow<Resource<List<Kajian>>> =
+        flow<Resource<List<Kajian>>> {
+
+            emit(Resource.Loading())
+            emit(Resource.Success(emptyList()))
+
+        }.flowOn(Dispatchers.IO).take(2)
 
 }

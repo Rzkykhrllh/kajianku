@@ -1,5 +1,6 @@
 package com.purplepotato.kajianku
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.purplepotato.kajianku.auth.login.LoginViewModel
@@ -17,9 +18,9 @@ class ViewModelFactory(private val repository: KajianRepository) : ViewModelProv
         @Volatile
         private var instance: ViewModelFactory? = null
 
-        fun getInstance(): ViewModelFactory = instance
+        fun getInstance(context: Context): ViewModelFactory = instance
             ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideRepository())
+                instance ?: ViewModelFactory(Injection.provideRepository(context))
             }
     }
 

@@ -34,6 +34,9 @@
     <string name="share_kajian_title">Bagikan kajian ini sekarang</string>
     <string name="kajian_invitation">Yuk ikutan kajian %s</string>
     <string name="date_time_format">%s WIB</string>
+    <string name="notification_title_reminder">Reminder Kajian</string>
+    <string name="save_kajian">Simpan kajian</string>
+    <string name="cancel_kajian">Batal Mengikuti Kajian</string>
 
     <string-array name="gender_list">
         <item>Ikhwan</item>

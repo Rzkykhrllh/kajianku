@@ -37,7 +37,10 @@ class SignUpFragment : Fragment(), View.OnClickListener {
     private var cal: Calendar = Calendar.getInstance()
 
     private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory.getInstance())[SignUpViewModel::class.java]
+        ViewModelProvider(
+            this,
+            ViewModelFactory.getInstance(requireContext().applicationContext)
+        )[SignUpViewModel::class.java]
     }
 
     override fun onCreateView(

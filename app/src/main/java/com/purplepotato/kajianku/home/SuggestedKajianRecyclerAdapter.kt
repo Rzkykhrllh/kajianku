@@ -10,6 +10,7 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.purplepotato.kajianku.R
 import com.purplepotato.kajianku.core.domain.Kajian
+import com.purplepotato.kajianku.core.util.AlarmReceiver
 import com.purplepotato.kajianku.core.util.DiffUtilItemCallback
 import com.purplepotato.kajianku.core.util.Helpers
 import com.purplepotato.kajianku.databinding.ItemKajianBinding
