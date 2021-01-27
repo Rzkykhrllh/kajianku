@@ -108,18 +108,6 @@ class ProfileFragment : Fragment() {
         binding.tvEmail.setText(sharedPref.getString("email",""))
         binding.tvUsername.setText(sharedPref.getString("nama",""))
 
-        /*viewModel.username.observe(viewLifecycleOwner, Observer {
-            if (viewModel.username != null){
-                binding.tvUsername.setText(viewModel.username.value)
-            }
-        })
-
-        // Set Username and email to view
-        viewModel.email.observe(viewLifecycleOwner, Observer {
-            if (viewModel.email != null){
-                binding.tvEmail.setText(viewModel.email.value)
-            }
-        })*/
     }
 
 }
