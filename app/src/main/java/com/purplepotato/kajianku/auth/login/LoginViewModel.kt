@@ -24,6 +24,10 @@ class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
     val navigateToHome: LiveData<Boolean>
         get() = _navigateToHome
 
+    private val _setPreference = MutableLiveData<Boolean>()
+    val setPreference: LiveData<Boolean>
+        get() = _setPreference
+
     var name: String? = null
     var gender: String? = null
     var birth: String? = null
@@ -59,6 +63,7 @@ class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
                         Log.i("shared-login", "$name, $birth")
 
 
+                        _setPreference.value = true
                         _isLoading.value = false
                         _navigateToHome.value = true
                     }.addOnFailureListener {

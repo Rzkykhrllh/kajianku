@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.purplepotato.kajianku.MainActivity
@@ -38,7 +39,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
         viewModel.navigateToHome.observe(viewLifecycleOwner, {
             if (it) {
                 moveToHome()
-                saveUserDataToPreferences()
             }
         })
     }
@@ -64,6 +64,12 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
         viewModel.isLoading.observe(viewLifecycleOwner, { state ->
             showLoading(state)
+        })
+
+        viewModel.setPreference.observe(viewLifecycleOwner, Observer {
+            if (it){
+                saveUserDataToPreferences()
+            }
         })
     }
 
