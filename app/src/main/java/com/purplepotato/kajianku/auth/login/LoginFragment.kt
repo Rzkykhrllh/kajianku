@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.purplepotato.kajianku.MainActivity
@@ -38,7 +39,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
         viewModel.navigateToHome.observe(viewLifecycleOwner, {
             if (it) {
                 moveToHome()
-                saveUserDataToPreferences()
             }
         })
     }
@@ -65,6 +65,12 @@ class LoginFragment : Fragment(), View.OnClickListener {
         viewModel.isLoading.observe(viewLifecycleOwner, { state ->
             showLoading(state)
         })
+
+        viewModel.setPreference.observe(viewLifecycleOwner, Observer {
+            if (it){
+                saveUserDataToPreferences()
+            }
+        })
     }
 
     private fun moveToHome() {
@@ -76,10 +82,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     private fun saveUserDataToPreferences() {
         val pref = Preferences(requireContext())
-        pref.setGender(viewModel.gender as String)
-        pref.setEmail(viewModel.email1 as String)
-        pref.setBirth(viewModel.birth as String)
-        pref.setName(viewModel.name as String)
+        pref.setGender(viewModel.gender ?: "")
+        pref.setEmail(viewModel.email1?: "")
+        pref.setBirth(viewModel.birth ?: "")
+        pref.setName(viewModel.name ?: "")
     }
 
     override fun onClick(v: View) {
