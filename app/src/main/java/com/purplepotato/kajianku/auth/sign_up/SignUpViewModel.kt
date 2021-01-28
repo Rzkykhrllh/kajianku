@@ -47,8 +47,8 @@ class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
         Log.i(tag, "di dalam signup")
 
         uiScope.launch {
+            _isLoading.value = true
             withContext(Dispatchers.IO) {
-                _isLoading.value = true
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnFailureListener{
                         Log.i(tag, "di dalam onFailure $it")
@@ -61,7 +61,7 @@ class SignUpViewModel(private val repository: KajianRepository) : ViewModel() {
                             updateProfile()
                             addDataToFirestore(user.uid)
 
-                            _isLoading.value = false
+                            _isLoading.postValue(false)
                             _navigateToHome.value = true
                         } else {
                             _navigateToHome.value = false

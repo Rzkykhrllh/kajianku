@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.purplepotato.kajianku.ViewModelFactory
 import com.purplepotato.kajianku.core.Resource
@@ -47,21 +48,33 @@ class SavedKajianFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-//        viewModel.listSavedKajian.observe(viewLifecycleOwner, { result ->
-//            when (result) {
-//                is Resource.Loading -> {
-//                    binding.progressIndicator.visibility = View.VISIBLE
-//                }
-//
-//                is Resource.Success -> {
-//                    binding.progressIndicator.visibility = View.GONE
-//                    recyclerAdapter.submitList(result.data)
-//                }
-//
-//                is Resource.Error -> {
-//                    binding.progressIndicator.visibility = View.GONE
-//                }
-//            }
-//        })
+        binding.btnCariKajian.setOnClickListener {
+         findNavController().navigate(SavedKajianFragmentDirections.actionSavedKajianFragmentToHomeFragment())
+        }
+
+        viewModel.listSavedKajian.observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    binding.progressIndicator.visibility = View.VISIBLE
+                }
+
+                is Resource.Success -> {
+                    binding.progressIndicator.visibility = View.GONE
+                    recyclerAdapter.submitList(result.data)
+
+                    if (result.data.isNullOrEmpty()){
+                        binding.txtSavedKajian.visibility = View.GONE
+                        binding.recyclerViewSavedKajian.visibility = View.GONE
+                        binding.viewNotSaved.visibility = View.VISIBLE
+                    } else{
+                        binding.viewNotSaved.visibility = View.GONE
+                    }
+                }
+
+                is Resource.Error -> {
+                    binding.progressIndicator.visibility = View.GONE
+                }
+            }
+        })
     }
 }

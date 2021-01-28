@@ -16,11 +16,15 @@ class Preferences(context: Context) {
     private val preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = preferences.edit()
 
+
+
     val name = preferences.getString(KEY_NAME, "")
     val email = preferences.getString(KEY_EMAIL, "")
     val gender = preferences.getString(KEY_GENDER, "")
     val birth = preferences.getString(KEY_BIRTH, "")
     val reminderId = preferences.getLong(KEY_REMINDER_ID, 1)
+
+
 
     fun setName(name: String) {
         editor.putString(KEY_NAME, name).commit()
