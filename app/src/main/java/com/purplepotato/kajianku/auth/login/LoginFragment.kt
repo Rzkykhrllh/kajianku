@@ -76,10 +76,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     private fun saveUserDataToPreferences() {
         val pref = Preferences(requireContext())
-        pref.setGender(viewModel.gender as String)
-        pref.setEmail(viewModel.email1 as String)
-        pref.setBirth(viewModel.birth as String)
-        pref.setName(viewModel.name as String)
+        pref.setGender(viewModel.gender ?: "")
+        pref.setEmail(viewModel.email1?: "")
+        pref.setBirth(viewModel.birth ?: "")
+        pref.setName(viewModel.name ?: "")
     }
 
     override fun onClick(v: View) {

@@ -1,65 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".saved_kajian.SavedKajianFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/txt_saved_kajian"
+    <TextView
+        android:id="@+id/txt_saved_kajian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="@string/saved_kajian"
+        android:textColor="@color/primary"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_saved_kajian"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/txt_saved_kajian"
+        tools:itemCount="7"
+        tools:listitem="@layout/item_normal" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/progress_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/txt_saved_kajian">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/item_kajian_placeholder" />
+
+            <include layout="@layout/item_kajian_placeholder" />
+
+            <include layout="@layout/item_kajian_placeholder" />
+
+            <include layout="@layout/item_kajian_placeholder" />
+
+            <include layout="@layout/item_kajian_placeholder" />
+
+            <include layout="@layout/item_kajian_placeholder" />
+
+            <include layout="@layout/item_kajian_placeholder" />
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view_not_saved"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_belum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/saved_kajian"
-            android:textColor="@color/black"
-            android:textSize="24sp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:text="Kamu belum mengikuti kajian"
+            android:textColor="@color/accent"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view_saved_kajian"
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/cari_kajian"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/txt_saved_kajian"
-            tools:itemCount="7"
-            tools:listitem="@layout/item_kajian" />
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Yuk Ikut Kajian !"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_belum" />
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/progress_indicator"
-            android:layout_width="match_parent"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_cari_kajian"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/txt_saved_kajian">
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/primary"
+            android:text="Cari Kajian"
+            app:cornerRadius="15dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cari_kajian" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <include layout="@layout/item_kajian_placeholder" />
-
-                <include layout="@layout/item_kajian_placeholder" />
-
-                <include layout="@layout/item_kajian_placeholder" />
-
-                <include layout="@layout/item_kajian_placeholder" />
-
-                <include layout="@layout/item_kajian_placeholder" />
-
-                <include layout="@layout/item_kajian_placeholder" />
-
-                <include layout="@layout/item_kajian_placeholder" />
-
-            </LinearLayout>
-        </com.facebook.shimmer.ShimmerFrameLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

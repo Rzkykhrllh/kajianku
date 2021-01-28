@@ -1,5 +1,6 @@
 package com.purplepotato.kajianku.auth.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -49,9 +50,15 @@ class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
                     .document(auth.currentUser!!.uid)
                     .get()
                     .addOnSuccessListener { data ->
+
                         name = data.getString("name") ?: ""
                         birth = data.getString("birth_date") ?: ""
                         gender = data.getString("gender") ?: ""
+
+                        Log.i("shared-login", "$data")
+                        Log.i("shared-login", "$name, $birth")
+
+
                         _isLoading.value = false
                         _navigateToHome.value = true
                     }.addOnFailureListener {
