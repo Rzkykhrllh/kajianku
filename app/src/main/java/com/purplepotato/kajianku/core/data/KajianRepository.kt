@@ -27,7 +27,7 @@ class KajianRepository(
             }
     }
 
-    suspend fun queryAllSuggestedKajian(): Flow<Resource<List<Kajian>>> =
+    fun queryAllSuggestedKajian(): Flow<Resource<List<Kajian>>> =
         remoteDataSource.queryAllSuggestedKajianFromFireStore()
 
     fun queryAllSavedKajian(): Flow<Resource<List<Kajian>>> =
@@ -53,7 +53,7 @@ class KajianRepository(
             }
         }.asFlow()
 
-    suspend fun queryAllPopularKajian(): Flow<Resource<List<Kajian>>> =
+    fun queryAllPopularKajian(): Flow<Resource<List<Kajian>>> =
         remoteDataSource.queryAllPopularKajianFromFireStore()
 
     suspend fun deleteAllSavedKajian() = localDataSource.deleteAllSavedKajian()
@@ -61,9 +61,18 @@ class KajianRepository(
     suspend fun deleteSavedKajian(kajian: Kajian) =
         localDataSource.deleteSavedKajian(DataMapper.mapDomainToEntity(kajian))
 
-    suspend fun insertSavedKajian(kajian: Kajian) =
+    suspend fun insertSavedKajian(kajian: Kajian) {
         localDataSource.insertSavedKajian(DataMapper.mapDomainToEntity(kajian))
+        remoteDataSource.insertSavedKajian(kajian.id)
+    }
 
     suspend fun getSavedKajian(title: String, organizer: String): Kajian =
         DataMapper.mapEntityToDomain(localDataSource.getSavedKajian(title, organizer))
+
+    fun deleteSavedKajianAndMoveToUserHistory(id: String) =
+        remoteDataSource.deleteSavedKajianAndMoveToUserHistory(id)
+
+    fun queryAllKajianHistory(): Flow<Resource<List<Kajian>>> = remoteDataSource.queryAllKajianHistory()
+
+    fun queryAllKajian(): Flow<Resource<List<Kajian>>> = remoteDataSource.queryAllKajian()
 }

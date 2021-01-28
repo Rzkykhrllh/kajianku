@@ -6,6 +6,7 @@ import com.purplepotato.kajianku.core.domain.Kajian
 object DataMapper {
     fun mapEntityToDomain(savedKajianEntity: SavedKajianEntity): Kajian {
         return Kajian(
+            id = savedKajianEntity.id,
             title = savedKajianEntity.title,
             imageUrl = savedKajianEntity.imageUrl,
             description = savedKajianEntity.description,
@@ -25,6 +26,7 @@ object DataMapper {
 
     fun mapDomainToEntity(kajian: Kajian): SavedKajianEntity {
         return SavedKajianEntity(
+            id = kajian.id,
             title = kajian.title,
             imageUrl = kajian.imageUrl,
             description = kajian.description,

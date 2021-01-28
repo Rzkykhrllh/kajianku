@@ -47,21 +47,21 @@ class SavedKajianFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
-        viewModel.listSavedKajian.observe(viewLifecycleOwner, { result ->
-            when (result) {
-                is Resource.Loading -> {
-                    binding.progressIndicator.visibility = View.VISIBLE
-                }
-
-                is Resource.Success -> {
-                    binding.progressIndicator.visibility = View.GONE
-                    recyclerAdapter.submitList(result.data)
-                }
-
-                is Resource.Error -> {
-                    binding.progressIndicator.visibility = View.GONE
-                }
-            }
-        })
+//        viewModel.listSavedKajian.observe(viewLifecycleOwner, { result ->
+//            when (result) {
+//                is Resource.Loading -> {
+//                    binding.progressIndicator.visibility = View.VISIBLE
+//                }
+//
+//                is Resource.Success -> {
+//                    binding.progressIndicator.visibility = View.GONE
+//                    recyclerAdapter.submitList(result.data)
+//                }
+//
+//                is Resource.Error -> {
+//                    binding.progressIndicator.visibility = View.GONE
+//                }
+//            }
+//        })
     }
 }

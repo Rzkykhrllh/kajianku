@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "saved_kajian")
 data class SavedKajianEntity(
     @PrimaryKey
+    @ColumnInfo(name = "id")
+    val id: String,
+
     @ColumnInfo(name = "reminder_id")
     val reminderId: Long? = -1,
 

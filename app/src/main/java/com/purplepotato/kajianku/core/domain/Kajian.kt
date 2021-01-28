@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Kajian(
+    val id: String,
     val title: String,
     val imageUrl: String,
     val description: String,

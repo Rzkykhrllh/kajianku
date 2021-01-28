@@ -38,7 +38,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         viewModel.navigateToHome.observe(viewLifecycleOwner, {
             if (it) {
                 moveToHome()
-                saveUserDataToPreferences()
+//                saveUserDataToPreferences()
             }
         })
     }

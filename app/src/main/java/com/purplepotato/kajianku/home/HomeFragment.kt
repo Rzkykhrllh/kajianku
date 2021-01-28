@@ -60,31 +60,31 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAllKajian())
         }
 
-        viewModel.listSuggestedKajian.observe(viewLifecycleOwner, { result ->
-            when (result) {
-                is Resource.Success -> {
-                    binding.progressIndicator.visibility = View.GONE
-                    suggestedRecyclerAdapter.submitList(result.data)
-                }
-                is Resource.Loading -> {
-                    binding.progressIndicator.visibility = View.VISIBLE
-                }
-                is Resource.Error -> {
-                    binding.progressIndicator.visibility = View.GONE
-                }
-            }
-        })
-
-        viewModel.listPopularKajian.observe(viewLifecycleOwner, { result ->
-            when (result) {
-                is Resource.Success -> {
-                    popularRecyclerAdapter.submitList(result.data)
-                }
-                is Resource.Loading -> {
-                }
-                is Resource.Error -> {
-                }
-            }
-        })
+//        viewModel.listSuggestedKajian.observe(viewLifecycleOwner, { result ->
+//            when (result) {
+//                is Resource.Success -> {
+//                    binding.progressIndicator.visibility = View.GONE
+//                    suggestedRecyclerAdapter.submitList(result.data)
+//                }
+//                is Resource.Loading -> {
+//                    binding.progressIndicator.visibility = View.VISIBLE
+//                }
+//                is Resource.Error -> {
+//                    binding.progressIndicator.visibility = View.GONE
+//                }
+//            }
+//        })
+//
+//        viewModel.listPopularKajian.observe(viewLifecycleOwner, { result ->
+//            when (result) {
+//                is Resource.Success -> {
+//                    popularRecyclerAdapter.submitList(result.data)
+//                }
+//                is Resource.Loading -> {
+//                }
+//                is Resource.Error -> {
+//                }
+//            }
+//        })
     }
 }

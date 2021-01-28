@@ -96,7 +96,7 @@ class ProfileFragment : Fragment() {
         // Navigation
 
         binding.tvChangePassword.setOnClickListener {
-            Toast.makeText(context, "pindah ke change pass", Toast.LENGTH_LONG).show()
+//            Toast.makeText(context, "pindah ke change pass", Toast.LENGTH_LONG).show()
 
             findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToChangePassword())
         }
