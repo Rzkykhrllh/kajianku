@@ -3,7 +3,6 @@ package com.purplepotato.kajianku.profile.history
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -26,10 +25,11 @@ class KajianHistoryRecyclerAdapter :
                 itemImgPoster.load(item.imageUrl) {
                     crossfade(true)
                     placeholder(R.drawable.image_placeholder)
-                    error(R.drawable.ic_broken_image)
+                    error(R.drawable.image_placeholder)
                     transformations(RoundedCornersTransformation(8f))
                 }
-
+                itemTxtDateTime.text =
+                    "${Helpers.convertTimeStampToDateTimeFormat(item.startedAt)}  WIB"
                 itemTxtTitle.text = item.title
                 itemTxtSpeaker.text = item.speaker
                 itemTxtPlace.text = item.location

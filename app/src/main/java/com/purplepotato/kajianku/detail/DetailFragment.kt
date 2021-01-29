@@ -92,7 +92,18 @@ class DetailFragment : Fragment(), View.OnClickListener {
                 val recyclerAdapter = TagKajianRecyclerAdapter()
                 binding.recyclerViewTag.apply {
                     adapter = recyclerAdapter
-                    layoutManager = GridLayoutManager(requireContext(), 3)
+                    layoutManager = when {
+                        it.tagId.size == 1 -> {
+                            GridLayoutManager(requireContext(), 1)
+                        }
+                        it.tagId.size % 2 == 0 -> {
+                            GridLayoutManager(requireContext(), 2)
+                        }
+                        else -> {
+                            GridLayoutManager(requireContext(), 3)
+                        }
+                    }
+
                 }
                 recyclerAdapter.submitList(item.tagId)
 
@@ -100,7 +111,10 @@ class DetailFragment : Fragment(), View.OnClickListener {
                 txtSpeaker.text = it.speaker
                 txtPlace.text = it.location
                 txtDate.text = Helpers.convertTimeStampToDateFormat(it.startedAt)
-                txtTime.text = it.time
+                txtTime.text = getString(
+                    R.string.time_format,
+                    Helpers.convertTimeStampToTimeFormat(it.startedAt)
+                )
                 txtDescription.text = it.description
                 txtRegisterUrl.text = it.registerUrl
             }
@@ -114,7 +128,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
             R.id.btn_find_location -> {
                 val item = viewModel.getKajian()
                 item?.let {
-                    val gmmIntentUri = Uri.parse("geo:${it.latitude},${it.longitude}")
+                    val gmmIntentUri = Uri.parse("geo:${it.latitude},${it.longitude}?q=${it.latitude},${it.longitude}")
                     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                     mapIntent.setPackage("com.google.android.apps.maps")
                     mapIntent.resolveActivity(requireContext().packageManager)?.let {
@@ -154,11 +168,6 @@ class DetailFragment : Fragment(), View.OnClickListener {
                 }
 
                 mBuilder.setPositiveButton("Simpan") { dialog, which ->
-                    Toast.makeText(
-                        requireContext(),
-                        "item terpilih adalah ${listItems[saved]}",
-                        Toast.LENGTH_LONG
-                    ).show()
                     var timeReducer: Long = 0
                     var stringTime = ""
                     when (saved) {
@@ -187,7 +196,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
                             requireContext(),
                             pref.reminderId,
                             pref.reminderId,
-                            getString(R.string.message_kajian_reminder, it.title,stringTime),
+                            getString(R.string.message_kajian_reminder, it.title, stringTime),
                             it.startedAt - timeReducer
                         )
                     }

@@ -25,7 +25,7 @@ class PopularKajianRecyclerAdapter :
                 itemImgPoster.load(item.imageUrl) {
                     crossfade(true)
                     placeholder(R.drawable.image_placeholder)
-                    error(R.drawable.ic_broken_image)
+                    error(R.drawable.image_placeholder)
                     transformations(RoundedCornersTransformation(16f))
                 }
                 itemTxtTitle.text = item.title

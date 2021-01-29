@@ -120,10 +120,10 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_view_tag"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintBottom_toBottomOf="@id/bg_title"
                     app:layout_constraintEnd_toEndOf="@id/bg_title"
                     app:layout_constraintStart_toStartOf="@id/bg_title"

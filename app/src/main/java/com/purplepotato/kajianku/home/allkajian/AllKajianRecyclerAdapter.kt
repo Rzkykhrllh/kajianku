@@ -27,14 +27,14 @@ class AllKajianRecyclerAdapter :
                 itemImgPoster.load(item.imageUrl) {
                     crossfade(true)
                     placeholder(R.drawable.image_placeholder)
-                    error(R.drawable.ic_broken_image)
+                    error(R.drawable.image_placeholder)
                     transformations(RoundedCornersTransformation(8f))
                 }
 
                 itemTxtTitle.text = item.title
                 itemTxtSpeaker.text = item.speaker
                 itemTxtPlace.text = item.location
-                itemTxtDateTime.text = "${Helpers.convertTimeStampToDateTimeFormat(item.startedAt)} | ${item.time}"
+                itemTxtDateTime.text = "${Helpers.convertTimeStampToDateTimeFormat(item.startedAt)} WIB"
 
                 root.setOnClickListener {
                     val action = AllKajianFragmentDirections.actionAllKajianToDetailFragment()
