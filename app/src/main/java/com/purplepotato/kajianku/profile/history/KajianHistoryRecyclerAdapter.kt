@@ -33,8 +33,6 @@ class KajianHistoryRecyclerAdapter :
                 itemTxtTitle.text = item.title
                 itemTxtSpeaker.text = item.speaker
                 itemTxtPlace.text = item.location
-                itemTxtDateTime.text =
-                    "${Helpers.convertTimeStampToDateTimeFormat(item.startedAt)} | ${item.time}"
             }
         }
     }

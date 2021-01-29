@@ -38,7 +38,7 @@ class AlarmReceiver : BroadcastReceiver() {
         intent.putExtra(EXTRA_MESSAGE, message)
 
         val pendingIntent = PendingIntent.getBroadcast(context, requestCode.toInt(), intent, 0)
-        alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent)
     }
 
     fun cancelAlarm(context: Context, requestCode: Long) {

@@ -73,7 +73,6 @@ class SavedKajianFragment : Fragment() {
                 }
 
                 is Resource.Success -> {
-                    binding.progressIndicator.visibility = View.GONE
                     if (result.data.isNullOrEmpty()) {
                         binding.txtSavedKajian.visibility = View.GONE
                         binding.recyclerViewSavedKajian.visibility = View.GONE
@@ -88,8 +87,12 @@ class SavedKajianFragment : Fragment() {
                                         requireContext(),
                                         pref.reminderId,
                                         pref.reminderId,
-                                        getString(R.string.message_kajian_reminder, it.title),
-                                        it.startedAt
+                                        getString(
+                                            R.string.message_kajian_reminder,
+                                            it.title,
+                                            "30 menit"
+                                        ),
+                                        it.startedAt + 1000 * 60 * 30
                                     )
                                 } else {
                                     viewModel.deleteSavedKajianAndMoveToUserHistory(it)
@@ -105,6 +108,7 @@ class SavedKajianFragment : Fragment() {
                         }
 
                         recyclerAdapter.submitList(result.data)
+                        binding.progressIndicator.visibility = View.GONE
                         emptyState(false)
                     }
                 }

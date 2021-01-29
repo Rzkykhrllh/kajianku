@@ -22,6 +22,7 @@ object Notifier {
             .setContentText(text)
             .setAutoCancel(true)
             .setCategory(Notification.CATEGORY_REMINDER)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationChannel = NotificationChannel(

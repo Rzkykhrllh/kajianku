@@ -69,13 +69,13 @@ class FireStore {
 
     @ExperimentalCoroutinesApi
     fun queryAllKajian(): Flow<Resource<List<Kajian>>> = callbackFlow<Resource<List<Kajian>>> {
-        val dataRef = database.collection("kajian").limit(1)
+        val dataRef = database.collection("kajian")
 
         val subscription = dataRef.addSnapshotListener { querySnapshot, _ ->
             val list = ArrayList<Kajian>()
 
             querySnapshot?.forEach { document ->
-                Log.d("allkajian", document.id)
+                Log.d("queryAllKajian", document.getDate("date")?.time.toString())
                 list.add(
                     Kajian(
                         id = document.id,
@@ -144,7 +144,7 @@ class FireStore {
                             organizer = data?.get("organizer") as? String ?: "",
                             tagId = emptyList(),
                             status = data?.get("status") as? String ?: "",
-                            startedAt = 0,
+                            startedAt = data?.get("date") as? Long ?: 0,
                             speaker = data?.get("speaker") as? String ?: "",
                             registerUrl = data?.get("registration") as? String ?: "",
                             location = data?.get("Location") as? String ?: "",
