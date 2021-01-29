@@ -92,7 +92,7 @@ class SavedKajianFragment : Fragment() {
                                             it.title,
                                             "30 menit"
                                         ),
-                                        it.startedAt + 1000 * 60 * 30
+                                        it.startedAt - 1000 * 60 * 30
                                     )
                                 } else {
                                     viewModel.deleteSavedKajianAndMoveToUserHistory(it)
