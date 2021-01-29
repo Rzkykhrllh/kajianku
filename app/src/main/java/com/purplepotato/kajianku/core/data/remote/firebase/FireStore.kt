@@ -1,6 +1,5 @@
 package com.purplepotato.kajianku.core.data.remote.firebase
 
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -11,8 +10,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 class FireStore {
 
@@ -48,14 +50,14 @@ class FireStore {
                             imageUrl = document.getString("pict") ?: "",
                             description = document.getString("description") ?: "",
                             organizer = document.getString("organizer") ?: "",
-                            tagId = emptyList(),
+                            tagId = document.get("tag") as? List<String> ?: emptyList(),
                             status = document.getString("status") ?: "",
                             startedAt = document.getDate("date")?.time ?: 1611912600,
                             speaker = document.getString("speaker") ?: "",
                             registerUrl = document.getString("registration") ?: "",
                             location = document.getString("Location") ?: "",
-                            latitude = 0.0,
-                            longitude = 0.0,
+                            latitude = document.getGeoPoint("location_uri")?.latitude ?: 0.0,
+                            longitude = document.getGeoPoint("location_uri")?.longitude ?: 0.0,
                             totalSaved = document.getLong("totalSaved") ?: 0L,
                             time = document.getString("time") ?: "--:--"
                         )
@@ -75,7 +77,6 @@ class FireStore {
             val list = ArrayList<Kajian>()
 
             querySnapshot?.forEach { document ->
-                Log.d("queryAllKajian", document.getDate("date")?.time.toString())
                 list.add(
                     Kajian(
                         id = document.id,
@@ -83,15 +84,15 @@ class FireStore {
                         imageUrl = document.getString("pict") ?: "",
                         description = document.getString("description") ?: "",
                         organizer = document.getString("organizer") ?: "",
-                        tagId = emptyList(),
+                        tagId = document.get("tag") as? List<String> ?: emptyList(),
                         status = document.getString("status") ?: "",
                         startedAt = document.getDate("date")?.time ?: 0,
                         speaker = document.getString("speaker") ?: "",
                         registerUrl = document.getString("registration") ?: "",
                         location = document.getString("Location") ?: "",
-                        latitude = 0.0,
-                        longitude = 0.0,
-                        totalSaved = document.getLong("total_saved") ?: 0L,
+                        latitude = document.getGeoPoint("location_uri")?.latitude ?: 0.0,
+                        longitude = document.getGeoPoint("location_uri")?.longitude ?: 0.0,
+                        totalSaved = document.getLong("totalSaved") ?: 0L,
                         time = document.getString("time") ?: "--:--"
                     )
                 )
@@ -108,19 +109,16 @@ class FireStore {
 
         database.runTransaction { transaction ->
             val snapshot = transaction.get(selectedKajianRef)
-            val newTotalSaved = snapshot.getLong("total_saved")?.plus(1L)
-
+            val newTotalSaved = snapshot.getLong("totalSaved")?.plus(1L)
             transaction.update(
                 saveKajianIdToUserRef,
                 "saved_kajian",
                 FieldValue.arrayUnion(kajianId)
             )
-            transaction.update(selectedKajianRef, "total_saved", newTotalSaved)
-
+            transaction.update(selectedKajianRef, "totalSaved", newTotalSaved)
         }.addOnSuccessListener {
-            Log.d("save kajian firestore", it.toString())
+
         }.addOnFailureListener {
-            Log.d("save kajian firestore", it.message.toString())
         }
     }
 
@@ -131,27 +129,27 @@ class FireStore {
             val dataRef = database.collection("kajian")
 
             database.runTransaction { transaction ->
-                val history = transaction.get(historyRef)["history"] as List<String>
+                val history = transaction.get(historyRef)["kajian_history"] as List<String>
                 val list = ArrayList<Kajian>()
                 history.forEach { kajianId ->
-                    val data = transaction.get(dataRef.document(kajianId)).data
+                    val data = transaction.get(dataRef.document(kajianId))
                     list.add(
                         Kajian(
                             id = kajianId,
-                            title = data?.get("title") as? String ?: "",
-                            imageUrl = data?.get("pict") as? String ?: "",
-                            description = data?.get("description") as? String ?: "",
-                            organizer = data?.get("organizer") as? String ?: "",
-                            tagId = emptyList(),
-                            status = data?.get("status") as? String ?: "",
-                            startedAt = data?.get("date") as? Long ?: 0,
-                            speaker = data?.get("speaker") as? String ?: "",
-                            registerUrl = data?.get("registration") as? String ?: "",
-                            location = data?.get("Location") as? String ?: "",
-                            latitude = 0.0,
-                            longitude = 0.0,
-                            totalSaved = data?.get("total_saved") as? Long ?: 0,
-                            time = data?.get("time") as? String ?: "--:--"
+                            title = data.getString("title") ?: "",
+                            imageUrl = data.getString("pict") ?: "",
+                            description = data.getString("description") ?: "",
+                            organizer = data.getString("organizer") ?: "",
+                            tagId = data.get("tag") as? List<String> ?: emptyList(),
+                            status = data.getString("status") ?: "",
+                            startedAt = data.getDate("date")?.time ?: 0,
+                            speaker = data.getString("speaker") ?: "",
+                            registerUrl = data.getString("registration") ?: "",
+                            location = data.getString("Location") ?: "",
+                            latitude = data.getGeoPoint("location_uri")?.latitude ?: 0.0,
+                            longitude = data.getGeoPoint("location_uri")?.longitude ?: 0.0,
+                            totalSaved = data.get("totalSaved") as? Long ?: 0,
+                            time = data.get("time") as? String ?: "--:--"
                         )
                     )
                 }
@@ -171,25 +169,25 @@ class FireStore {
                     transaction.get(savedKajianIdRef)["saved_kajian"] as List<String>
                 val list = ArrayList<Kajian>()
                 savedKajianId.forEach { kajianId ->
-                    val data = transaction.get(dataRef.document(kajianId)).data
-                    Log.d("queryAllSavedKajian", kajianId)
+                    val data = transaction.get(dataRef.document(kajianId))
+
                     list.add(
                         Kajian(
                             id = kajianId,
-                            title = data?.get("title") as? String ?: "",
-                            imageUrl = data?.get("pict") as? String ?: "",
-                            description = data?.get("description") as? String ?: "",
-                            organizer = data?.get("organizer") as? String ?: "",
-                            tagId = emptyList(),
-                            status = data?.get("status") as? String ?: "",
-                            startedAt = 0,
-                            speaker = data?.get("speaker") as? String ?: "",
-                            registerUrl = data?.get("registration") as? String ?: "",
-                            location = data?.get("Location") as? String ?: "",
-                            latitude = 0.0,
-                            longitude = 0.0,
-                            totalSaved = data?.get("total_saved") as? Long ?: 0,
-                            time = data?.get("time") as? String ?: "--:--"
+                            title = data.getString("title") ?: "",
+                            imageUrl = data.getString("pict") ?: "",
+                            description = data.getString("description") ?: "",
+                            organizer = data.getString("organizer") ?: "",
+                            tagId = data.get("tag") as? List<String> ?: emptyList(),
+                            status = data.getString("status") ?: "",
+                            startedAt = data.getDate("date")?.time ?: 0,
+                            speaker = data.getString("speaker") ?: "",
+                            registerUrl = data.getString("registration") ?: "",
+                            location = data.getString("Location") ?: "",
+                            latitude = data.getGeoPoint("location_uri")?.latitude ?: 0.0,
+                            longitude = data.getGeoPoint("location_uri")?.longitude ?: 0.0,
+                            totalSaved = data.get("totalSaved") as? Long ?: 0,
+                            time = data.get("time") as? String ?: "--:--"
                         )
                     )
                 }
@@ -205,17 +203,102 @@ class FireStore {
             transaction.update(savedKajianIdRef, "kajian_history", FieldValue.arrayUnion(kajianId))
             transaction.update(savedKajianIdRef, "saved_kajian", FieldValue.arrayRemove(kajianId))
         }.addOnSuccessListener {
-            Log.d("MoveKajianToHistory", it.toString())
         }.addOnFailureListener {
-            Log.d("MoveKajianToHistory", it.message.toString())
         }
     }
 
+    @ExperimentalCoroutinesApi
     fun queryAllSuggestedKajian(): Flow<Resource<List<Kajian>>> =
-        flow<Resource<List<Kajian>>> {
-            emit(Resource.Loading())
-            emit(Resource.Success(emptyList()))
-        }.flowOn(IO).take(2)
+        callbackFlow<Resource<List<Kajian>>> {
+            val userHistoryRef = database.collection("users").document(currentUserId)
+            val dataKajianRef = database.collection("kajian")
+
+            database.runTransaction { transaction ->
+                val userKajianHistoryId =
+                    transaction.get(userHistoryRef)["kajian_history"] as? List<String>
+                val tags = mutableSetOf<String>()
+
+                userKajianHistoryId?.let { kajianHistoryId ->
+                    kajianHistoryId.forEach { kajianId ->
+                        val listTag =
+                            transaction.get(dataKajianRef.document(kajianId))["tag"] as List<String>
+                        listTag.forEach {
+                            tags.add(it)
+                        }
+                    }
+                }
+
+                if (tags.isEmpty()) {
+                    dataKajianRef.limit(15).get().addOnSuccessListener { querySnapshot ->
+                        val list = ArrayList<Kajian>()
+                        querySnapshot.documents.forEach { documentSnapshot ->
+                            list.add(
+                                Kajian(
+                                    id = documentSnapshot.id,
+                                    title = documentSnapshot.getString("title") ?: "",
+                                    imageUrl = documentSnapshot.getString("pict") ?: "",
+                                    description = documentSnapshot.getString("description")
+                                        ?: "",
+                                    organizer = documentSnapshot.getString("organizer") ?: "",
+                                    tagId = documentSnapshot.get("tag") as? List<String>
+                                        ?: emptyList(),
+                                    status = documentSnapshot.getString("status") ?: "",
+                                    startedAt = documentSnapshot.getDate("date")?.time ?: 0,
+                                    speaker = documentSnapshot.getString("speaker") ?: "",
+                                    registerUrl = documentSnapshot.getString("registration")
+                                        ?: "",
+                                    location = documentSnapshot.getString("Location") ?: "",
+                                    latitude = documentSnapshot.getGeoPoint("location_uri")?.latitude
+                                        ?: 0.0,
+                                    longitude = documentSnapshot.getGeoPoint("location_uri")?.longitude
+                                        ?: 0.0,
+                                    totalSaved = documentSnapshot.get("totalSaved") as? Long
+                                        ?: 0,
+                                    time = documentSnapshot.get("time") as? String ?: "--:--"
+                                )
+                            )
+                        }
+                        offer(Resource.Success(list))
+                    }
+                } else {
+                    val random = Random(System.nanoTime()).nextInt(tags.size)
+
+                    dataKajianRef.whereArrayContains("tag", tags.elementAt(random)).limit(20).get()
+                        .addOnSuccessListener { querySnapshot ->
+                            val list = ArrayList<Kajian>()
+                            querySnapshot.documents.forEach { documentSnapshot ->
+                                list.add(
+                                    Kajian(
+                                        id = documentSnapshot.id,
+                                        title = documentSnapshot.getString("title") ?: "",
+                                        imageUrl = documentSnapshot.getString("pict") ?: "",
+                                        description = documentSnapshot.getString("description")
+                                            ?: "",
+                                        organizer = documentSnapshot.getString("organizer") ?: "",
+                                        tagId = documentSnapshot.get("tag") as? List<String>
+                                            ?: emptyList(),
+                                        status = documentSnapshot.getString("status") ?: "",
+                                        startedAt = documentSnapshot.getDate("date")?.time ?: 0,
+                                        speaker = documentSnapshot.getString("speaker") ?: "",
+                                        registerUrl = documentSnapshot.getString("registration")
+                                            ?: "",
+                                        location = documentSnapshot.getString("Location") ?: "",
+                                        latitude = documentSnapshot.getGeoPoint("location_uri")?.latitude
+                                            ?: 0.0,
+                                        longitude = documentSnapshot.getGeoPoint("location_uri")?.longitude
+                                            ?: 0.0,
+                                        totalSaved = documentSnapshot.get("totalSaved") as? Long
+                                            ?: 0,
+                                        time = documentSnapshot.get("time") as? String ?: "--:--"
+                                    )
+                                )
+                            }
+                            offer(Resource.Success(list))
+                        }
+                }
+            }
+            awaitClose()
+        }.flowOn(IO)
 
     fun deleteSavedKajian(kajianId: String) = CoroutineScope(IO).launch {
         database.collection("users").document(currentUserId)

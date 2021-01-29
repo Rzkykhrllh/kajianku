@@ -73,6 +73,7 @@ class SavedKajianFragment : Fragment() {
                 }
 
                 is Resource.Success -> {
+                    binding.progressIndicator.visibility = View.GONE
                     if (result.data.isNullOrEmpty()) {
                         binding.txtSavedKajian.visibility = View.GONE
                         binding.recyclerViewSavedKajian.visibility = View.GONE
@@ -105,11 +106,9 @@ class SavedKajianFragment : Fragment() {
                                     viewModel.deleteSavedKajianAndMoveToUserHistory(it)
                                 }
                             }
+                            recyclerAdapter.submitList(result.data)
+                            emptyState(false)
                         }
-
-                        recyclerAdapter.submitList(result.data)
-                        binding.progressIndicator.visibility = View.GONE
-                        emptyState(false)
                     }
                 }
 

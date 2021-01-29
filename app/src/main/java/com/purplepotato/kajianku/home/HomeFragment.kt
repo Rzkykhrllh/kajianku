@@ -62,21 +62,24 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAllKajian())
         }
 
-//        viewModel.listSuggestedKajian.observe(viewLifecycleOwner, { result ->
-//            when (result) {
-//                is Resource.Success -> {
-//                    binding.progressIndicator.visibility = View.GONE
-//                    suggestedRecyclerAdapter.submitList(result.data)
-//                }
-//                is Resource.Loading -> {
-//                    binding.progressIndicator.visibility = View.VISIBLE
-//                }
-//                is Resource.Error -> {
-//                    binding.progressIndicator.visibility = View.GONE
-//                }
-//            }
-//        })
-//
+        viewModel.listSuggestedKajian.observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is Resource.Success -> {
+                    binding.btnSeeMore.visibility = View.VISIBLE
+                    binding.progressIndicator.visibility = View.GONE
+                    suggestedRecyclerAdapter.submitList(result.data)
+                }
+                is Resource.Loading -> {
+                    binding.progressIndicator.visibility = View.VISIBLE
+                    binding.btnSeeMore.visibility = View.GONE
+                }
+                is Resource.Error -> {
+                    binding.progressIndicator.visibility = View.GONE
+                    binding.btnSeeMore.visibility = View.VISIBLE
+                }
+            }
+        })
+
         viewModel.listPopularKajian.observe(viewLifecycleOwner, { result ->
             when (result) {
                 is Resource.Success -> {

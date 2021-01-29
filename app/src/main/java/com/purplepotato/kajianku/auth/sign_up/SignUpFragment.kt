@@ -121,7 +121,6 @@ class SignUpFragment : Fragment(), View.OnClickListener {
                 position: Int,
                 id: Long
             ) {
-                Toast.makeText(context, genderList[position], Toast.LENGTH_SHORT).show()
                 gender = genderList[position]
             }
 
