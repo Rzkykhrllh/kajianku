@@ -13,7 +13,6 @@ import com.purplepotato.kajianku.core.domain.Kajian
 import com.purplepotato.kajianku.core.util.DiffUtilItemCallback
 import com.purplepotato.kajianku.core.util.Helpers
 import com.purplepotato.kajianku.databinding.ItemKajianBinding
-import com.purplepotato.kajianku.detail.DetailFragment
 
 class SuggestedKajianRecyclerAdapter :
     ListAdapter<Kajian, SuggestedKajianRecyclerAdapter.SuggestedKajianViewHolder>(
@@ -27,14 +26,15 @@ class SuggestedKajianRecyclerAdapter :
                 itemImgPoster.load(item.imageUrl) {
                     crossfade(true)
                     placeholder(R.drawable.image_placeholder)
-                    error(R.drawable.ic_broken_image)
+                    error(R.drawable.image_placeholder)
                     transformations(RoundedCornersTransformation(8f))
                 }
 
                 itemTxtTitle.text = item.title
                 itemTxtSpeaker.text = item.speaker
                 itemTxtPlace.text = item.location
-                itemTxtDateTime.text = "${Helpers.convertTimeStampToDateTimeFormat(item.startedAt)} | ${item.time} WIB"
+                itemTxtDateTime.text =
+                    "${Helpers.convertTimeStampToDateTimeFormat(item.startedAt)}  WIB"
 
                 root.setOnClickListener {
                     val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
