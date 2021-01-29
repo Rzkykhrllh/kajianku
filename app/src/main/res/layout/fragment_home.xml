@@ -59,10 +59,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@id/btn_see_more"
             app:layout_constraintTop_toBottomOf="@id/txt_suggested_kajian"
-
             tools:listitem="@layout/item_kajian" />
 
         <com.facebook.shimmer.ShimmerFrameLayout
@@ -111,12 +110,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="16dp"
             android:background="@drawable/bg_button"
             android:text="Lihat kajian lainnya"
             android:textColor="@color/primary"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view_suggested_kajian"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
