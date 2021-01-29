@@ -14,9 +14,7 @@ https://github.com/mfathur/kajianku/issues
 
 ## Contributing Translations
 
-Interested in helping to translate Signal? Contribute here:
-
-https://www.transifex.com/projects/p/signal-android/
+Interested in helping to translate Kajianku? just create pull request and let us check you work 😁
 
 ## Contributing Code
 
