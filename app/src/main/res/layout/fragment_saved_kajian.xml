@@ -38,80 +38,75 @@
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/txt_saved_kajian">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <include layout="@layout/item_kajian_placeholder" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-        </LinearLayout>
+                <include layout="@layout/item_kajian_placeholder" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/view_not_saved"
-
-        android:layout_width="match_parent"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_belum"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="Kamu belum mengikuti kajian"
+        android:textColor="@color/accent"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/cari_kajian"
+        app:layout_constraintEnd_toEndOf="@id/cari_kajian"
+        app:layout_constraintStart_toStartOf="@id/cari_kajian" />
+
+    <TextView
+        android:id="@+id/cari_kajian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Yuk Ikut Kajian !"
+        android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_belum"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:text="Kamu belum mengikuti kajian"
-            android:textColor="@color/accent"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-            android:id="@+id/cari_kajian"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Yuk Ikut Kajian !"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_belum" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_cari_kajian"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:backgroundTint="@color/primary"
-            android:text="Cari Kajian"
-            app:cornerRadius="15dp"
-            android:layout_marginTop="14dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cari_kajian" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cari_kajian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="14dp"
+        android:backgroundTint="@color/primary"
+        android:text="Cari Kajian"
+        android:visibility="gone"
+        app:cornerRadius="15dp"
+        app:layout_constraintEnd_toEndOf="@id/cari_kajian"
+        app:layout_constraintStart_toStartOf="@id/cari_kajian"
+        app:layout_constraintTop_toBottomOf="@id/cari_kajian" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

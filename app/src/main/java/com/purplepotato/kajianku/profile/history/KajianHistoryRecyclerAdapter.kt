@@ -1,4 +1,4 @@
-package com.purplepotato.kajianku.saved_kajian
+package com.purplepotato.kajianku.profile.history
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,14 +13,13 @@ import com.purplepotato.kajianku.core.domain.Kajian
 import com.purplepotato.kajianku.core.util.DiffUtilItemCallback
 import com.purplepotato.kajianku.core.util.Helpers
 import com.purplepotato.kajianku.databinding.ItemKajianBinding
-import com.purplepotato.kajianku.detail.DetailFragment
 
-class SavedKajianRecyclerAdapter :
-    ListAdapter<Kajian, SavedKajianRecyclerAdapter.SavedKajianViewHolder>(
+class KajianHistoryRecyclerAdapter :
+    ListAdapter<Kajian, KajianHistoryRecyclerAdapter.KajianHistoryViewHolder>(
         DiffUtilItemCallback.KAJIAN_DIFF_CALLBACK
     ) {
 
-    inner class SavedKajianViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class KajianHistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemKajianBinding.bind(itemView)
         fun bind(item: Kajian) {
             with(binding) {
@@ -34,28 +33,19 @@ class SavedKajianRecyclerAdapter :
                 itemTxtTitle.text = item.title
                 itemTxtSpeaker.text = item.speaker
                 itemTxtPlace.text = item.location
-                itemTxtDateTime.text = "${Helpers.convertTimeStampToDateTimeFormat(item.startedAt)} | ${item.time}"
-
-                root.setOnClickListener {
-                    val action =
-                        SavedKajianFragmentDirections.actionSavedKajianFragmentToDetailFragment()
-                    action.kajian = item
-                    root.findNavController().navigate(action)
-                }
+                itemTxtDateTime.text =
+                    "${Helpers.convertTimeStampToDateTimeFormat(item.startedAt)} | ${item.time}"
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavedKajianViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): KajianHistoryViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_kajian, parent, false)
-        return SavedKajianViewHolder(view)
+        return KajianHistoryViewHolder(view)
     }
 
-    override fun onBindViewHolder(
-        holder: SavedKajianRecyclerAdapter.SavedKajianViewHolder,
-        position: Int
-    ) {
+    override fun onBindViewHolder(holder: KajianHistoryViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 }

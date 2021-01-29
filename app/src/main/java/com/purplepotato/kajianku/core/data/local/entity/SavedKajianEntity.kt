@@ -7,6 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "saved_kajian")
 data class SavedKajianEntity(
     @PrimaryKey
+    @ColumnInfo(name = "id")
+    val id: String,
+
     @ColumnInfo(name = "reminder_id")
     val reminderId: Long? = -1,
 
@@ -47,5 +50,9 @@ data class SavedKajianEntity(
     val totalSaved: Long,
 
     @ColumnInfo(name = "organizer")
-    val organizer: String
+    val organizer: String,
+
+    @ColumnInfo(name = "time")
+    val time:String
+
 )

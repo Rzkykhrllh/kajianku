@@ -25,7 +25,10 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.detailFragment -> binding.chipNavBar.visibility = View.GONE
                 R.id.profileFragment -> binding.chipNavBar.visibility = View.VISIBLE
-                R.id.homeFragment -> binding.chipNavBar.visibility = View.VISIBLE
+                R.id.homeFragment -> {
+                    binding.chipNavBar.visibility = View.VISIBLE
+                    binding.chipNavBar.setItemSelected(R.id.homeFragment)
+                }
                 R.id.savedKajianFragment -> binding.chipNavBar.visibility = View.VISIBLE
             }
         }

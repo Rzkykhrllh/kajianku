@@ -1,9 +1,6 @@
 package com.purplepotato.kajianku.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.purplepotato.kajianku.core.Resource
 import com.purplepotato.kajianku.core.data.KajianRepository
 import com.purplepotato.kajianku.core.domain.Kajian
@@ -12,30 +9,20 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(private val repository: KajianRepository) : ViewModel() {
 
-    private val _listSuggestedKajian = MutableLiveData<Resource<List<Kajian>>>()
-
     val listSuggestedKajian: LiveData<Resource<List<Kajian>>>
-        get() = _listSuggestedKajian
+        get() = repository.queryAllSuggestedKajian().asLiveData()
 
-    private val _listPopularKajian = MutableLiveData<Resource<List<Kajian>>>()
+    val listPopularKajian = liveData<Resource<List<Kajian>>> {
+        emit(Resource.Loading())
 
-    val listPopularKajian: LiveData<Resource<List<Kajian>>>
-        get() = _listPopularKajian
-
-    init {
-        queryAllSuggestedKajian()
-        queryAllPopularKajian()
-    }
-
-    private fun queryAllSuggestedKajian() = viewModelScope.launch {
-        repository.queryAllSuggestedKajian().collect {
-            _listSuggestedKajian.postValue(it)
+        try {
+            repository.queryAllPopularKajian().collect {
+                emit(it)
+            }
+        }catch (e:Exception){
+            emit(Resource.Error(e.message.toString(), emptyList()))
         }
     }
 
-    private fun queryAllPopularKajian() = viewModelScope.launch {
-        repository.queryAllPopularKajian().collect {
-            _listPopularKajian.postValue(it)
-        }
-    }
+
 }

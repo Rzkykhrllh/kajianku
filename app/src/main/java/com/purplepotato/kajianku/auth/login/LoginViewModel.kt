@@ -59,10 +59,6 @@ class LoginViewModel(private val repository: KajianRepository) : ViewModel() {
                         birth = data.getString("birth_date") ?: ""
                         gender = data.getString("gender") ?: ""
 
-                        Log.i("shared-login", "$data")
-                        Log.i("shared-login", "$name, $birth")
-
-
                         _setPreference.value = true
                         _isLoading.value = false
                         _navigateToHome.value = true

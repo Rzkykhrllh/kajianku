@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Kajian(
+    val id: String,
     val title: String,
     val imageUrl: String,
     val description: String,
@@ -17,6 +18,7 @@ data class Kajian(
     val location: String,
     val latitude: Double,
     val longitude: Double,
+    val time: String,
     val totalSaved: Long,
     var reminderId: Long? = -1
 ) : Parcelable

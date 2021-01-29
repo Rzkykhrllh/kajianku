@@ -125,9 +125,9 @@
             android:layout_marginTop="-10dp"
             android:backgroundTint="@color/primary"
             android:clickable="false"
-            android:editable="false"
             android:drawableStart="@drawable/ic_baseline_mail_outline_24"
             android:drawablePadding="12dp"
+            android:editable="false"
             android:fontFamily="@font/montserrat_bold"
             android:hint="Ikhwan"
             android:textColor="@color/primary"
@@ -177,11 +177,9 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_update_data"
-
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="62dp"
         android:backgroundTint="@color/primary"
         android:text="Save"
         app:cornerRadius="15dp"

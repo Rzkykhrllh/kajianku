@@ -1,4 +1,4 @@
-package com.purplepotato.kajianku.saved_kajian
+package com.purplepotato.kajianku.home.allkajian
 
 import android.view.LayoutInflater
 import android.view.View
@@ -13,14 +13,14 @@ import com.purplepotato.kajianku.core.domain.Kajian
 import com.purplepotato.kajianku.core.util.DiffUtilItemCallback
 import com.purplepotato.kajianku.core.util.Helpers
 import com.purplepotato.kajianku.databinding.ItemKajianBinding
-import com.purplepotato.kajianku.detail.DetailFragment
+import com.purplepotato.kajianku.home.HomeFragmentDirections
 
-class SavedKajianRecyclerAdapter :
-    ListAdapter<Kajian, SavedKajianRecyclerAdapter.SavedKajianViewHolder>(
+class AllKajianRecyclerAdapter :
+    ListAdapter<Kajian, AllKajianRecyclerAdapter.AllKajianViewHolder>(
         DiffUtilItemCallback.KAJIAN_DIFF_CALLBACK
     ) {
 
-    inner class SavedKajianViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class AllKajianViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemKajianBinding.bind(itemView)
         fun bind(item: Kajian) {
             with(binding) {
@@ -37,8 +37,7 @@ class SavedKajianRecyclerAdapter :
                 itemTxtDateTime.text = "${Helpers.convertTimeStampToDateTimeFormat(item.startedAt)} | ${item.time}"
 
                 root.setOnClickListener {
-                    val action =
-                        SavedKajianFragmentDirections.actionSavedKajianFragmentToDetailFragment()
+                    val action = AllKajianFragmentDirections.actionAllKajianToDetailFragment()
                     action.kajian = item
                     root.findNavController().navigate(action)
                 }
@@ -46,16 +45,13 @@ class SavedKajianRecyclerAdapter :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SavedKajianViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllKajianViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_kajian, parent, false)
-        return SavedKajianViewHolder(view)
+        return AllKajianViewHolder(view)
     }
 
-    override fun onBindViewHolder(
-        holder: SavedKajianRecyclerAdapter.SavedKajianViewHolder,
-        position: Int
-    ) {
+    override fun onBindViewHolder(holder: AllKajianViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 }

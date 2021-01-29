@@ -7,7 +7,6 @@
     android:background="@color/background"
     tools:context=".profile.history.RiwayatKajianFragment">
 
-
     <TextView
         android:id="@+id/txt_saved_kajian"
         android:layout_width="wrap_content"
@@ -15,18 +14,21 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/montserrat_bold"
-        android:text="Riwayat Kajian"
+        android:text="@string/kajian_history"
         android:textColor="@color/primary"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_saved_kajian"
+        android:id="@+id/recycler_view_kajian_history"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_saved_kajian"
+        android:layout_marginTop="16dp"
         tools:itemCount="7"
         tools:listitem="@layout/item_normal" />
 
@@ -38,48 +40,55 @@
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/txt_saved_kajian">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <include layout="@layout/item_kajian_placeholder" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-            <include layout="@layout/item_kajian_placeholder" />
+                <include layout="@layout/item_kajian_placeholder" />
 
-        </LinearLayout>
+                <include layout="@layout/item_kajian_placeholder" />
+
+            </LinearLayout>
+        </ScrollView>
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/view_not_has_history"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <TextView
+        android:id="@+id/empty_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:text="@string/empty_history"
+        android:textColor="@color/accent_2"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semi_bold"
-            android:text="Riwayat Kajian Kosong"
-            android:textColor="@color/accent_2"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 

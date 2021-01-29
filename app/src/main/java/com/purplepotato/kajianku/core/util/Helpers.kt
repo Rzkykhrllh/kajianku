@@ -1,7 +1,9 @@
 package com.purplepotato.kajianku.core.util
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Patterns
+import android.widget.Toast
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,7 +21,7 @@ object Helpers {
 
     fun convertTimeStampToDateTimeFormat(timeInMillis: Long): String {
         return try {
-            val parser = SimpleDateFormat("dd MMMM YYYY - HH.mm", Locale.getDefault())
+            val parser = SimpleDateFormat("dd MMMM YYYY", Locale.getDefault())
             parser.format(timeInMillis)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -42,3 +44,11 @@ object Helpers {
 
 fun CharSequence?.isValidEmail() =
     !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
+fun Context.showLongToastMessage(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+}
+
+fun Context.showShortToastMessage(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}

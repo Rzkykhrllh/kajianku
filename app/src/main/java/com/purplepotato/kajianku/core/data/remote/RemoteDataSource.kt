@@ -4,6 +4,7 @@ import com.purplepotato.kajianku.core.Resource
 import com.purplepotato.kajianku.core.data.remote.firebase.FireStore
 import com.purplepotato.kajianku.core.data.remote.firebase.FirebaseAuthentication
 import com.purplepotato.kajianku.core.domain.Kajian
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 
 class RemoteDataSource(
@@ -23,12 +24,23 @@ class RemoteDataSource(
         }
     }
 
-    suspend fun queryAllSuggestedKajianFromFireStore(): Flow<Resource<List<Kajian>>> =
+    fun queryAllSuggestedKajianFromFireStore(): Flow<Resource<List<Kajian>>> =
         fireStore.queryAllSuggestedKajian()
 
-    suspend fun queryAllSavedKajianFromFireStore(): Flow<ApiResponse<List<Kajian>>> =
+    fun queryAllSavedKajianFromFireStore(): Flow<Resource<List<Kajian>>> =
         fireStore.queryAllSavedKajian()
 
-    suspend fun queryAllPopularKajianFromFireStore(): Flow<Resource<List<Kajian>>> =
+    fun queryAllPopularKajianFromFireStore(): Flow<Resource<List<Kajian>>> =
         fireStore.queryAllPopularKajian()
+
+    fun insertSavedKajian(id: String) = fireStore.insertSavedKajian(id)
+
+    fun deleteSavedKajianAndMoveToUserHistory(id: String) =
+        fireStore.deleteSavedKajianAndMoveToUserHistory(id)
+
+    fun queryAllKajianHistory(): Flow<Resource<List<Kajian>>> = fireStore.queryAllKajianHistory()
+
+    fun queryAllKajian(): Flow<Resource<List<Kajian>>> = fireStore.queryAllKajian()
+
+    fun deleteSavedKajian(kajianId: String) = fireStore.deleteSavedKajian(kajianId)
 }

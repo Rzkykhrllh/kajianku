@@ -1,9 +1,11 @@
 package com.purplepotato.kajianku.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -60,29 +62,31 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAllKajian())
         }
 
-        viewModel.listSuggestedKajian.observe(viewLifecycleOwner, { result ->
-            when (result) {
-                is Resource.Success -> {
-                    binding.progressIndicator.visibility = View.GONE
-                    suggestedRecyclerAdapter.submitList(result.data)
-                }
-                is Resource.Loading -> {
-                    binding.progressIndicator.visibility = View.VISIBLE
-                }
-                is Resource.Error -> {
-                    binding.progressIndicator.visibility = View.GONE
-                }
-            }
-        })
-
+//        viewModel.listSuggestedKajian.observe(viewLifecycleOwner, { result ->
+//            when (result) {
+//                is Resource.Success -> {
+//                    binding.progressIndicator.visibility = View.GONE
+//                    suggestedRecyclerAdapter.submitList(result.data)
+//                }
+//                is Resource.Loading -> {
+//                    binding.progressIndicator.visibility = View.VISIBLE
+//                }
+//                is Resource.Error -> {
+//                    binding.progressIndicator.visibility = View.GONE
+//                }
+//            }
+//        })
+//
         viewModel.listPopularKajian.observe(viewLifecycleOwner, { result ->
             when (result) {
                 is Resource.Success -> {
+                    Log.d("listpopularkajian", result.data.toString())
                     popularRecyclerAdapter.submitList(result.data)
                 }
                 is Resource.Loading -> {
                 }
                 is Resource.Error -> {
+                    Toast.makeText(activity, result.message, Toast.LENGTH_LONG).show()
                 }
             }
         })

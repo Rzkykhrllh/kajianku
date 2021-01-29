@@ -17,6 +17,7 @@ import com.purplepotato.kajianku.ViewModelFactory
 import com.purplepotato.kajianku.core.session.Preferences
 import com.purplepotato.kajianku.core.util.AlarmReceiver
 import com.purplepotato.kajianku.core.util.Helpers
+import com.purplepotato.kajianku.core.util.showLongToastMessage
 import com.purplepotato.kajianku.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment(), View.OnClickListener {
@@ -97,10 +98,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
                 txtSpeaker.text = it.speaker
                 txtPlace.text = it.location
                 txtDate.text = Helpers.convertTimeStampToDateFormat(it.startedAt)
-                txtTime.text = getString(
-                    R.string.time_format,
-                    Helpers.convertTimeStampToTimeFormat(it.startedAt)
-                )
+                txtTime.text = it.time
                 txtDescription.text = it.description
                 txtRegisterUrl.text = it.registerUrl
             }
@@ -148,12 +146,13 @@ class DetailFragment : Fragment(), View.OnClickListener {
                         requireContext(),
                         pref.reminderId,
                         pref.reminderId,
-                        getString(R.string.kajian_invitation, it.title),
+                        getString(R.string.message_kajian_reminder, it.title),
                         it.startedAt
                     )
                 }
                 pref.incrementReminderId()
                 viewModel.insertSavedKajian()
+                requireContext().showLongToastMessage(getString(R.string.add_reminder_succeed_message))
             }
 
             R.id.btn_cancel_kajian -> {
@@ -163,6 +162,8 @@ class DetailFragment : Fragment(), View.OnClickListener {
                     item?.reminderId!!
                 )
                 viewModel.deleteSavedKajian()
+                showCancelKajianButton(false)
+                requireContext().showLongToastMessage(getString(R.string.delete_reminder_message))
             }
         }
     }

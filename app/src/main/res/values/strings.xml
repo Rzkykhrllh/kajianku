@@ -33,11 +33,15 @@
     <string name="time_format">%s - selesai</string>
     <string name="share_kajian_title">Bagikan kajian ini sekarang</string>
     <string name="kajian_invitation">Yuk ikutan kajian %s</string>
-    <string name="date_time_format">%s WIB</string>
     <string name="notification_title_reminder">Reminder Kajian</string>
     <string name="save_kajian">Simpan kajian</string>
     <string name="cancel_kajian">Batal Mengikuti Kajian</string>
     <string name="find_kajian">Cari kajian</string>
+    <string name="empty_history">Riwayat Kajian Kosong</string>
+    <string name="content_desc_back_to_home">back to home</string>
+    <string name="message_kajian_reminder">Kajian %s akan segera datang</string>
+    <string name="delete_reminder_message">Pengingat berhasil dihapus</string>
+    <string name="add_reminder_succeed_message">Pengingat berhasil ditambahkan</string>
 
     <string-array name="gender_list">
         <item>Ikhwan</item>

@@ -10,19 +10,21 @@ abstract class NetworkBoundResource<RequestType, ResultType> {
         emit(Resource.Loading())
         val dbData = loadFromDB().first()
         if (shouldFetch(dbData)) {
-            when (val apiResponse = createCall().first()) {
-                is ApiResponse.Success -> {
-                    saveCallResult(apiResponse.data)
-                    emitAll(loadFromDB().map { Resource.Success(it) })
-                }
+            createCall().collect { apiResponse ->
+                when (apiResponse) {
+                    is ApiResponse.Success -> {
+                        saveCallResult(apiResponse.data)
+                        emitAll(loadFromDB().map { Resource.Success(it) })
+                    }
 
-                is ApiResponse.Empty -> {
-                    emitAll(loadFromDB().map { Resource.Success(it) })
-                }
+                    is ApiResponse.Empty -> {
+                        emitAll(loadFromDB().map { Resource.Success(it) })
+                    }
 
-                is ApiResponse.Error -> {
-                    onFetchFailed()
-                    emit(Resource.Error<ResultType>(apiResponse.errorMessage))
+                    is ApiResponse.Error -> {
+                        onFetchFailed()
+                        emit(Resource.Error<ResultType>(apiResponse.errorMessage))
+                    }
                 }
             }
         }
