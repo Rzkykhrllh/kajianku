@@ -34,10 +34,7 @@ class SuggestedKajianRecyclerAdapter :
                 itemTxtTitle.text = item.title
                 itemTxtSpeaker.text = item.speaker
                 itemTxtPlace.text = item.location
-                itemTxtDateTime.text = root.context.getString(
-                    R.string.date_time_format,
-                    Helpers.convertTimeStampToDateTimeFormat(item.startedAt)
-                )
+                itemTxtDateTime.text = "${Helpers.convertTimeStampToDateTimeFormat(item.startedAt)} | ${item.time} WIB"
 
                 root.setOnClickListener {
                     val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()

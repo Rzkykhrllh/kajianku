@@ -74,7 +74,7 @@
         android:id="@+id/chaneUsernameFragment"
         android:name="com.purplepotato.kajianku.profile.changeusername.ChaneUsernameFragment"
         android:label="fragment_chane_username"
-        tools:layout="@layout/fragment_chane_username" >
+        tools:layout="@layout/fragment_chane_username">
         <action
             android:id="@+id/action_chaneUsernameFragment_to_profileFragment"
             app:destination="@id/profileFragment"
@@ -85,7 +85,7 @@
         android:id="@+id/tentangKamiFragment"
         android:name="com.purplepotato.kajianku.profile.tentangkami.TentangKamiFragment"
         android:label="fragment_tentang_kami"
-        tools:layout="@layout/fragment_tentang_kami" >
+        tools:layout="@layout/fragment_tentang_kami">
         <action
             android:id="@+id/action_tentangKamiFragment_to_profileFragment"
             app:destination="@id/profileFragment"
@@ -96,7 +96,7 @@
         android:id="@+id/riwayatKajianFragment"
         android:name="com.purplepotato.kajianku.profile.history.RiwayatKajianFragment"
         android:label="fragment_riwayat_kajian"
-        tools:layout="@layout/fragment_riwayat_kajian" >
+        tools:layout="@layout/fragment_riwayat_kajian">
         <action
             android:id="@+id/action_riwayatKajianFragment_to_profileFragment"
             app:destination="@id/profileFragment"
@@ -107,5 +107,9 @@
         android:id="@+id/allKajian"
         android:name="com.purplepotato.kajianku.home.allkajian.AllKajianFragment"
         android:label="fragment_all_kajian"
-        tools:layout="@layout/fragment_all_kajian" />
+        tools:layout="@layout/fragment_all_kajian">
+        <action
+            android:id="@+id/action_allKajian_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
 </navigation>

@@ -29,6 +29,7 @@ class PopularKajianRecyclerAdapter :
                     transformations(RoundedCornersTransformation(16f))
                 }
                 itemTxtTitle.text = item.title
+                itemTxtStatus.text = item.status
                 root.setOnClickListener {
                     val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment()
                     action.kajian = item

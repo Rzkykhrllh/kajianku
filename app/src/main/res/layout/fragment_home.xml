@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -73,11 +72,6 @@
             android:layout_marginTop="8dp"
             android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/txt_suggested_kajian">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -94,7 +88,6 @@
                     <include layout="@layout/item_kajian_placeholder" />
 
                 </LinearLayout>
-            </ScrollView>
         </com.facebook.shimmer.ShimmerFrameLayout>
 
         <EditText
@@ -119,7 +112,6 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="62dp"
             android:background="@drawable/bg_button"
             android:text="Lihat kajian lainnya"
             android:textColor="@color/primary"
@@ -127,7 +119,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

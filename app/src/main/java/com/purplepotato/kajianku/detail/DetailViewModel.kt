@@ -49,6 +49,5 @@ class DetailViewModel(private val repository: KajianRepository) : ViewModel() {
         } catch (e: Exception) {
 
         }
-
     }
 }

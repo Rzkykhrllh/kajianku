@@ -6,14 +6,12 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.purplepotato.kajianku.core.Resource
-import com.purplepotato.kajianku.core.data.remote.ApiResponse
 import com.purplepotato.kajianku.core.domain.Kajian
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.take
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class FireStore {
@@ -28,51 +26,56 @@ class FireStore {
     }
 
     private val database by lazy { FirebaseFirestore.getInstance() }
+
     private val currentUserId by lazy {
         FirebaseAuth.getInstance().currentUser!!.uid
     }
 
+    @ExperimentalCoroutinesApi
     fun queryAllPopularKajian(): Flow<Resource<List<Kajian>>> =
-        flow<Resource<List<Kajian>>> {
-            emit(Resource.Loading())
-            database.collection("kajian").orderBy("total_saved", Query.Direction.DESCENDING)
-                .limit(6).get().addOnSuccessListener { querySnapshot ->
-                    val list = ArrayList<Kajian>()
-                    querySnapshot.forEach { document ->
-                        list.add(
-                            Kajian(
-                                id = document.id,
-                                title = document.getString("title") ?: "",
-                                imageUrl = document.getString("pict") ?: "",
-                                description = document.getString("description") ?: "",
-                                organizer = document.getString("organizer") ?: "",
-                                tagId = emptyList(),
-                                status = document.getString("status") ?: "",
-                                startedAt = document.getTimestamp("date")?.seconds ?: 0,
-                                speaker = document.getString("speaker") ?: "",
-                                registerUrl = document.getString("registration") ?: "",
-                                location = document.getString("Location") ?: "",
-                                latitude = 0.0,
-                                longitude = 0.0,
-                                totalSaved = document.getLong("total_saved") ?: 0L,
-                            )
-                        )
-                    }
-                    CoroutineScope(IO).launch {
-                        emit(Resource.Success(list))
-                    }
-                }.addOnFailureListener {
-                    CoroutineScope(IO).launch {
-                        emit(Resource.Error(it.message.toString(), emptyList()))
-                    }
-                }
-        }.flowOn(IO).take(2)
-
-    fun queryAllKajian(): Flow<Resource<List<Kajian>>> = flow<Resource<List<Kajian>>> {
-        emit(Resource.Loading())
-        database.collection("kajian").get().addOnSuccessListener { querySnapshot ->
+        callbackFlow<Resource<List<Kajian>>> {
+            val dataRef =
+                database.collection("kajian").orderBy("totalSaved", Query.Direction.DESCENDING)
+                    .limit(6)
             val list = ArrayList<Kajian>()
-            querySnapshot.forEach { document ->
+            val subscription = dataRef.addSnapshotListener { querySnapshot, _ ->
+
+                querySnapshot?.forEach { document ->
+                    list.add(
+                        Kajian(
+                            id = document.id,
+                            title = document.getString("title") ?: "",
+                            imageUrl = document.getString("pict") ?: "",
+                            description = document.getString("description") ?: "",
+                            organizer = document.getString("organizer") ?: "",
+                            tagId = emptyList(),
+                            status = document.getString("status") ?: "",
+                            startedAt = document.getDate("date")?.time ?: 1611912600,
+                            speaker = document.getString("speaker") ?: "",
+                            registerUrl = document.getString("registration") ?: "",
+                            location = document.getString("Location") ?: "",
+                            latitude = 0.0,
+                            longitude = 0.0,
+                            totalSaved = document.getLong("totalSaved") ?: 0L,
+                            time = document.getString("time") ?: "--:--"
+                        )
+                    )
+                }
+                offer(Resource.Success(list))
+            }
+
+            awaitClose { subscription.remove() }
+        }
+
+    @ExperimentalCoroutinesApi
+    fun queryAllKajian(): Flow<Resource<List<Kajian>>> = callbackFlow<Resource<List<Kajian>>> {
+        val dataRef = database.collection("kajian").limit(1)
+
+        val subscription = dataRef.addSnapshotListener { querySnapshot, _ ->
+            val list = ArrayList<Kajian>()
+
+            querySnapshot?.forEach { document ->
+                Log.d("allkajian", document.id)
                 list.add(
                     Kajian(
                         id = document.id,
@@ -80,28 +83,23 @@ class FireStore {
                         imageUrl = document.getString("pict") ?: "",
                         description = document.getString("description") ?: "",
                         organizer = document.getString("organizer") ?: "",
-                        tagId = document.get("tag") as List<String>,
+                        tagId = emptyList(),
                         status = document.getString("status") ?: "",
-                        startedAt = document.getTimestamp("date")?.seconds ?: 0,
+                        startedAt = document.getDate("date")?.time ?: 0,
                         speaker = document.getString("speaker") ?: "",
                         registerUrl = document.getString("registration") ?: "",
                         location = document.getString("Location") ?: "",
                         latitude = 0.0,
                         longitude = 0.0,
                         totalSaved = document.getLong("total_saved") ?: 0L,
+                        time = document.getString("time") ?: "--:--"
                     )
                 )
-            }
-            CoroutineScope(IO).launch {
-                emit(Resource.Success(list))
-            }
-        }.addOnFailureListener {
-            CoroutineScope(IO).launch {
-                emit(Resource.Error(it.message.toString(), emptyList()))
+                offer(Resource.Success(list))
             }
         }
-
-    }.flowOn(IO).take(2)
+        awaitClose { subscription.remove() }
+    }
 
     fun insertSavedKajian(kajianId: String) = CoroutineScope(IO).launch {
 
@@ -126,35 +124,78 @@ class FireStore {
         }
     }
 
-    fun queryAllKajianHistory(): Flow<Resource<List<Kajian>>> = flow<Resource<List<Kajian>>> {
-        emit(Resource.Loading())
-        emit(Resource.Success(emptyList()))
-    }.flowOn(IO).take(1)
+    @ExperimentalCoroutinesApi
+    fun queryAllKajianHistory(): Flow<Resource<List<Kajian>>> =
+        callbackFlow<Resource<List<Kajian>>> {
+            val historyRef = database.collection("users").document(currentUserId)
+            val dataRef = database.collection("kajian")
 
-    fun queryAllSavedKajian(): Flow<ApiResponse<List<Kajian>>> =
-        flow<ApiResponse<List<Kajian>>> {
-            val userTagRef = database.collection("users").document(currentUserId)
-            val allKajianRef = database.collection("kajian").document()
-            val list = ArrayList<Kajian>()
             database.runTransaction { transaction ->
-                val tagSnapshot = transaction.get(userTagRef).get("saved_kajian") as List<String>
-                val kajianSnapshot = transaction.get(allKajianRef)
-                for (i in tagSnapshot.indices) {
-
+                val history = transaction.get(historyRef)["history"] as List<String>
+                val list = ArrayList<Kajian>()
+                history.forEach { kajianId ->
+                    val data = transaction.get(dataRef.document(kajianId)).data
+                    list.add(
+                        Kajian(
+                            id = kajianId,
+                            title = data?.get("title") as? String ?: "",
+                            imageUrl = data?.get("pict") as? String ?: "",
+                            description = data?.get("description") as? String ?: "",
+                            organizer = data?.get("organizer") as? String ?: "",
+                            tagId = emptyList(),
+                            status = data?.get("status") as? String ?: "",
+                            startedAt = 0,
+                            speaker = data?.get("speaker") as? String ?: "",
+                            registerUrl = data?.get("registration") as? String ?: "",
+                            location = data?.get("Location") as? String ?: "",
+                            latitude = 0.0,
+                            longitude = 0.0,
+                            totalSaved = data?.get("total_saved") as? Long ?: 0,
+                            time = data?.get("time") as? String ?: "--:--"
+                        )
+                    )
                 }
-                list
-            }.addOnSuccessListener {
-                Log.d("queryAllSavedKajian", it.toString())
-                CoroutineScope(IO).launch {
-                    emit(ApiResponse.Success(it))
-                }
-            }.addOnFailureListener {
-                Log.d("queryAllSavedKajian", it.toString())
-                CoroutineScope(IO).launch {
-                    emit(ApiResponse.Empty)
-                }
+                offer(Resource.Success(list))
             }
+            awaitClose()
+        }.flowOn(IO)
 
+    @ExperimentalCoroutinesApi
+    fun queryAllSavedKajian(): Flow<Resource<List<Kajian>>> =
+        callbackFlow<Resource<List<Kajian>>> {
+            val savedKajianIdRef = database.collection("users").document(currentUserId)
+            val dataRef = database.collection("kajian")
+
+            database.runTransaction { transaction ->
+                val savedKajianId =
+                    transaction.get(savedKajianIdRef)["saved_kajian"] as List<String>
+                val list = ArrayList<Kajian>()
+                savedKajianId.forEach { kajianId ->
+                    val data = transaction.get(dataRef.document(kajianId)).data
+                    Log.d("queryAllSavedKajian", kajianId)
+                    list.add(
+                        Kajian(
+                            id = kajianId,
+                            title = data?.get("title") as? String ?: "",
+                            imageUrl = data?.get("pict") as? String ?: "",
+                            description = data?.get("description") as? String ?: "",
+                            organizer = data?.get("organizer") as? String ?: "",
+                            tagId = emptyList(),
+                            status = data?.get("status") as? String ?: "",
+                            startedAt = 0,
+                            speaker = data?.get("speaker") as? String ?: "",
+                            registerUrl = data?.get("registration") as? String ?: "",
+                            location = data?.get("Location") as? String ?: "",
+                            latitude = 0.0,
+                            longitude = 0.0,
+                            totalSaved = data?.get("total_saved") as? Long ?: 0,
+                            time = data?.get("time") as? String ?: "--:--"
+                        )
+                    )
+                }
+                offer(Resource.Success(list))
+            }
+            awaitClose()
         }.flowOn(IO)
 
     fun deleteSavedKajianAndMoveToUserHistory(kajianId: String) = CoroutineScope(IO).launch {
@@ -175,4 +216,9 @@ class FireStore {
             emit(Resource.Loading())
             emit(Resource.Success(emptyList()))
         }.flowOn(IO).take(2)
+
+    fun deleteSavedKajian(kajianId: String) = CoroutineScope(IO).launch {
+        database.collection("users").document(currentUserId)
+            .update("saved_kajian", FieldValue.arrayRemove(kajianId))
+    }
 }

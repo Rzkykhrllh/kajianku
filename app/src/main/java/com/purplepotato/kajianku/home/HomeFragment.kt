@@ -1,9 +1,11 @@
 package com.purplepotato.kajianku.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -75,16 +77,18 @@ class HomeFragment : Fragment() {
 //            }
 //        })
 //
-//        viewModel.listPopularKajian.observe(viewLifecycleOwner, { result ->
-//            when (result) {
-//                is Resource.Success -> {
-//                    popularRecyclerAdapter.submitList(result.data)
-//                }
-//                is Resource.Loading -> {
-//                }
-//                is Resource.Error -> {
-//                }
-//            }
-//        })
+        viewModel.listPopularKajian.observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is Resource.Success -> {
+                    Log.d("listpopularkajian", result.data.toString())
+                    popularRecyclerAdapter.submitList(result.data)
+                }
+                is Resource.Loading -> {
+                }
+                is Resource.Error -> {
+                    Toast.makeText(activity, result.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        })
     }
 }

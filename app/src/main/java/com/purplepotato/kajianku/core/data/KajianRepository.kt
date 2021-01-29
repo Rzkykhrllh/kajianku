@@ -2,12 +2,11 @@ package com.purplepotato.kajianku.core.data
 
 import com.purplepotato.kajianku.core.Resource
 import com.purplepotato.kajianku.core.data.local.LocalDataSource
-import com.purplepotato.kajianku.core.data.remote.ApiResponse
+import com.purplepotato.kajianku.core.data.local.entity.SavedKajianEntity
 import com.purplepotato.kajianku.core.data.remote.RemoteDataSource
 import com.purplepotato.kajianku.core.domain.Kajian
 import com.purplepotato.kajianku.core.util.DataMapper
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
 class KajianRepository(
     private val remoteDataSource: RemoteDataSource,
@@ -30,49 +29,44 @@ class KajianRepository(
     fun queryAllSuggestedKajian(): Flow<Resource<List<Kajian>>> =
         remoteDataSource.queryAllSuggestedKajianFromFireStore()
 
-    fun queryAllSavedKajian(): Flow<Resource<List<Kajian>>> =
-        object : NetworkBoundResource<List<Kajian>, List<Kajian>>() {
-            override fun shouldFetch(data: List<Kajian>?): Boolean {
-                return data == null || data.isEmpty()
-            }
+    fun queryAllSavedKajianFromRemote(): Flow<Resource<List<Kajian>>> =
+        remoteDataSource.queryAllSavedKajianFromFireStore()
 
-            override fun loadFromDB(): Flow<List<Kajian>> {
-                return localDataSource.queryAllSavedKajian().map { list ->
-                    list.map { DataMapper.mapEntityToDomain(it) }
-                }
-            }
+    fun queryAllSavedKajianFromLocal(): Flow<List<SavedKajianEntity>> =
+        localDataSource.queryAllSavedKajian()
 
-            override suspend fun createCall(): Flow<ApiResponse<List<Kajian>>> {
-                return remoteDataSource.queryAllSavedKajianFromFireStore()
-            }
-
-            override suspend fun saveCallResult(data: List<Kajian>) {
-                localDataSource.insertListSavedKajian(data.map {
-                    DataMapper.mapDomainToEntity(it)
-                })
-            }
-        }.asFlow()
+    suspend fun insertListSavedKajianToLocal(listSavedKajianEntity: List<SavedKajianEntity>) {
+        localDataSource.insertListSavedKajian(listSavedKajianEntity)
+    }
 
     fun queryAllPopularKajian(): Flow<Resource<List<Kajian>>> =
         remoteDataSource.queryAllPopularKajianFromFireStore()
 
     suspend fun deleteAllSavedKajian() = localDataSource.deleteAllSavedKajian()
 
-    suspend fun deleteSavedKajian(kajian: Kajian) =
+    suspend fun deleteSavedKajian(kajian: Kajian) {
         localDataSource.deleteSavedKajian(DataMapper.mapDomainToEntity(kajian))
+        remoteDataSource.deleteSavedKajian(kajian.id)
+    }
 
     suspend fun insertSavedKajian(kajian: Kajian) {
         localDataSource.insertSavedKajian(DataMapper.mapDomainToEntity(kajian))
         remoteDataSource.insertSavedKajian(kajian.id)
     }
 
+    suspend fun insertSavedKajianAfterLogin(kajian: Kajian){
+        localDataSource.insertSavedKajian(DataMapper.mapDomainToEntity(kajian))
+    }
+
     suspend fun getSavedKajian(title: String, organizer: String): Kajian =
         DataMapper.mapEntityToDomain(localDataSource.getSavedKajian(title, organizer))
 
-    fun deleteSavedKajianAndMoveToUserHistory(id: String) =
+    fun deleteSavedKajianAndMoveToUserHistory(id: String) {
         remoteDataSource.deleteSavedKajianAndMoveToUserHistory(id)
+    }
 
-    fun queryAllKajianHistory(): Flow<Resource<List<Kajian>>> = remoteDataSource.queryAllKajianHistory()
+    fun queryAllKajianHistory(): Flow<Resource<List<Kajian>>> =
+        remoteDataSource.queryAllKajianHistory()
 
     fun queryAllKajian(): Flow<Resource<List<Kajian>>> = remoteDataSource.queryAllKajian()
 }

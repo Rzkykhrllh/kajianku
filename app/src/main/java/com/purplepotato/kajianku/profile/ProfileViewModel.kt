@@ -6,7 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.purplepotato.kajianku.core.data.KajianRepository
+import com.purplepotato.kajianku.core.domain.Kajian
+import com.purplepotato.kajianku.core.util.DataMapper
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.take
 
 class ProfileViewModel(private val repository: KajianRepository) : ViewModel() {
 
@@ -15,6 +19,8 @@ class ProfileViewModel(private val repository: KajianRepository) : ViewModel() {
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
+    val listSavedKajianLocal = ArrayList<Kajian>()
 
     private val _navigateToLogin = MutableLiveData<Boolean>()
     val navigateToLogin: LiveData<Boolean>
@@ -42,8 +48,17 @@ class ProfileViewModel(private val repository: KajianRepository) : ViewModel() {
         repository.deleteAllSavedKajian()
     }
 
+    fun queryAllSavedKajian() = uiScope.launch {
+        repository.queryAllSavedKajianFromLocal().take(1).collect { list ->
+            list.map {
+                listSavedKajianLocal.add(
+                    DataMapper.mapEntityToDomain(it)
+                )
+            }
+        }
+    }
+
     fun logout() {
-        clearLocalDB()
         auth.signOut()
         _navigateToLogin.value = true
     }

@@ -11,6 +11,7 @@ import com.purplepotato.kajianku.di.Injection
 import com.purplepotato.kajianku.home.HomeViewModel
 import com.purplepotato.kajianku.home.allkajian.AllKajianViewModel
 import com.purplepotato.kajianku.profile.ProfileViewModel
+import com.purplepotato.kajianku.profile.history.RiwayatKajianViewModel
 import com.purplepotato.kajianku.saved_kajian.SavedKajianViewModel
 
 class ViewModelFactory(private val repository: KajianRepository) : ViewModelProvider.Factory {
@@ -53,6 +54,10 @@ class ViewModelFactory(private val repository: KajianRepository) : ViewModelProv
 
             modelClass.isAssignableFrom(AllKajianViewModel::class.java) -> {
                 AllKajianViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(RiwayatKajianViewModel::class.java) -> {
+                RiwayatKajianViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown View model class : $modelClass")

@@ -12,7 +12,17 @@ class HomeViewModel(private val repository: KajianRepository) : ViewModel() {
     val listSuggestedKajian: LiveData<Resource<List<Kajian>>>
         get() = repository.queryAllSuggestedKajian().asLiveData()
 
-    val listPopularKajian: LiveData<Resource<List<Kajian>>>
-        get() = repository.queryAllPopularKajian().asLiveData()
+    val listPopularKajian = liveData<Resource<List<Kajian>>> {
+        emit(Resource.Loading())
+
+        try {
+            repository.queryAllPopularKajian().collect {
+                emit(it)
+            }
+        }catch (e:Exception){
+            emit(Resource.Error(e.message.toString(), emptyList()))
+        }
+    }
+
 
 }

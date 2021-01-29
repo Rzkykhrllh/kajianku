@@ -20,7 +20,8 @@ object DataMapper {
             longitude = savedKajianEntity.longitude,
             totalSaved = savedKajianEntity.totalSaved,
             reminderId = savedKajianEntity.reminderId,
-            organizer = savedKajianEntity.organizer
+            organizer = savedKajianEntity.organizer,
+            time = savedKajianEntity.time
         )
     }
 
@@ -40,7 +41,8 @@ object DataMapper {
             longitude = kajian.longitude,
             totalSaved = kajian.totalSaved,
             reminderId = kajian.reminderId,
-            organizer = kajian.organizer
+            organizer = kajian.organizer,
+            time = kajian.time
         )
     }
 }

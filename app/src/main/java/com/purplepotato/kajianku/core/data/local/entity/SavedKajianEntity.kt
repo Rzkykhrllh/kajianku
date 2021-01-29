@@ -50,5 +50,9 @@ data class SavedKajianEntity(
     val totalSaved: Long,
 
     @ColumnInfo(name = "organizer")
-    val organizer: String
+    val organizer: String,
+
+    @ColumnInfo(name = "time")
+    val time:String
+
 )
