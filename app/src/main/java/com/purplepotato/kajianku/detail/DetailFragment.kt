@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +24,8 @@ import com.purplepotato.kajianku.core.util.showLongToastMessage
 import com.purplepotato.kajianku.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment(), View.OnClickListener {
+
+    val a = "debug_desu"
 
     private val viewModel by lazy {
         ViewModelProvider(
@@ -137,7 +142,30 @@ class DetailFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.btn_save_kajian -> {
-                val pref = Preferences(requireContext())
+                Log.d(a, "btn clicked")
+
+                var saved = 0
+                val listItems = arrayOf("30 menit sebelum", "1 jam sebelum", "2 hari sebelum")
+                val mBuilder = AlertDialog.Builder(requireContext())
+
+                mBuilder.setTitle("Set Reminder : ")
+                mBuilder.setSingleChoiceItems(listItems, 0) { dialogInterface, i ->
+                    saved = i
+                }
+
+                mBuilder.setNeutralButton("Cancel"){ dialog, which ->
+                    dialog.cancel()
+                }
+
+                mBuilder.setPositiveButton("Simpan"){dialog, which ->
+                    Toast.makeText(requireContext(), "item terpilih adalah ${listItems[saved]}",
+                        Toast.LENGTH_LONG).show()
+                }
+
+                val mDialog = mBuilder.create()
+                mDialog.show()
+
+                /*val pref = Preferences(requireContext())
                 val item = viewModel.getKajian()
                 item?.let {
                     it.reminderId = pref.reminderId
@@ -152,7 +180,7 @@ class DetailFragment : Fragment(), View.OnClickListener {
                 }
                 pref.incrementReminderId()
                 viewModel.insertSavedKajian()
-                requireContext().showLongToastMessage(getString(R.string.add_reminder_succeed_message))
+                requireContext().showLongToastMessage(getString(R.string.add_reminder_succeed_message))*/
             }
 
             R.id.btn_cancel_kajian -> {
