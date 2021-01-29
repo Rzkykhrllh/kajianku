@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,8 +23,6 @@ import com.purplepotato.kajianku.core.util.showLongToastMessage
 import com.purplepotato.kajianku.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment(), View.OnClickListener {
-
-    val a = "debug_desu"
 
     private val viewModel by lazy {
         ViewModelProvider(
@@ -142,45 +139,66 @@ class DetailFragment : Fragment(), View.OnClickListener {
             }
 
             R.id.btn_save_kajian -> {
-                Log.d(a, "btn clicked")
 
                 var saved = 0
-                val listItems = arrayOf("30 menit sebelum", "1 jam sebelum", "2 hari sebelum")
+                val listItems = arrayOf("30 menit sebelum", "1 jam sebelum", "1 hari sebelum")
                 val mBuilder = AlertDialog.Builder(requireContext())
 
                 mBuilder.setTitle("Set Reminder : ")
-                mBuilder.setSingleChoiceItems(listItems, 0) { dialogInterface, i ->
+                mBuilder.setSingleChoiceItems(listItems, 0) { _, i ->
                     saved = i
                 }
 
-                mBuilder.setNeutralButton("Cancel"){ dialog, which ->
+                mBuilder.setNeutralButton("Cancel") { dialog, _ ->
                     dialog.cancel()
                 }
 
-                mBuilder.setPositiveButton("Simpan"){dialog, which ->
-                    Toast.makeText(requireContext(), "item terpilih adalah ${listItems[saved]}",
-                        Toast.LENGTH_LONG).show()
+                mBuilder.setPositiveButton("Simpan") { dialog, which ->
+                    Toast.makeText(
+                        requireContext(),
+                        "item terpilih adalah ${listItems[saved]}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    var timeReducer: Long = 0
+                    var stringTime = ""
+                    when (saved) {
+                        THIRTY_MINUTES_BEFORE -> {
+                            timeReducer = 1000 * 60 * 30
+                            stringTime = "30 menit"
+                        }
+
+                        ONE_HOUR_BEFORE -> {
+                            timeReducer = 1000 * 60 * 60
+                            stringTime = "30 jam"
+                        }
+
+                        ONE_DAY_BEFORE -> {
+                            timeReducer = 1000 * 60 * 60 * 24
+                            stringTime = "1 hari"
+                        }
+                    }
+
+                    val pref = Preferences(requireContext())
+                    val item = viewModel.getKajian()
+                    item?.let {
+                        it.reminderId = pref.reminderId
+                        viewModel.setKajian(it)
+                        alarmReceiver.setOneTimeAlarm(
+                            requireContext(),
+                            pref.reminderId,
+                            pref.reminderId,
+                            getString(R.string.message_kajian_reminder, it.title,stringTime),
+                            it.startedAt - timeReducer
+                        )
+                    }
+
+                    pref.incrementReminderId()
+                    viewModel.insertSavedKajian()
+                    requireContext().showLongToastMessage(getString(R.string.add_reminder_succeed_message))
                 }
 
                 val mDialog = mBuilder.create()
                 mDialog.show()
-
-                /*val pref = Preferences(requireContext())
-                val item = viewModel.getKajian()
-                item?.let {
-                    it.reminderId = pref.reminderId
-                    viewModel.setKajian(it)
-                    alarmReceiver.setOneTimeAlarm(
-                        requireContext(),
-                        pref.reminderId,
-                        pref.reminderId,
-                        getString(R.string.message_kajian_reminder, it.title),
-                        it.startedAt
-                    )
-                }
-                pref.incrementReminderId()
-                viewModel.insertSavedKajian()
-                requireContext().showLongToastMessage(getString(R.string.add_reminder_succeed_message))*/
             }
 
             R.id.btn_cancel_kajian -> {
@@ -204,5 +222,11 @@ class DetailFragment : Fragment(), View.OnClickListener {
             binding.btnSaveKajian.visibility = View.VISIBLE
             binding.btnCancelKajian.visibility = View.GONE
         }
+    }
+
+    companion object {
+        private const val THIRTY_MINUTES_BEFORE = 0
+        private const val ONE_HOUR_BEFORE = 1
+        private const val ONE_DAY_BEFORE = 2
     }
 }

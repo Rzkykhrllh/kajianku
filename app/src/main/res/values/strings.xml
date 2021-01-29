@@ -39,7 +39,7 @@
     <string name="find_kajian">Cari kajian</string>
     <string name="empty_history">Riwayat Kajian Kosong</string>
     <string name="content_desc_back_to_home">back to home</string>
-    <string name="message_kajian_reminder">Kajian %s akan segera datang</string>
+    <string name="message_kajian_reminder">Kajian "%s" akan segera dimulai %s lagi</string>
     <string name="delete_reminder_message">Pengingat berhasil dihapus</string>
     <string name="add_reminder_succeed_message">Pengingat berhasil ditambahkan</string>
 
