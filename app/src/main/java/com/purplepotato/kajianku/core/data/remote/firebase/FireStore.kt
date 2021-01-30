@@ -1,5 +1,6 @@
 package com.purplepotato.kajianku.core.data.remote.firebase
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -210,12 +211,14 @@ class FireStore {
     @ExperimentalCoroutinesApi
     fun queryAllSuggestedKajian(): Flow<Resource<List<Kajian>>> =
         callbackFlow<Resource<List<Kajian>>> {
-            val userHistoryRef = database.collection("users").document(currentUserId)
+            val userDataRef = database.collection("users").document(currentUserId)
             val dataKajianRef = database.collection("kajian")
 
             database.runTransaction { transaction ->
                 val userKajianHistoryId =
-                    transaction.get(userHistoryRef)["kajian_history"] as? List<String>
+                    transaction.get(userDataRef)["kajian_history"] as? List<String>
+                val userSavedKajianId =
+                    transaction.get(userDataRef)["saved_kajian"] as? List<String>
                 val tags = mutableSetOf<String>()
 
                 userKajianHistoryId?.let { kajianHistoryId ->
@@ -227,6 +230,19 @@ class FireStore {
                         }
                     }
                 }
+                Log.d("historytag", tags.toString())
+
+                userSavedKajianId?.let { savedKajianId ->
+                    savedKajianId.forEach { kajianId ->
+                        val listTag =
+                            transaction.get(dataKajianRef.document(kajianId))["tag"] as List<String>
+                        listTag.forEach {
+                            tags.add(it)
+                        }
+                    }
+                }
+
+                Log.d("savedhistorytag", tags.toString())
 
                 if (tags.isEmpty()) {
                     dataKajianRef.limit(15).get().addOnSuccessListener { querySnapshot ->
